@@ -10,6 +10,7 @@ LIB_DIR = ./libmx/
 
 SRC = $(addprefix $(SRC_DIR), $(addprefix mx_, $(addsuffix .c, $(RAW))))
 OBJ = $(addprefix $(OBJ_DIR), $(addprefix mx_, $(addsuffix .o, $(RAW))))
+LIB_PATH = $(addprefix $(LIB_DIR), $(LIB))
 
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 LFLAGS = -Iinc -Ilibmx/inc
@@ -26,7 +27,7 @@ $(LIB):
 	@make -s -C $(LIB_DIR) -f Makefile install
 
 $(NAME): $(OBJ_DIR) $(OBJ)
-	@$(CC) $(CFLAGS) $(LFLAGS) $(OBJ) -o $(NAME) $(LIB_DIR)$(LIB)
+	@$(CC) $(CFLAGS) $(LFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
 
 install: $(LIB) $(NAME)
 

@@ -10,14 +10,6 @@ static char *make_dec(int num, int length) {
     return dec;
 }
 
-char *mx_itoa(int number) {
-    char *dec_str = NULL;
-
-    if (number)
-        dec_str = make_dec(number, mx_get_num_length(number, 10));
-    else {
-        dec_str = mx_strnew(1);
-        *dec_str = '0';
-    }
-    return dec_str;
+char *mx_itoa(int nbr) {
+    return nbr ? make_dec(nbr, mx_get_num_length(nbr, 10)) : mx_strdup("0");
 }

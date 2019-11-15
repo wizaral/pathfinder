@@ -10,13 +10,5 @@ static char *make_hex(unsigned long nbr, unsigned length) {
 }
 
 char *mx_nbr_to_hex(unsigned long nbr) {
-    char *hex_str = NULL;
-
-    if (nbr)
-        hex_str = make_hex(nbr, mx_get_num_length(nbr, 16));
-    else {
-        hex_str = mx_strnew(1);
-        *hex_str = '0';
-    }
-    return hex_str;
+    return nbr ? make_hex(nbr, mx_get_num_length(nbr, 16)) : mx_strdup("0");
 }

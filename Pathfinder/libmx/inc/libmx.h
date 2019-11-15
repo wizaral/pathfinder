@@ -91,7 +91,7 @@ int mx_atoi(const char *str);
 unsigned long long mx_factorial(unsigned long long n);
 int mx_sum_digits(int num);
 
-void printerr(const char *s);
+void mx_printerr(const char *s);
 
 void mx_swap_int(int *i1, int *i2);
 void mx_swap_str(char **s1, char **s2);

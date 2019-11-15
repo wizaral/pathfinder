@@ -1,8 +1,9 @@
 NAME = libmx.a
 CC = clang
 
-RAW = printchar print_unicode printstr print_strarr printint pow sqrt \
-	nbr_to_hex hex_to_nbr itoa foreach binary_search bubble_sort quicksort \
+RAW = printchar print_unicode printstr print_strarr printint \
+	pow sqrt nbr_to_hex hex_to_nbr itoa \
+	foreach binary_search bubble_sort quicksort \
 	\
 	strlen swap_char str_reverse strdel del_strarr get_char_index strdup \
 	strndup strcpy strncpy strcmp strcat strstr get_substr_index count_substr \
@@ -13,8 +14,10 @@ RAW = printchar print_unicode printstr print_strarr printint pow sqrt \
 	\
 	create_node push_front push_back pop_front pop_back list_size sort_list \
 	\
-	atoi factorial sum_digits printerr swap_int swap_str swap_void max_ll min_ll \
-	isalpha isdigit isspace isodd ishex islower isupper isprime max_ull min_ull \
+	atoi factorial sum_digits printerr \
+	swap_int swap_str swap_void \
+	max_ll min_ll max_ull min_ull \
+	isalpha isdigit isspace isodd ishex islower isupper isprime \
 	\
 	get_file_length get_num_length strchr strncmp tolower toupper \
 	\
