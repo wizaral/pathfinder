@@ -13,7 +13,7 @@ RAW = printchar print_unicode printstr print_strarr printint pow sqrt \
 	\
 	create_node push_front push_back pop_front pop_back list_size sort_list \
 	\
-	atoi factorial sum_digits swap_int swap_str swap_void max_ll min_ll \
+	atoi factorial sum_digits printerr swap_int swap_str swap_void max_ll min_ll \
 	isalpha isdigit isspace isodd ishex islower isupper isprime max_ull min_ull \
 	\
 	get_file_length get_num_length strchr strncmp tolower toupper \
