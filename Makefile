@@ -1,9 +1,9 @@
 CC = clang
 
-all: install go
+install:
+	@make -s -C Pathfinder -f Makefile all
 
 go:
 	@./Pathfinder/pathfinder
 
-install:
-	@make -s -C Pathfinder -f Makefile all
+all: install go

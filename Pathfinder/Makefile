@@ -12,7 +12,7 @@ SRC = $(addprefix $(SRC_DIR), $(addprefix mx_, $(addsuffix .c, $(RAW))))
 OBJ = $(addprefix $(OBJ_DIR), $(addprefix mx_, $(addsuffix .o, $(RAW))))
 
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
-LFLAGS = -Iinc -I$(addprefix $(LIB_DIR), $(LIB))
+LFLAGS = -Iinc -Ilibmx/inc
 
 all: install clean
 
@@ -26,7 +26,7 @@ $(LIB):
 	@make -s -C $(LIB_DIR) -f Makefile install
 
 $(NAME): $(OBJ_DIR) $(OBJ)
-	@$(CC) $(CFLAGS) $(LFLAGS) $(OBJ) -o $(NAME)
+	@$(CC) $(CFLAGS) $(LFLAGS) $(OBJ) -o $(NAME) $(LIB_DIR)$(LIB)
 
 install: $(LIB) $(NAME)
 

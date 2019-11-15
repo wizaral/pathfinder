@@ -1,5 +1,6 @@
 #include "header.h"
 
-int main() {
-    printf("HELLO WORLD\n");
+int main(int ac, char **av) {
+    if (ac && av)
+        mx_printstr("GOOD!\n");
 }
