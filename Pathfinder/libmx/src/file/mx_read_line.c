@@ -1,11 +1,11 @@
 #include "libmx.h"
 
-int mx_read_line(char **lineptr, int buf_size, char delim, const int fd) {
+int mx_read_line(char **lineptr, char delim, const int fd) {
     size_t len = 0;
     size_t lim = 16;
     int write_bytes = 1;
 
-    if (buf_size < 1 || read(fd, NULL, 0) < 0) {
+    if (read(fd, NULL, 0) < 0) {
         *lineptr = mx_realloc(*lineptr, 0);
         return -2;
     }

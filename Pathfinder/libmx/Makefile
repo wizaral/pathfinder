@@ -1,27 +1,26 @@
 NAME = libmx.a
 CC = clang
 
-RAW = printchar print_unicode printstr print_strarr printint \
-	pow sqrt nbr_to_hex hex_to_nbr itoa \
-	foreach binary_search bubble_sort quicksort \
-	\
-	strlen swap_char str_reverse strdel del_strarr get_char_index strdup \
-	strndup strcpy strncpy strcmp strcat strstr get_substr_index count_substr \
-	count_words strnew strtrim del_extra_spaces strsplit strjoin file_to_str \
-	read_line replace_substr \
-	\
-	memset memcpy memccpy memcmp memchr memrchr memmem memmove realloc \
-	\
-	create_node push_front push_back pop_front pop_back list_size sort_list \
-	\
-	atoi factorial sum_digits printerr \
-	swap_int swap_str swap_void \
-	max_ll min_ll max_ull min_ull \
-	isalpha isdigit isspace isodd ishex islower isupper isprime \
-	\
-	get_file_length get_num_length strchr strncmp tolower toupper \
-	\
-	push_index pop_index clear_list foreach_list
+algorithm = binary_search bubble_sort quicksort
+
+file = get_file_length file_to_str read_line
+
+forward_list = clear_list create_node foreach_list list_size \
+	pop_back pop_front pop_index push_back push_front push_index sort_list
+
+memory = memccpy memchr memcmp memcpy memmem memmove memrchr memset realloc
+
+print = print_strarr print_unicode printchar printerr printint printstr
+
+string = atoi count_substr count_words del_extra_spaces del_strarr get_char_index \
+	get_num_length get_substr_index hex_to_nbr itoa nbr_to_hex replace_substr \
+	str_reverse strcat strchr strcmp strcpy strdel strdup strjoin strlen strncmp \
+	strncpy strndup strnew strsplit strstr strtrim tolower toupper
+
+type = isalpha isdigit ishex islower isspace isupper
+
+utils = factorial foreach isodd isprime sum_digits max_ll min_ll max_ull min_ull \
+	pow sqrt swap_char swap_int swap_str swap_void
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/
