@@ -1,0 +1,7 @@
+Type of sorting		Time							Array		Type of unsorted array
+
+Mergesort			0.000000000000000000 sec		10000		Numbers in opposite order
+
+Type of searching	Time							Array		Type of array		Value		Result
+
+Line search			0.000000000000000000 sec		10000		Unsorted			0			9999

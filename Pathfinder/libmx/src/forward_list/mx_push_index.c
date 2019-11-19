@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-void mx_push_index(t_forward_list *list, void *data, t_ll index) {
+void mx_push_index(t_list *list, void *data, t_ll index) {
     t_list_node *prev_node = list ? list->head : NULL;
     t_list_node *new_node = NULL;
 

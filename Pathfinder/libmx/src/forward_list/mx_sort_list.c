@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-t_forward_list *mx_sort_list(t_forward_list *list, bool (*cmp)(void *a, void *b)) {
+t_list *mx_sort_list(t_list *list, bool (*cmp)(void *a, void *b)) {
     int swaps = 0;
 
     for (t_list_node *node1 = list; node1 && cmp; node1 = node1->next) {

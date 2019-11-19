@@ -9,9 +9,6 @@
 
 #include "structs.h"
 
-typedef unsigned long long t_ull;
-typedef long long t_ll;
-
 // ======== algorithm ======== //
 
 int linear_search(char **arr, int size, const char *s);

@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-void mx_pop_front(t_forward_list *list) {
+void mx_pop_front(t_list *list) {
     t_list_node *temp = NULL;
 
     if (list && list->head) {

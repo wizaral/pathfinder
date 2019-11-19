@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-void mx_clear_list(t_forward_list *list) {
+void mx_clear_list(t_list *list) {
     t_list_node *temp = list ? list->head : NULL;
 
     if (list) {

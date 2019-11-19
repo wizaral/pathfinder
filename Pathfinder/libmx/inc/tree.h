@@ -1,6 +1,8 @@
 #ifndef TREE_H
 #define TREE_H
 
+#include "types.h"
+
 typedef struct s_tree_node {
     void *data;
     struct s_tree_node *next;
@@ -8,7 +10,7 @@ typedef struct s_tree_node {
 } t_tree_node;
 
 typedef struct s_tree {
-    long long size;
+    t_ll size;
     t_tree_node *root;
     bool(*cmp)(void *, void *);
 } t_tree;

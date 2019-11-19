@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-void mx_pop_index(t_forward_list *list, t_ll index) {
+void mx_pop_index(t_list *list, t_ll index) {
     t_list_node *del_node = NULL;
     t_list_node *prev_node = list ? list->head : NULL;
 

@@ -1,7 +1,7 @@
 #include "libmx.h"
 
-long long mx_check_size(t_forward_list *list) {
-    long long size = 0;
+t_ll mx_check_size(t_list *list) {
+    t_ll size = 0;
 
     for (t_list_node *node = list ? list->head : NULL; node; node = node->next)
         ++size;

@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-void mx_check_cycle(t_forward_list *list) {
+void mx_check_cycle(t_list *list) {
     t_list_node *slow = list ? list->head : NULL;
     t_list_node *fast = list ? list->head->next : NULL;
     t_list_node *finder = list ? list->head : NULL;
