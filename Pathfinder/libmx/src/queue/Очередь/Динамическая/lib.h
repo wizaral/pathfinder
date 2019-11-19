@@ -3,27 +3,30 @@
 
 using namespace std;
 
-class infStack {
+class Queue {
 public:
-    infStack() {
+    Queue() {
         size = 0;
+        pointer1 = 0;
+        pointer2 = 0;
         capacity = 10;
         array = new int[capacity];
     }
 
-    ~infStack() {
+    ~Queue() {
         delete[] array;
     }
 
     int getSize();
-    void push();
-    void pop();
-    void peek();
+    void enQueue();
+    void deQueue();
     void print();
 
 private:
     int capacity;
     int size;
+    int pointer1;
+    int pointer2;
     int* array;
 };
 

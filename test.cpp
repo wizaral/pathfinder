@@ -5,10 +5,11 @@ const int INF = 2147483647;
 
 using std::vector, std::pair;
 
-void dijkstra(vector<vector<pair<int, int>>> &graph, int start = 0) {
+void dijkstra(vector<vector<pair<int, int>>> &graph) {
     vector<int> distances(graph.size(), INF);
     vector<int> parents(graph.size(), -1);
     vector<char> visited(graph.size(), false);
+    static int start = 0;
     distances[start] = 0;
 
     for (int i = 0, v = -1, _size = graph.size(); i < _size; ++i, v = -1) {
@@ -19,12 +20,13 @@ void dijkstra(vector<vector<pair<int, int>>> &graph, int start = 0) {
         if (distances[v] == INF)
             break;
 
+        // std::cout << v << " " << distances[v] << std::endl;
         visited[v] = true;
 
         for (size_t j = 0, size = graph[v].size(); j < size; ++j) {
             int to = graph[v][j].first, len = graph[v][j].second;
 
-            if (distances[v] + len < distances[to]) {
+            if (len != INF && distances[v] + len < distances[to]) {
                 distances[to] = distances[v] + len;
                 parents[to] = v;
             }
@@ -33,13 +35,15 @@ void dijkstra(vector<vector<pair<int, int>>> &graph, int start = 0) {
 
     std::cout << std::string(40, '=') << std::endl;
 
-    for (int i = start + 1, end = distances.size(); i < end; ++i)
+    for (int i = 0, end = distances.size(); i < end; ++i)
         std::cout << i << " : " << distances[i] << std::endl;
 
-    // for (int i = 0, end = parents.size(); i < end; ++i)
-    //     std::cout << i << " : " << parents[i] << std::endl;
+    for (int i = 0, end = parents.size(); i < end; ++i)
+        std::cout << "P: " << i << " : " << parents[i] << std::endl;
 
     std::cout << std::string(40, '=') << std::endl;
+
+    ++start;
 }
 
 int main() {
@@ -85,22 +89,35 @@ int main() {
     // D 3
     // E 4
 
-    graph[0].push_back({1, 11});
-    graph[0].push_back({2, 10});
+    graph[0].push_back({0, INF});
+    graph[0].push_back({1,  11});
+    graph[0].push_back({2,  10});
+    graph[0].push_back({3, INF});
+    graph[0].push_back({4, INF});
 
-    graph[1].push_back({0, 11});
-    graph[1].push_back({3,  5});
+    graph[1].push_back({0,  11});
+    graph[1].push_back({1, INF});
+    graph[1].push_back({2, INF});
+    graph[1].push_back({3,   5});
+    graph[1].push_back({4, INF});
 
-    graph[2].push_back({0, 10});
-    graph[2].push_back({3,  6});
-    graph[2].push_back({4, 15});
+    graph[2].push_back({0,  10});
+    graph[2].push_back({1, INF});
+    graph[2].push_back({2, INF});
+    graph[2].push_back({3,   6});
+    graph[2].push_back({4,  15});
 
-    graph[3].push_back({1,  5});
-    graph[3].push_back({2,  6});
-    graph[3].push_back({4,  4});
+    graph[3].push_back({0, INF});
+    graph[3].push_back({1,   5});
+    graph[3].push_back({2,   6});
+    graph[3].push_back({3, INF});
+    graph[3].push_back({4,   4});
 
-    graph[4].push_back({2, 15});
-    graph[4].push_back({3,  4});
+    graph[4].push_back({0, INF});
+    graph[4].push_back({1, INF});
+    graph[4].push_back({2,  15});
+    graph[4].push_back({3,   4});
+    graph[4].push_back({4, INF});
 
     // ======================================== //
 
@@ -131,5 +148,5 @@ int main() {
     // ======================================== //
 
     for (int i = 0; i < size - 1; ++i)
-        dijkstra(graph, i);
+        dijkstra(graph);
 }
