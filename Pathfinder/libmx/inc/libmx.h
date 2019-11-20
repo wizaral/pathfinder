@@ -14,8 +14,9 @@
 int linear_search(char **arr, int size, const char *s);
 int mx_binary_search(char **arr, int size, const char *s);
 
-void mx_bubble_sort(char **arr, int size);
-void mx_quicksort(char **arr, int left, int right);
+void mx_bubblesort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));  ////////////
+void mx_quicksort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));   ////////////
+void mx_mergesort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));   ////////////
 
 // ======== file ======== //
 

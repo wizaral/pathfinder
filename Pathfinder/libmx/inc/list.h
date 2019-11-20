@@ -6,6 +6,7 @@
 typedef struct s_list_node {
     void *data;
     struct s_list_node *next;
+    struct s_list_node *prev;       ////////////////////////////
 } t_list_node;
 
 typedef struct s_list {

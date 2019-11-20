@@ -1,12 +1,12 @@
 NAME = libmx.a
 CC = clang
 
-algorithm = binary_search bubble_sort quicksort
+algorithm = binary_search bubblesort quicksort
 
 file = get_file_length file_to_str read_line
 
-forward_list = clear_list create_node foreach_list list_size \
-	pop_back pop_front pop_index push_back push_front push_index sort_list
+list = clear_list create_node foreach_list list_size pop_back pop_front \
+	pop_index push_back push_front push_index sort_list
 
 memory = memccpy memchr memcmp memcpy memmem memmove memrchr memset realloc
 
