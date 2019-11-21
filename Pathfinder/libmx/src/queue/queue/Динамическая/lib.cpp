@@ -117,8 +117,7 @@ void Queue::deQueue() {
             capacity = tmp_capacity;
         }
     } else
-        cout << "������ �������!" << endl
-             << endl;
+        cout << "������ �������!" << endl << endl;
 }
 
 int getInt() {

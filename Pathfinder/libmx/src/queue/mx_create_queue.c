@@ -5,13 +5,10 @@ t_queue *mx_create_queue(size_t bytes) {
 
     if (queue) {
         queue->bytes = bytes;
-        queue->capacity = 10;
+        queue->cap = 10;
 
-        queue->pointer1 = 0;
-        queue->pointer2 = 0;
-
-        queue->size = 0;
-        queue->array = malloc(bytes * queue->capacity);
+        queue->head = queue->tail = queue->size = 0;
+        queue->arr = malloc(bytes * queue->cap);
     }
     return queue;
 }

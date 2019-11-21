@@ -1,7 +1,7 @@
 #include "libmx.h"
 
-void *mx_top(t_stack *stack) {
-    return stack && stack->array ?
-        (unsigned char)stack->array + (stack->bytes * (stack->size - 1)) :
-        NULL;
+void *mx_top(t_stack *st) {
+    return st && st->arr && st->size
+    ? (t_uc *)st->arr + (st->bytes * (st->size - 1))
+    : NULL;
 }

@@ -1,6 +1,5 @@
 #include "libmx.h"
 
-// переделать для очереди с замкнутым массивом
-void *mx_rear(t_queue *queue) {
-    return queue && queue->array ? (unsigned char)queue->array : NULL;
+void *mx_rear(t_queue *q) {
+    return q && q->arr ? (t_uc *)q->arr + (q->head * q->bytes) : NULL;
 }

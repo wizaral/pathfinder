@@ -1,14 +1,14 @@
 #include "libmx.h"
 
-void *mx_pop(t_stack *stack) {
-    void *item = mx_top(stack);
+void *mx_pop(t_stack *st) {
+    void *item = mx_top(st);
 
-    if (stack && stack->array) {
-        --stack->size;
+    if (st && st->arr) {
+        --st->size;
 
-        if ((float)stack->capacity / stack->size > 3 && stack->capacity > 30) {
-            stack->capacity = stack->capacity / 3 + 1;
-            stack->array = mx_realloc(stack->array, stack->capacity);
+        if ((float)st->cap / st->size > 3 && st->cap > 30) {
+            st->cap = st->cap / 3 + 1;
+            st->arr = mx_realloc(st->arr, st->cap);
         }
     }
     return item;

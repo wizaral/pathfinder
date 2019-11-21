@@ -4,19 +4,19 @@
 #include "types.h"
 
 typedef struct s_stack {
-    long long capacity;
-    long long size;
-    size_t bytes;
-    void *array;
+    t_ull cap;      // capacity
+    t_ull size;     // current size
+    size_t bytes;   // size of item
+    void *arr;      // array of items
 } t_stack;
 
-t_stack *mx_create_stack(size_t bytes);     // создание управляющей структуры
-void mx_delete_stack(t_stack **stack);      // удаление структуры и массива
+t_stack *mx_create_stack(size_t bytes);  // create base struct
+void mx_delete_stack(t_stack **st);      // delete base struct
 
-void mx_push(t_stack *stack, void *item);   // добавление в конец
-void *mx_top(t_stack *stack);               // указатель на верхний элемент
-void *mx_pop(t_stack *stack);               // удаление с конца
+void mx_push(t_stack *st, void *item);   // add element at the end
+void *mx_top(t_stack *st);               // return pointer on last item
+void *mx_pop(t_stack *st);               // delete last item
 
-void mx_foreach_stack(t_stack *stack, void (*f)(void *));
+void mx_foreach_stack(t_stack *st, void (*f)(void *));
 
 #endif

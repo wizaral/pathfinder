@@ -1,11 +1,11 @@
 #include "libmx.h"
 
-void mx_delete_queue(t_queue **queue) {
-    if (queue && *queue) {
-        if (malloc_size((*queue)->array))
-            free((*queue)->array);
-        if (malloc_size(*queue))
-            free(*queue);
-        *queue = NULL;
+void mx_delete_queue(t_queue **q) {
+    if (q && *q) {
+        if (malloc_size((*q)->arr))
+            free((*q)->arr);
+        if (malloc_size(*q))
+            free(*q);
+        *q = NULL;
     }
 }

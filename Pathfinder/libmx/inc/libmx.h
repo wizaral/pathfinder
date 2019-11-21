@@ -2,10 +2,10 @@
 #define LIBMX_H
 
 #include <fcntl.h>
-// #include <unistd.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
-// #include <malloc/malloc.h>
+#include <malloc/malloc.h>
 
 #include "structs.h"
 

@@ -1,14 +1,13 @@
 #include "libmx.h"
 
-void mx_push(t_stack *stack, void *item) {
-    if (stack && stack->array && item) {
-        if (stack->size == stack->capacity) {
-            stack->capacity *= 1.5;
-            stack->array = mx_realloc(stack->array, stack->capacity);
+void mx_push(t_stack *st, void *item) {
+    if (st && st->arr && item) {
+        if (st->size == st->cap) {
+            st->cap *= 1.5;
+            st->arr = mx_realloc(st->arr, st->cap);
         }
 
-        mx_memcpy((unsigned char)stack->array + (stack->size * stack->bytes),
-            item, stack->bytes);
-        ++stack->size;
+        mx_memcpy((t_uc *)st->arr + (st->size * st->bytes), item, st->bytes);
+        ++st->size;
     }
 }

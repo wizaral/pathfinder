@@ -1,13 +1,13 @@
 #include "libmx.h"
 
 t_stack *mx_create_stack(size_t bytes) {
-    t_stack *stack = bytes > 0 ? (t_stack *)malloc(sizeof(t_stack)) : NULL;
+    t_stack *st = bytes > 0 ? (t_stack *)malloc(sizeof(t_stack)) : NULL;
 
-    if (stack) {
-        stack->capacity = 10;
-        stack->size = 0;
-        stack->bytes = bytes;
-        stack->array = malloc(bytes * stack->capacity);
+    if (st) {
+        st->cap = 10;
+        st->size = 0;
+        st->bytes = bytes;
+        st->arr = malloc(bytes * st->cap);
     }
-    return stack;
+    return st;
 }

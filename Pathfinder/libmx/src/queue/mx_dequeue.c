@@ -1,15 +1,14 @@
 #include "libmx.h"
 
-void *mx_dequeue(t_queue *queue) {
-    void *item = mx_peek(queue);
+void *mx_dequeue(t_queue *q) {
+    void *item = mx_front(q);
 
-    if (queue && queue->array) {
-        --queue->size;
+    if (q && q->arr) {
+        q->head = q->head + 1 == q->cap ? 0 : q->head + 1;
+        --q->size;
 
-        if ((float)queue->capacity / queue->size > 3 && queue->capacity > 30) {
-            queue->capacity = queue->capacity / 3 + 1;
-            queue->array = mx_realloc(queue->array, queue->capacity);
-        }
+        if ((float)q->cap / q->size > 3 && q->cap > 20)
+            mx_realloc_queue(q, 0.5);
     }
     return item;
 }
