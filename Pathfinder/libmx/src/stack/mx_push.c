@@ -7,7 +7,7 @@ void mx_push(t_stack *stack, void *item) {
             stack->array = mx_realloc(stack->array, stack->capacity);
         }
 
-        mx_memcpy((char)stack->array + (stack->size * stack->bytes),
+        mx_memcpy((unsigned char)stack->array + (stack->size * stack->bytes),
             item, stack->bytes);
         ++stack->size;
     }
