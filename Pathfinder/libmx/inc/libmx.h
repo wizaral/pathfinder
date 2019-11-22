@@ -101,7 +101,7 @@ bool mx_islower(int c);
 bool mx_isspace(int c);
 bool mx_isupper(int c);
 
-// ======== type ======== //
+// ======== utils ======== //
 
 t_ull mx_factorial(t_ull n);
 void mx_foreach(int *arr, int size, void(*f)(int));
