@@ -11,12 +11,12 @@
 
 // ======== algorithm ======== //
 
-int linear_search(char **arr, int size, const char *s);
-int mx_binary_search(char **arr, int size, const char *s);
+t_ll mx_linear_search(void *arr, void *item, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
+t_ll mx_binary_search(void *arr, void *item, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
 
-void mx_bubblesort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));  ////////////
-void mx_quicksort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));   ////////////
-void mx_mergesort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));   ////////////
+void mx_bubblesort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
+void mx_quicksort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
+// void mx_mergesort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));    ////////////
 
 // ======== file ======== //
 
@@ -120,6 +120,7 @@ int mx_sqrt(int x);
 int mx_sum_digits(int num);
 
 void mx_swap_char(char *c1, char *c2);
+void mx_swap_copy(void *v1, void *v2, size_t size);
 void mx_swap_int(int *i1, int *i2);
 void mx_swap_str(char **s1, char **s2);
 void mx_swap_void(void **v1, void **v2);

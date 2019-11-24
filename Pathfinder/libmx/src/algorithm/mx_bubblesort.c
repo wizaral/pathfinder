@@ -1,11 +1,11 @@
 #include "libmx.h"
 
-// void mx_bubblesort(char **arr, int size) {
-//     for (int i = 0, swaps = 0; arr && i < size; ++i, swaps = 0) {
-//         for (int j = 0; j < size - i - 1; ++j)
-//             if (mx_strcmp(arr[j], arr[j + 1]) > 0)
-//                 mx_swap_str(arr + j, arr + j + 1), ++swaps;
-//         if (swaps == 0)
-//             break;
-//     }
-// }
+void mx_bubblesort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *)) {
+    for (t_ll i = 0, swaps = 0; arr && i < size; ++i, swaps = 0) {
+        for (t_ll j = 0; j < size - i - 1; ++j)
+            if (cmp(arr + j * size, arr + (j + 1) * size) > 0)
+                mx_swap_copy(arr + j, arr + j + 1, bytes), ++swaps;
+        if (swaps == 0)
+            break;
+    }
+}

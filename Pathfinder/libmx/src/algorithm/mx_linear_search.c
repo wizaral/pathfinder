@@ -1,8 +1,8 @@
 #include "libmx.h"
 
-int mx_linear_search(char **arr, int size, const char *s) {
-    for (int i = 0; i < size; ++i)
-        if (mx_strcmp(s, arr[i]) == 0)
+t_ll mx_linear_search(void *arr, void *item, size_t size, size_t bytes, int (*cmp)(const void *, const void *)) {
+    for (t_ll i = 0; i < size; ++i)
+        if (cmp(item, arr + i * bytes) == 0)
             return i;
     return -1;
 }
