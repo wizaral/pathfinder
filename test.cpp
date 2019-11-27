@@ -5,11 +5,10 @@ const int INF = 2147483647;
 
 using std::vector, std::pair;
 
-void dijkstra(vector<vector<pair<int, int>>> &graph) {
+void dijkstra(vector<vector<pair<int, int>>> &graph, int start) {
     vector<int> distances(graph.size(), INF);
     vector<int> parents(graph.size(), -1);
     vector<char> visited(graph.size(), false);
-    static int start = 0;
     distances[start] = 0;
 
     for (int i = 0, v = -1, _size = graph.size(); i < _size; ++i, v = -1) {
@@ -42,8 +41,6 @@ void dijkstra(vector<vector<pair<int, int>>> &graph) {
         std::cout << "P: " << i << " : " << parents[i] << std::endl;
 
     std::cout << std::string(40, '=') << std::endl;
-
-    ++start;
 }
 
 int main() {
@@ -148,5 +145,5 @@ int main() {
     // ======================================== //
 
     for (int i = 0; i < size - 1; ++i)
-        dijkstra(graph);
+        dijkstra(graph, i);
 }
