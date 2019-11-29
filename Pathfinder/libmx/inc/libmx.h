@@ -11,12 +11,12 @@
 
 // ======== algorithm ======== //
 
-t_ll mx_linear_search(void *arr, void *item, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
-t_ll mx_binary_search(void *arr, void *item, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
+t_ll mx_linear_search(void *key, void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
+t_ll mx_binary_search(void *key, void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
 
 void mx_bubblesort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
 void mx_quicksort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
-// void mx_mergesort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));    ////////////
+// void mx_mergesort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
 
 // ======== file ======== //
 

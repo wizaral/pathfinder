@@ -5,7 +5,7 @@ t_queue *mx_create_queue(size_t bytes) {
 
     if (queue) {
         queue->bytes = bytes;
-        queue->cap = 10;
+        queue->cap = 32;
 
         queue->head = queue->tail = queue->size = 0;
         queue->arr = malloc(bytes * queue->cap);

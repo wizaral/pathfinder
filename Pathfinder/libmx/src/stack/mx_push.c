@@ -3,7 +3,7 @@
 void mx_push(t_stack *st, void *item) {
     if (st && st->arr && item) {
         if (st->size == st->cap) {
-            st->cap *= 1.5;
+            st->cap *= 2;
             st->arr = mx_realloc(st->arr, st->cap);
         }
 

@@ -1,6 +1,8 @@
 #include "libmx.h"
 
-bool mx_checksort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *)) {
+bool mx_checksort(void *arr, size_t size, size_t bytes,
+    int (*cmp)(const void *, const void *))
+{
     t_ull end = size * bytes;
 
     if (arr && size > 0 && bytes > 0 && cmp) {
