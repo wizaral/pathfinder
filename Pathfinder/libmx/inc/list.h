@@ -34,7 +34,7 @@ void mx_push_back(t_list *list, void *data);                // вставка в
 void mx_push_front(t_list *list, void *data);               // вставка в начало
 void mx_push_index(t_list *list, void *data, t_ll index);   // вставка по индексу
 
-t_list *mx_sort_list(t_list *list, bool (*cmp)(void *, void *));    // bubble
+t_list *mx_sort_list(t_list *list, int (*cmp)(const void *, const void *));
 void **mx_list_to_array(t_list *list);      // создает массив указателей на информацию из нод списка
 
 #endif

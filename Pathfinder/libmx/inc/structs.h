@@ -5,5 +5,6 @@
 #include "queue.h"
 #include "stack.h"
 #include "tree.h"
+#include "vector.h"
 
 #endif
