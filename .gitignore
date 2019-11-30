@@ -5,6 +5,7 @@
 
 *.dms
 *.sw*
+*.vscode
 
 *.i
 *.s
