@@ -1,18 +1,23 @@
 #include <iostream>
 #include <vector>
 
-const int INF = 2147483647;
-using std::vector, std::pair;
+#define INF 2147483647
+using std::string, std::vector, std::pair, std::cout, std::endl;
+
+// void print_way(vector<vector<int>> &children, vector<int> way, int length) {
+//     if (length) {
+        
+//         // way.push_back();
+//         print_way(children, way, length - 1);
+//     }
+// }
 
 void dijkstra(vector<vector<pair<int, int>>> &graph, int start) {
     vector<int> distances(graph.size(), INF);
     distances[start] = 0;
 
-    // vector<vector<int>> parents(graph.size(), vector<int>(graph.size(), -1));
-    vector<vector<int>> parents;
-    for (size_t i = 0; i < graph.size(); ++i)
-        parents.push_back(vector<int>(graph[i].size(), -1));
-
+    vector<vector<int>> parents(graph.size());
+    vector<vector<int>> children(graph.size());
     vector<char> visited(graph.size(), false);
 
     for (size_t i = 0, v = INF, _size = graph.size(); i < _size; ++i, v = INF) {
@@ -25,35 +30,55 @@ void dijkstra(vector<vector<pair<int, int>>> &graph, int start) {
         for (size_t j = 0, size = graph[v].size(); j < size; ++j) {
             int to = graph[v][j].first, len = graph[v][j].second;
 
-            if (distances[v] + len < distances[to]) {
-                distances[to] = distances[v] + len;
-                parents[to].erase(parents[to].begin(), parents[to].end());
-                parents[to].push_back(v);
-            }
-            else if (distances[v] + len == distances[to]) {
-                distances[to] = distances[v] + len;
+            if (distances[v] + len <= distances[to]) {
+                if (distances[v] + len < distances[to]) {
+                    parents[to].erase(parents[to].begin(), parents[to].end());
+                    distances[to] = distances[v] + len;
+                }
                 parents[to].push_back(v);
             }
         }
     }
 
-    std::cout << std::string(40, '=') << std::endl;
+    for (int i = 0; i < parents.size(); ++i)
+        for (int j = 0; j < parents[i].size(); ++j)
+            children[parents[i][j]].push_back(i);
 
-    for (size_t i = 0, end = distances.size(); i < end; ++i)
-        std::cout << i << " : " << distances[i] << std::endl;
+    cout << string(40, '=') << endl;
 
-    for (size_t i = 0, end = parents.size(); i < end; ++i) {
-        std::cout << "P: " << i << " : ";
+    int begin = start + 1;
+
+    for (size_t i = begin, end = distances.size(); i < end; ++i)
+        cout << i << " : " << distances[i] << endl;
+
+    cout << string(40, '-') << endl;
+
+    for (size_t i = begin, end = parents.size(); i < end; ++i) {
+        cout << "P: " << i << " : ";
         for (const auto &j : parents[i])
-            std::cout << j << ", ";
-        std::cout << std::endl;
+            cout << j << ", ";
+        cout << endl;
     }
 
-    std::cout << std::string(40, '=') << std::endl;
+    cout << string(40, '-') << endl;
+
+    for (size_t i = 0, end = children.size(); i < end; ++i) {
+        cout << "C: " << i << " : ";
+        for (const auto &j : children[i])
+            cout << j << ", ";
+        cout << endl;
+    }
+
+    // cout << string(40, '-') << endl;
+
+    // for (int i = 0; i < graph.size(); ++i)
+    //     print_way(children, vector<int>(), i);
+
+    cout << string(40, '=') << endl;
 }
 
 int main() {
-    size_t size = 13;
+    size_t size = 5;
     vector<vector<pair<int, int>>> graph(size, vector<pair<int, int>>());   // список вершин: спискок ребер: вершина | вес ребра
 
     // ======================================== //
@@ -95,22 +120,22 @@ int main() {
     // D 3
     // E 4
 
-    // graph[0].push_back({1, 11});
-    // graph[0].push_back({2, 10});
+    graph[0].push_back({1, 11});
+    graph[0].push_back({2, 10});
 
-    // graph[1].push_back({0, 11});
-    // graph[1].push_back({3,  5});
+    graph[1].push_back({0, 11});
+    graph[1].push_back({3,  5});
 
-    // graph[2].push_back({0, 10});
-    // graph[2].push_back({3,  6});
-    // graph[2].push_back({4, 15});
+    graph[2].push_back({0, 10});
+    graph[2].push_back({3,  6});
+    graph[2].push_back({4, 15});
 
-    // graph[3].push_back({1,  5});
-    // graph[3].push_back({2,  6});
-    // graph[3].push_back({4,  4});
+    graph[3].push_back({1,  5});
+    graph[3].push_back({2,  6});
+    graph[3].push_back({4,  4});
 
-    // graph[4].push_back({2, 15});
-    // graph[4].push_back({3,  4});
+    graph[4].push_back({2, 15});
+    graph[4].push_back({3,  4});
 
     // ======================================== //
 
@@ -140,86 +165,86 @@ int main() {
 
     // ======================================== //
 
-    graph[0].push_back({1, 1});
-    graph[0].push_back({2, 1});
-    graph[0].push_back({3, 1});
+    // graph[0].push_back({ 1, 1});
+    // graph[0].push_back({ 2, 1});
+    // graph[0].push_back({ 3, 1});
 
-    graph[1].push_back({0, 1});
-    graph[1].push_back({2, 1});
-    graph[1].push_back({4, 1});
-    graph[1].push_back({5, 1});
-    graph[1].push_back({6, 1});
+    // graph[1].push_back({ 0, 1});
+    // graph[1].push_back({ 2, 1});
+    // graph[1].push_back({ 4, 1});
+    // graph[1].push_back({ 5, 1});
+    // graph[1].push_back({ 6, 1});
 
-    graph[2].push_back({0, 1});
-    graph[2].push_back({1, 1});
-    graph[2].push_back({3, 1});
-    graph[2].push_back({5, 1});
-    graph[2].push_back({6, 1});
-    graph[2].push_back({7, 1});
+    // graph[2].push_back({ 0, 1});
+    // graph[2].push_back({ 1, 1});
+    // graph[2].push_back({ 3, 1});
+    // graph[2].push_back({ 5, 1});
+    // graph[2].push_back({ 6, 1});
+    // graph[2].push_back({ 7, 1});
 
-    graph[3].push_back({0, 1});
-    graph[3].push_back({2, 1});
-    graph[3].push_back({6, 1});
-    graph[3].push_back({7, 1});
-    graph[3].push_back({8, 1});
+    // graph[3].push_back({ 0, 1});
+    // graph[3].push_back({ 2, 1});
+    // graph[3].push_back({ 6, 1});
+    // graph[3].push_back({ 7, 1});
+    // graph[3].push_back({ 8, 1});
 
-    graph[4].push_back({1, 1});
-    graph[4].push_back({5, 1});
-    graph[4].push_back({9, 1});
+    // graph[4].push_back({ 1, 1});
+    // graph[4].push_back({ 5, 1});
+    // graph[4].push_back({ 9, 1});
 
-    graph[5].push_back({1, 1});
-    graph[5].push_back({2, 1});
-    graph[5].push_back({4, 1});
-    graph[5].push_back({6, 1});
-    graph[5].push_back({9, 1});
-    graph[5].push_back({10, 1});
+    // graph[5].push_back({ 1, 1});
+    // graph[5].push_back({ 2, 1});
+    // graph[5].push_back({ 4, 1});
+    // graph[5].push_back({ 6, 1});
+    // graph[5].push_back({ 9, 1});
+    // graph[5].push_back({10, 1});
 
-    graph[6].push_back({1, 1});
-    graph[6].push_back({2, 1});
-    graph[6].push_back({3, 1});
-    graph[6].push_back({5, 1});
-    graph[6].push_back({7, 1});
-    graph[6].push_back({9, 1});
-    graph[6].push_back({10, 1});
-    graph[6].push_back({11, 1});
+    // graph[6].push_back({ 1, 1});
+    // graph[6].push_back({ 2, 1});
+    // graph[6].push_back({ 3, 1});
+    // graph[6].push_back({ 5, 1});
+    // graph[6].push_back({ 7, 1});
+    // graph[6].push_back({ 9, 1});
+    // graph[6].push_back({10, 1});
+    // graph[6].push_back({11, 1});
 
-    graph[7].push_back({2, 1});
-    graph[7].push_back({3, 1});
-    graph[7].push_back({6, 1});
-    graph[7].push_back({8, 1});
-    graph[7].push_back({10, 1});
-    graph[7].push_back({11, 1});
+    // graph[7].push_back({ 2, 1});
+    // graph[7].push_back({ 3, 1});
+    // graph[7].push_back({ 6, 1});
+    // graph[7].push_back({ 8, 1});
+    // graph[7].push_back({10, 1});
+    // graph[7].push_back({11, 1});
 
-    graph[8].push_back({3, 1});
-    graph[8].push_back({7, 1});
-    graph[8].push_back({11, 1});
+    // graph[8].push_back({ 3, 1});
+    // graph[8].push_back({ 7, 1});
+    // graph[8].push_back({11, 1});
 
-    graph[9].push_back({4, 1});
-    graph[9].push_back({5, 1});
-    graph[9].push_back({6, 1});
-    graph[9].push_back({10, 1});
-    graph[9].push_back({12, 1});
+    // graph[9].push_back({ 4, 1});
+    // graph[9].push_back({ 5, 1});
+    // graph[9].push_back({ 6, 1});
+    // graph[9].push_back({10, 1});
+    // graph[9].push_back({12, 1});
 
-    graph[10].push_back({5, 1});
-    graph[10].push_back({6, 1});
-    graph[10].push_back({7, 1});
-    graph[10].push_back({9, 1});
-    graph[10].push_back({11, 1});
-    graph[10].push_back({12, 1});
+    // graph[10].push_back({ 5, 1});
+    // graph[10].push_back({ 6, 1});
+    // graph[10].push_back({ 7, 1});
+    // graph[10].push_back({ 9, 1});
+    // graph[10].push_back({11, 1});
+    // graph[10].push_back({12, 1});
 
-    graph[11].push_back({6, 1});
-    graph[11].push_back({7, 1});
-    graph[11].push_back({8, 1});
-    graph[11].push_back({10, 1});
-    graph[11].push_back({12, 1});
+    // graph[11].push_back({ 6, 1});
+    // graph[11].push_back({ 7, 1});
+    // graph[11].push_back({ 8, 1});
+    // graph[11].push_back({10, 1});
+    // graph[11].push_back({12, 1});
 
-    graph[12].push_back({9, 1});
-    graph[12].push_back({10, 1});
-    graph[12].push_back({11, 1});
+    // graph[12].push_back({ 9, 1});
+    // graph[12].push_back({10, 1});
+    // graph[12].push_back({11, 1});
 
     // ======================================== //
 
-    for (int i = 0; i < size; ++i)
+    for (int i = 0; i < size - 1; ++i)
         dijkstra(graph, i);
     // dijkstra(graph, 0);
 }
