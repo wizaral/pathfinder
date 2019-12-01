@@ -14,15 +14,34 @@ typedef struct s_queue {
     void *arr;      // array of items
 } t_queue;
 
-t_queue *mx_create_queue(size_t bytes);     // create base struct
-void mx_delete_queue(t_queue **q);          // delete base struct
+/*
+* creates base struct
+* deletes base struct
+*/
 
-void mx_enqueue(t_queue *q, void *item);    // add element at the end
-void *mx_dequeue(t_queue *q);               // delete first element
-void *mx_front(t_queue *q);                 // return first element
-void *mx_rear(t_queue *q);                  // return element at the end
+t_queue *mx_create_queue(size_t bytes);
+void mx_delete_queue(t_queue **q);
 
-void mx_realloc_queue(t_queue *q, double scale);
+/*
+* adds element at the end
+* deletes first element
+*/
+
+void mx_enqueue(t_queue *q, void *item);
+void *mx_dequeue(t_queue *q);
+
+/*
+* returns first element
+* returns last element
+*/
+
+void *mx_front(t_queue *q);
+void *mx_rear(t_queue *q);
+
+/*
+* applies function f to every element in the container
+*/
+
 void mx_foreach_queue(t_queue *q, void (*f)(void *));
 
 #endif

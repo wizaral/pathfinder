@@ -6,35 +6,70 @@
 typedef struct s_list_node {
     void *data;
     struct s_list_node *next;
+    struct s_list_node *prev;
 } t_list_node;
 
 typedef struct s_list {
-    t_ll size;
-    t_list_node *head;
-    t_list_node *tail;
+    t_ll size;          // amount of elements
+    void *data;         // pointer to special data if you need it
+    t_list_node *head;  // first element
+    t_list_node *tail;  // last element
 } t_list;
 
-void mx_check_cycle(t_list *list);                          // удаление зацикленности в списке
-t_ll mx_check_size(t_list *list);                           // проход по листу + перезапись размера
-t_list_node *mx_check_tail(t_list *list);                   // проход по листу + перезапись хвоста
+/*
+* deletes cycle
+* counts elements in list and rewrite size
+* checks every element and rewrite tail
+*/
 
-t_list *mx_create_list();                                   // создание управляющей структуры
-t_list_node *mx_create_node(void *data, t_list_node *next); // создание ноды списка
+void mx_check_cycle(t_list *list);
+t_ll mx_check_size(t_list *list);
+t_list_node *mx_check_tail(t_list *list);
 
-void mx_clear_list(t_list *list);                           // удаление всех нод
-void mx_delete_list(t_list **list);                         // удаление всех нод и хранящей структуры
+/*
+* creates base struct
+* deletes base struct and all elements
+*/
 
-void mx_foreach_list(t_list *list, void (*f)(t_list_node *));
+t_list *mx_create_list();
+void mx_delete_list(t_list **list);
 
-void mx_pop_back(t_list *list);                             // удаление хвоста
-void mx_pop_front(t_list *list);                            // удаление головы
-void mx_pop_index(t_list *list, t_ll index);                // удаление по номеру
+/*
+* creates node struct and assigns next element
+* delete all elements from list
+*/
 
-void mx_push_back(t_list *list, void *data);                // вставка в конец
-void mx_push_front(t_list *list, void *data);               // вставка в начало
-void mx_push_index(t_list *list, void *data, t_ll index);   // вставка по индексу
+t_list_node *mx_create_node(void *data, t_list_node *next);
+void mx_clear_list(t_list *list);
+
+/*
+* deletes first element
+* deletes last element
+* deletes element with pos index
+*/
+
+void mx_pop_back(t_list *list);
+void mx_pop_front(t_list *list);
+void mx_pop_index(t_list *list, t_ll pos);
+
+/*
+* adds first element
+* adds last element
+* adds element with in pos index
+*/
+
+void mx_push_back(t_list *list, void *data);
+void mx_push_front(t_list *list, void *data);
+void mx_push_index(t_list *list, void *data, t_ll pos);
+
+/*
+* sorts elements in list
+* returns null-terminated array of data pointers
+* applies function f to every element in the container
+*/
 
 t_list *mx_sort_list(t_list *list, int (*cmp)(const void *, const void *));
-void **mx_list_to_array(t_list *list);      // создает массив указателей на информацию из нод списка
+void **mx_list_to_array(t_list *list);
+void mx_foreach_list(t_list *list, void (*f)(t_list_node *));
 
 #endif

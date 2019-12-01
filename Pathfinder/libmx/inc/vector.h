@@ -10,21 +10,50 @@ typedef struct s_vector {
     void *arr;      // array of items
 } t_vector;
 
-t_vector *mx_create_vector(size_t bytes);  // create base struct
-void mx_delete_vector(t_vector **v);      // delete base struct
+/*
+* creates base struct
+* deletes base struct
+*/
 
-// replaces the contents of container with count copies of value item
+t_vector *mx_create_vector(size_t bytes);
+void mx_delete_vector(t_vector **v);
+
+/*
+* replaces the contents of container with count copies of value item
+* adds element to the end of container
+* deletes last item of the container
+*/
+
 void mx_assign(t_vector *v, size_t count, void *item);
+void mx_push_backward(t_vector *v, void *item);
+void *mx_pop_backward(t_vector *v);
 
-void mx_push_backward(t_vector *v, void *item); // add element to the end of container
-void *mx_pop_backward(t_vector *v);             // delete last item of the container
+/*
+* inserts value before pos
+* removes the element at pos
+* erases all elements from the container
+*/
 
-// returns a pointer to the element at specified location pos, with bounds checking
+void *insert(t_vector *v, void *item);
+void *erase(t_vector *v, t_ull pos);
+void *clear(t_vector *v);
+
+/*
+* returns a pointer to element at location pos with bounds checking
+* returns a pointer to the first element in the container
+* returns a pointer to the last element in the container
+*/
+
 void *mx_at(t_vector *v, t_ull pos);
-void *mx_get_front(t_vector *v);    // returns a pointer to the first element in the container
-void *mx_get_back(t_vector *v);     // returns a pointer to the last element in the container
+void *mx_get_front(t_vector *v);
+void *mx_get_back(t_vector *v);
 
-void mx_foreach_vector(t_vector *st, void (*f)(void *));
+/*
+* applies function f to every element of the container
+* reverse the order of elements
+*/
 
+void mx_foreach_vector(t_vector *v, void (*f)(void *));
+void mx_reverse_vector(t_vector *v);
 
 #endif

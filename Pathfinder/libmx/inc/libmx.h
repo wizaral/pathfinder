@@ -9,22 +9,28 @@
 
 #include "structs.h"
 
-// ======== algorithm ======== //
+/*
+* algorithm
+*/
 
-t_ll mx_linear_search(void *key, void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
-t_ll mx_binary_search(void *key, void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
+t_ll mx_linear_search(const void *key, const t_vector *v, int (*cmp)(const void *, const void *));
+t_ll mx_binary_search(const void *key, const t_vector *v, int (*cmp)(const void *, const void *));
 
 void mx_bubblesort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
 void mx_quicksort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
-// void mx_mergesort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
+void mx_mergesort(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
 
-// ======== file ======== //
+/*
+* file
+*/
 
 char *mx_file_to_str(const char *file);
 int mx_get_file_length(const char *filename);
 int mx_read_line(char **lineptr, char delim, const int fd);
 
-// ======== memory ======== //
+/*
+* memory
+*/
 
 void *mx_memccpy(void *restrict dst, const void *restrict src, int c, size_t n);
 void *mx_memchr(const void *s, int c, size_t n);
@@ -37,7 +43,9 @@ void *mx_memset(void *b, int c, size_t len);
 
 void *mx_realloc(void *ptr, size_t size);
 
-// ======== print ======== //
+/*
+* print
+*/
 
 void mx_print_strarr(char **arr, const char *delim);
 void mx_print_unicode(wchar_t c);
@@ -47,7 +55,9 @@ void mx_printerr(const char *s);
 void mx_printint(int n);
 void mx_printstr(const char *s);
 
-// ======== string ======== //
+/*
+* string
+*/
 
 int mx_atoi(const char *str);
 
@@ -92,7 +102,9 @@ char *mx_strtrim(const char *str);
 int mx_tolower(int c);
 int mx_toupper(int c);
 
-// ======== type ======== //
+/*
+* type
+*/
 
 bool mx_isalpha(int c);
 bool mx_isdigit(int c);
@@ -101,7 +113,9 @@ bool mx_islower(int c);
 bool mx_isspace(int c);
 bool mx_isupper(int c);
 
-// ======== utils ======== //
+/*
+* utils
+*/
 
 t_ull mx_factorial(t_ull n);
 void mx_foreach(int *arr, int size, void(*f)(int));

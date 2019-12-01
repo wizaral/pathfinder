@@ -297,5 +297,4 @@ int main() {
 
     for (int i = 0; i < size - 1; ++i)
         dijkstra(graph, i);
-    // dijkstra(graph, 0);
 }

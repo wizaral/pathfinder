@@ -10,12 +10,27 @@ typedef struct s_stack {
     void *arr;      // array of items
 } t_stack;
 
-t_stack *mx_create_stack(size_t bytes);  // create base struct
-void mx_delete_stack(t_stack **st);      // delete base struct
+/*
+* creates base struct
+* deletes base struct
+*/
 
-void mx_push(t_stack *st, void *item);   // add element at the end
-void *mx_top(t_stack *st);               // return pointer on last item
-void *mx_pop(t_stack *st);               // delete last item
+t_stack *mx_create_stack(size_t bytes);
+void mx_delete_stack(t_stack **st);
+
+/*
+* adds element at the end
+* returns pointer on last item
+* removes last item and return its pointer
+*/
+
+void mx_push(t_stack *st, void *item);
+void *mx_top(t_stack *st);
+void *mx_pop(t_stack *st);
+
+/*
+* applies function f to every element of the container
+*/
 
 void mx_foreach_stack(t_stack *st, void (*f)(void *));
 

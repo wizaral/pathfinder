@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-void mx_bubblesort(void *arr, size_t size, size_t bytes,
+void mx_bubblesort(void *arr, const size_t size, const size_t bytes,
     int (*cmp)(const void *, const void *))
 {
     for (t_ll i = 0, swaps = 0; arr && i < size; ++i, swaps = 0) {
