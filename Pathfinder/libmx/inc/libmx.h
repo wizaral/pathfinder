@@ -133,10 +133,6 @@ double mx_pow(double n, unsigned int pow);
 int mx_sqrt(int x);
 int mx_sum_digits(int num);
 
-void mx_swap_char(char *c1, char *c2);
-void mx_swap_copy(void *v1, void *v2, size_t size);
-void mx_swap_int(int *i1, int *i2);
-void mx_swap_str(char **s1, char **s2);
-void mx_swap_void(void **v1, void **v2);
+void mx_swap(void *v1, void *v2, size_t size);
 
 #endif
