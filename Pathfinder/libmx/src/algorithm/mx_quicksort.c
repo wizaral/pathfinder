@@ -14,7 +14,7 @@ void mx_quicksort(void *arr, const size_t size, const size_t bytes,
             for (; cmp((t_uc *)arr + i, x) < 0; i += bytes);
             for (; cmp((t_uc *)arr + j, x) > 0; j -= bytes);
             if (i <= j) {
-                mx_swap_copy((t_uc *)arr + i, (t_uc *)arr + j, bytes);
+                mx_swap((t_uc *)arr + i, (t_uc *)arr + j, bytes);
                 i += bytes, j -= bytes;
             }
         }
