@@ -11,8 +11,8 @@ typedef struct s_vector {
 } t_vector;
 
 /*
-* creates base struct
-* deletes base struct
+* creates base struct;
+* deletes base struc
 */
 
 t_vector *mx_create_vector(size_t bytes);
@@ -24,9 +24,9 @@ void mx_delete_vector(t_vector **v);
 * deletes last item of the container
 */
 
-void mx_assign(t_vector *v, size_t count, void *item);
-void mx_push_backward(t_vector *v, void *item);
-void *mx_pop_backward(t_vector *v);
+void mx_assign(t_vector *v, size_t count, const void *item);
+void mx_push_backward(t_vector *v, const void *item);
+void mx_pop_backward(t_vector *v);
 
 /*
 * inserts value before pos
@@ -34,9 +34,9 @@ void *mx_pop_backward(t_vector *v);
 * erases all elements from the container
 */
 
-void *insert(t_vector *v, void *item);
-void *erase(t_vector *v, t_ull pos);
-void *clear(t_vector *v);
+void mx_insert(t_vector *v, t_ull pos, const void *item);
+void mx_erase(t_vector *v, t_ull pos);
+void mx_clear(t_vector *v);
 
 /*
 * returns a pointer to element at location pos with bounds checking

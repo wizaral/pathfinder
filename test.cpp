@@ -294,7 +294,6 @@ int main() {
     graph[6].push_back({1, 18});
     graph[6].push_back({5, 16});
 
-
     for (int i = 0; i < size - 1; ++i)
         dijkstra(graph, i);
 }
