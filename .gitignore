@@ -15,3 +15,6 @@
 *.a
 *.out
 *.exe
+
+*.txt
+*.pdf
