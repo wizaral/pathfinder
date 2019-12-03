@@ -24,7 +24,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
 
 $(LIB):
-	@make -s -C $(LIB_DIR) -f Makefile install
+	@make -sC $(LIB_DIR) -f Makefile install
 
 $(NAME): $(OBJ_DIR) $(OBJ)
 	@$(CC) $(CFLAGS) $(LFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
@@ -32,11 +32,11 @@ $(NAME): $(OBJ_DIR) $(OBJ)
 install: $(LIB) $(NAME)
 
 clean:
-	@make -s -C $(LIB_DIR) -f Makefile clean
+	@make -sC $(LIB_DIR) -f Makefile clean
 	@rm -rf $(OBJ_DIR)
 
 uninstall:
-	@make -s -C $(LIB_DIR) -f Makefile uninstall
+	@make -sC $(LIB_DIR) -f Makefile uninstall
 	@rm -rf $(NAME)
 	@rm -rf $(OBJ_DIR)
 

@@ -1,113 +1,139 @@
-#include <algorithm>
-#include <iostream>
-#include <vector>
+#include "tests.h"
 
-#define INF 2147483647
-using std::string, std::vector, std::pair, std::cout, std::endl;
+static inline t_ull get_min(Info &info) {
+    t_ull v = INF;
 
-void print_way(vector<vector<int>> &parents, vector<int> &way, int start) {
-    for (int i = 0; i < parents[way.back()].size(); ++i) {
-        way.push_back(parents[way.back()][i]);
+    for (t_ull j = 0; j < info.size; ++j)
+        if (info.visited[j] == false && (v == INF || info.distances[j] < info.distances[v]))
+            v = j;
 
-        if (start != way.back())
-            print_way(parents, way, start);
-        else {
-            cout << "Route: ";
-            for (const auto &i : way)
-                cout << i << ", ";
-            cout << endl;
+    return v;
+}
+
+static inline void check_distance(Info &info, t_ull v, t_ull j) {
+    t_ull to = info.graph[v][j].first;
+    t_ull len = info.graph[v][j].second;
+
+    if (info.distances[v] + len <= info.distances[to]) {
+        if (info.distances[v] + len < info.distances[to]) {
+            info.parents[to].clear();
+            info.distances[to] = info.distances[v] + len;
         }
-        way.pop_back();
+        info.parents[to].push_back(v);
     }
 }
 
-void dijkstra(vector<vector<pair<int, int>>> &graph, int start) {
-    vector<int> distances(graph.size(), INF);
-    distances[start] = 0;
+void dijkstra(Info &info, int start) {
+    for (t_ull i = 0, v; i < info.size; ++i) {
+        v = get_min(info);
 
-    vector<vector<int>> parents(graph.size());
-    vector<char> visited(graph.size(), false);
+        if (info.distances[v] == INF)
+            break;
 
-    for (size_t i = 0, v = INF, _size = graph.size(); i < _size; ++i, v = INF) {
-        for (size_t j = 0; j < _size; ++j)
-            if (visited[j] == false && (v == INF || distances[j] < distances[v]))
-                v = j;
+        info.visited[v] = true;
 
-        visited[v] = true;
+        for (t_ull j = 0, size = info.graph[v].size(); j < size; ++j)
+            check_distance(info, v, j);
+    }
+}
 
-        for (size_t j = 0, size = graph[v].size(); j < size; ++j) {
-            int to = graph[v][j].first, len = graph[v][j].second;
+static void add_route(Info &info, vector<t_ull> &route, t_ull start) {
+    for (int i = 0; i < info.parents[route.back()].size(); ++i) {
+        route.push_back(info.parents[route.back()][i]);
 
-            if (distances[v] + len <= distances[to]) {
-                if (distances[v] + len < distances[to]) {
-                    parents[to].erase(parents[to].begin(), parents[to].end());
-                    distances[to] = distances[v] + len;
-                }
-                parents[to].push_back(v);
-            }
+        if (start != route.back())
+            add_route(info, route, start);
+        else
+            info.routes.push_back(vector<t_ull>(route));
+
+        route.pop_back();
+    }
+}
+
+bool static compare(vector<t_ull> &r1, vector<t_ull> &r2) { // true if left element smaller than right
+    if (r1.back() < r2.back())
+        return true;
+
+    if (r1.back() == r2.back()) {
+        for (t_ull i = 1, s1 = r1.size() - 1, s2 = r2.size() - 1; i < s1 && i < s2; ++i) {
+            if (r1[i] < r2[i])
+                return true;
+            else if (r1[i] == r2[i] && r1.size() > r2.size())
+                return false;
         }
     }
+    return false;
+}
 
-    cout << string(40, '=') << endl;
+void create_routes(Info &info, t_ull start) {
+    vector<t_ull> route;
 
-    int begin = start + 1;
-
-    for (size_t i = begin, end = distances.size(); i < end; ++i)
-        cout << i << " : " << distances[i] << endl;
-
-    cout << string(40, '-') << endl;
-
-    for (size_t i = 0, end = parents.size(); i < end; ++i) {
-        std::sort(parents[i].begin(), parents[i].end());
-
-        cout << "P: " << i << " : ";
-        for (const auto &j : parents[i])
-            cout << j << ", ";
-        cout << endl;
+    for (t_ull i = start; i < info.size; ++i) {
+        route.push_back(i);
+        add_route(info, route, start);
+        route.pop_back();
     }
 
-    cout << string(40, '-') << endl;
+    for (auto &r : info.routes)
+        std::reverse(r.begin(), r.end());
 
-    vector<int> way;
+    std::sort(info.routes.begin(), info.routes.end(), compare);
+}
 
-    for (int i = 1, end = parents.size(); i < end; ++i) {
-        way.push_back(i);
-        print_way(parents, way, start);
-        way.pop_back();
+static void print_route(Info &info, vector<t_ull> &route, ostream &stream) {
+    for (auto i = route.begin(), end = --route.end(); i != end; ++i)
+        stream << info.names[*i] << " -> ";
+    stream << info.names[route.back()] << endl;
+}
+
+static void print_distance(Info &info, vector<t_ull> &route, ostream &stream) {
+    t_ull dist = 0;
+
+    for (auto i = ++route.begin(), end = --route.end(); i != end; ++i) {
+        stream << info.distances[*i] - dist << " + ";
+        dist = info.distances[*i];
     }
+    stream << info.distances[*(--route.end())] - dist
+        << " = " << info.distances[route.back()] << endl;
+}
 
-    cout << string(40, '=') << endl;
+void print_routes(Info &info, ostream &stream) {
+    string delim(40, '=');
+
+    for (auto r = info.routes.begin(), end = info.routes.end(); r != end; ++r) {
+        stream << delim << endl;
+        stream << "Path: " << info.names[(*r).front()] << " -> " << info.names[(*r).back()] << endl;
+
+        stream << "Route: ";
+        print_route(info, (*r), stream);
+
+        stream << "Distance: ";
+        if ((*r).size() > 2)
+            print_distance(info, (*r), stream);
+        else
+            stream << info.distances[(*r).back()] << endl;
+
+        stream << delim << endl;
+    }
+}
+
+void clean_info(Info &info) {
+    for (auto &p : info.parents)
+        p.clear();
+
+    info.routes.clear();
+    info.distances.assign(info.size, INF);
+    info.visited.assign(info.size, false);
 }
 
 int main() {
-    size_t size = 7;
-
-    // список вершин: спискок ребер: вершина | вес ребра
-    vector<vector<pair<int, int>>> graph(size, vector<pair<int, int>>());
-
-    // ======================================== //
-
     // Greenland-Bananal,8
     // Fraser-Greenland,10
     // Bananal-Fraser,3
     // Java-Fraser,5
 
-    // Greenland 0
-    // Bananal 1
-    // Fraser 2
-    // Java 3
-
-    // graph[0].push_back({1,  8});
-    // graph[0].push_back({2, 10});
-
-    // graph[1].push_back({0,  8});
-    // graph[1].push_back({2,  3});
-
-    // graph[2].push_back({0, 10});
-    // graph[2].push_back({1,  3});
-    // graph[2].push_back({3,  5});
-
-    // graph[3].push_back({2,  5});
+    Info info(4);
+    test1(info);
 
     // ======================================== //
 
@@ -118,133 +144,21 @@ int main() {
     // C-E,15
     // D-E,4
 
-    // A 0
-    // B 1
-    // C 2
-    // D 3
-    // E 4
-
-    // graph[0].push_back({1, 11});
-    // graph[0].push_back({2, 10});
-
-    // graph[1].push_back({0, 11});
-    // graph[1].push_back({3,  5});
-
-    // graph[2].push_back({0, 10});
-    // graph[2].push_back({3,  6});
-    // graph[2].push_back({4, 15});
-
-    // graph[3].push_back({1,  5});
-    // graph[3].push_back({2,  6});
-    // graph[3].push_back({4,  4});
-
-    // graph[4].push_back({2, 15});
-    // graph[4].push_back({3,  4});
+    // Info info(5);
+    // test2(info);
 
     // ======================================== //
 
-    // graph[0].push_back({1,  7});
-    // graph[0].push_back({2,  9});
-    // graph[0].push_back({5, 14});
+    // Kyiv-Kharkiv,471
+    // Nikopol-Kharkiv,340
+    // Kyiv-Warsaw,766
+    // Kyiv-Paris,2403
+    // Kyiv-Prague,1141
+    // Kyiv-Singapore,11864
+    // Kyiv-Tokyo,11079
 
-    // graph[1].push_back({0,  7});
-    // graph[1].push_back({2, 10});
-    // graph[1].push_back({3, 15});
-
-    // graph[2].push_back({0,  9});
-    // graph[2].push_back({1, 10});
-    // graph[2].push_back({3, 11});
-    // graph[2].push_back({5,  2});
-
-    // graph[3].push_back({1, 15});
-    // graph[3].push_back({2, 11});
-    // graph[3].push_back({4,  6});
-
-    // graph[4].push_back({3,  6});
-    // graph[4].push_back({5,  9});
-
-    // graph[5].push_back({0, 14});
-    // graph[5].push_back({2,  2});
-    // graph[5].push_back({4,  9});
-
-    // ======================================== //
-
-    // graph[0].push_back({ 1, 1});
-    // graph[0].push_back({ 2, 1});
-    // graph[0].push_back({ 3, 1});
-
-    // graph[1].push_back({ 0, 1});
-    // graph[1].push_back({ 2, 1});
-    // graph[1].push_back({ 4, 1});
-    // graph[1].push_back({ 5, 1});
-    // graph[1].push_back({ 6, 1});
-
-    // graph[2].push_back({ 0, 1});
-    // graph[2].push_back({ 1, 1});
-    // graph[2].push_back({ 3, 1});
-    // graph[2].push_back({ 5, 1});
-    // graph[2].push_back({ 6, 1});
-    // graph[2].push_back({ 7, 1});
-
-    // graph[3].push_back({ 0, 1});
-    // graph[3].push_back({ 2, 1});
-    // graph[3].push_back({ 6, 1});
-    // graph[3].push_back({ 7, 1});
-    // graph[3].push_back({ 8, 1});
-
-    // graph[4].push_back({ 1, 1});
-    // graph[4].push_back({ 5, 1});
-    // graph[4].push_back({ 9, 1});
-
-    // graph[5].push_back({ 1, 1});
-    // graph[5].push_back({ 2, 1});
-    // graph[5].push_back({ 4, 1});
-    // graph[5].push_back({ 6, 1});
-    // graph[5].push_back({ 9, 1});
-    // graph[5].push_back({10, 1});
-
-    // graph[6].push_back({ 1, 1});
-    // graph[6].push_back({ 2, 1});
-    // graph[6].push_back({ 3, 1});
-    // graph[6].push_back({ 5, 1});
-    // graph[6].push_back({ 7, 1});
-    // graph[6].push_back({ 9, 1});
-    // graph[6].push_back({10, 1});
-    // graph[6].push_back({11, 1});
-
-    // graph[7].push_back({ 2, 1});
-    // graph[7].push_back({ 3, 1});
-    // graph[7].push_back({ 6, 1});
-    // graph[7].push_back({ 8, 1});
-    // graph[7].push_back({10, 1});
-    // graph[7].push_back({11, 1});
-
-    // graph[8].push_back({ 3, 1});
-    // graph[8].push_back({ 7, 1});
-    // graph[8].push_back({11, 1});
-
-    // graph[9].push_back({ 4, 1});
-    // graph[9].push_back({ 5, 1});
-    // graph[9].push_back({ 6, 1});
-    // graph[9].push_back({10, 1});
-    // graph[9].push_back({12, 1});
-
-    // graph[10].push_back({ 5, 1});
-    // graph[10].push_back({ 6, 1});
-    // graph[10].push_back({ 7, 1});
-    // graph[10].push_back({ 9, 1});
-    // graph[10].push_back({11, 1});
-    // graph[10].push_back({12, 1});
-
-    // graph[11].push_back({ 6, 1});
-    // graph[11].push_back({ 7, 1});
-    // graph[11].push_back({ 8, 1});
-    // graph[11].push_back({10, 1});
-    // graph[11].push_back({12, 1});
-
-    // graph[12].push_back({ 9, 1});
-    // graph[12].push_back({10, 1});
-    // graph[12].push_back({11, 1});
+    // Info info(8);
+    // test3(info);
 
     // ======================================== //
 
@@ -259,41 +173,133 @@ int main() {
     // BusStop-Park,18
     // Park-Metro,16
 
-    // 0 Home
-    // 1 BusStop
-    // 2 Work
-    // 3 Taxi
-    // 4 Metro
-    // 5 Gym
-    // 6 Park
+    // Info info(7);
+    // test4(info);
 
-    graph[0].push_back({1, 4});
-    graph[0].push_back({3, 1});
-    graph[0].push_back({4, 6});
+    // ======================================== //
 
-    graph[1].push_back({0, 4});
-    graph[1].push_back({2, 7});
-    graph[1].push_back({6, 18});
+    // A-B,1
+    // A-C,1
+    // A-D,1
+    // B-C,1
+    // B-E,1
+    // B-F,1
+    // B-G,1
+    // C-D,1
+    // C-F,1
+    // C-G,1
+    // C-H,1
+    // D-G,1
+    // D-H,1
+    // D-I,1
+    // E-F,1
+    // E-J,1
+    // F-G,1
+    // F-J,1
+    // F-K,1
+    // G-J,1
+    // G-K,1
+    // G-L,1
+    // G-H,1
+    // H-K,1
+    // H-L,1
+    // H-I,1
+    // I-L,1
+    // J-K,1
+    // J-M,1
+    // K-M,1
+    // K-L,1
+    // M-L,1
 
-    graph[2].push_back({1, 7});
-    graph[2].push_back({3, 10});
-    graph[2].push_back({4, 8});
-    graph[2].push_back({5, 2});
+    // Info info(13);
+    // test5(info);
 
-    graph[3].push_back({0, 1});
-    graph[3].push_back({2, 10});
-    graph[3].push_back({5, 12});
+    // ======================================== //
 
-    graph[4].push_back({0, 6});
-    graph[4].push_back({2, 8});
-    graph[4].push_back({6, 16});
+    // A-B,2
+    // A-C,2
+    // A-D,2
+    // B-C,2
+    // B-E,1
+    // C-D,2
+    // C-E,1
+    // C-F,1
+    // B-G,2
+    // B-H,2
+    // C-I,2
+    // D-F,1
+    // D-J,2
+    // D-K,2
+    // E-H,1
+    // E-I,1
+    // F-I,1
+    // F-J,1
+    // H-L,1
+    // J-M,1
+    // G-H,2
+    // G-N,2
+    // H-I,2
+    // H-N,2
+    // I-L,1
+    // I-O,2
+    // I-M,1
+    // I-J,2
+    // J-K,2
+    // J-P,2
+    // K-P,2
+    // L-N,1
+    // L-O,1
+    // M-O,1
+    // M-P,1
+    // N-O,2
+    // N-Q,2
+    // O-P,2
+    // O-Q,2
+    // P-Q,2
 
-    graph[5].push_back({2, 2});
-    graph[5].push_back({3, 12});
+    // Info info(17);
+    // test6(info);
 
-    graph[6].push_back({1, 18});
-    graph[6].push_back({5, 16});
+    // ======================================== //
 
-    for (int i = 0; i < size - 1; ++i)
-        dijkstra(graph, i);
+    // Seattle-SanFrancisco,1306
+    // SanFrancisco-LasVegas,919
+    // SanFrancisco-LosAngeles,629
+    // LosAngeles-LasVegas,435
+    // Seattle-Denver,2161
+    // Seattle-Minneapolis,2661
+    // LasVegas-Denver,1225
+    // Denver-Dallas,1258
+    // Denver-Minneapolis,1483
+    // Minneapolis-Dallas,1532
+    // LasVegas-Dallas,1983
+    // Minneapolis-Chicago,661
+    // Chicago-WashDC,1145
+    // Chicago-Boston,1613
+    // Boston-NewYork,338
+    // NewYork-Miami,2145
+    // Dallas-WashDC,2113
+    // Dallas-Miami,2161
+    // WashDC-Miami,1709
+    // WashDC-NewYork,383
+    // WashDC-Boston,725
+
+    // Info info(12);
+    // test7(info);
+
+    // ======================================== //
+
+    // ofstream ofile("result.txt");
+
+    for (int i = 0; i < info.size - 1; ++i) {
+        info.distances[i] = 0;
+        dijkstra(info, i);
+
+        create_routes(info, i);
+        print_routes(info, cout);
+        // print_routes(info, ofile);
+
+        clean_info(info);
+    }
+    // ofile.close();
 }
