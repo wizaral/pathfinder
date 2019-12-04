@@ -4,8 +4,11 @@ static inline t_ull get_min(Info &info) {
     t_ull v = INF;
 
     for (t_ull j = 0; j < info.size; ++j)
-        if (info.visited[j] == false && (v == INF || info.distances[j] < info.distances[v]))
+        if (info.visited[j] == false && (v == INF
+            || info.distances[j] < info.distances[v]))
+        {
             v = j;
+        }
 
     return v;
 }
@@ -102,7 +105,8 @@ void print_routes(Info &info, ostream &stream) {
 
     for (auto r = info.routes.begin(), end = info.routes.end(); r != end; ++r) {
         stream << delim << endl;
-        stream << "Path: " << info.names[(*r).front()] << " -> " << info.names[(*r).back()] << endl;
+        stream << "Path: " << info.names[(*r).front()] << " -> ";
+        stream << info.names[(*r).back()] << endl;
 
         stream << "Route: ";
         print_route(info, (*r), stream);
