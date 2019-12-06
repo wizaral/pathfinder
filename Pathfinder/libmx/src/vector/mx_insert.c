@@ -9,10 +9,11 @@ void mx_insert(t_vector *v, t_ull pos, const void *item) {
 
         if (pos < v->size) {
             for (t_ull i = pos + 1; i < v->size; ++i)
-                mx_memcpy((t_uc *)v->arr + (i - 1) * v->bytes,
-                    (t_uc *)v->arr + i * v->bytes,
+                mx_memcpy((t_uc *)v->arr + ((i - 1) * v->bytes),
+                    (t_uc *)v->arr + (i * v->bytes),
                     v->bytes);
+            mx_memcpy((t_uc *)v->arr + pos * v->bytes, item, v->bytes);
         }
-        --v->size;
+        ++v->size;
     }
 }
