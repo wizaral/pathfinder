@@ -26,7 +26,7 @@ static inline void check_distance(Info &info, t_ull v, t_ull j) {
     }
 }
 
-void dijkstra(Info &info, int start) {
+void dijkstra(Info &info) {
     for (t_ull i = 0, v; i < info.size; ++i) {
         v = get_min(info);
 
@@ -41,7 +41,7 @@ void dijkstra(Info &info, int start) {
 }
 
 static void add_route(Info &info, vector<t_ull> &route, t_ull start) {
-    for (int i = 0; i < info.parents[route.back()].size(); ++i) {
+    for (size_t i = 0; i < info.parents[route.back()].size(); ++i) {
         route.push_back(info.parents[route.back()][i]);
 
         if (start != route.back())
@@ -136,8 +136,8 @@ int main() {
     // Bananal-Fraser,3
     // Java-Fraser,5
 
-    Info info(4);
-    test1(info);
+    // Info info(4);
+    // test1(info);
 
     // ======================================== //
 
@@ -177,8 +177,8 @@ int main() {
     // BusStop-Park,18
     // Park-Metro,16
 
-    // Info info(7);
-    // test4(info);
+    Info info(7);
+    test4(info);
 
     // ======================================== //
 
@@ -295,9 +295,9 @@ int main() {
 
     // ofstream ofile("result.txt");
 
-    for (int i = 0; i < info.size - 1; ++i) {
+    for (size_t i = 0; i < info.size - 1; ++i) {
         info.distances[i] = 0;
-        dijkstra(info, i);
+        dijkstra(info);
 
         create_routes(info, i);
         print_routes(info, cout);
