@@ -4,12 +4,8 @@ static inline t_ull get_min(Info &info) {
     t_ull v = INF;
 
     for (t_ull j = 0; j < info.size; ++j)
-        if (info.visited[j] == false && (v == INF
-            || info.distances[j] < info.distances[v]))
-        {
+        if (info.visited[j] == false && (v == INF || info.distances[j] < info.distances[v]))
             v = j;
-        }
-
     return v;
 }
 
@@ -29,12 +25,10 @@ static inline void check_distance(Info &info, t_ull v, t_ull j) {
 void dijkstra(Info &info) {
     for (t_ull i = 0, v; i < info.size; ++i) {
         v = get_min(info);
-
         if (info.distances[v] == INF)
             break;
 
         info.visited[v] = true;
-
         for (t_ull j = 0, size = info.graph[v].size(); j < size; ++j)
             check_distance(info, v, j);
     }
@@ -53,17 +47,17 @@ static void add_route(Info &info, vector<t_ull> &route, t_ull start) {
     }
 }
 
-bool static compare(vector<t_ull> &r1, vector<t_ull> &r2) { // true if left element smaller than right
+// true if left element smaller than right
+bool static compare(vector<t_ull> &r1, vector<t_ull> &r2) {
     if (r1.back() < r2.back())
         return true;
 
     if (r1.back() == r2.back()) {
-        for (t_ull i = 1, s1 = r1.size() - 1, s2 = r2.size() - 1; i < s1 && i < s2; ++i) {
+        t_ull stop = (r1.size() < r2.size() ? r1.size() : r2.size());
+
+        for (t_ull i = 1; i < stop; ++i)
             if (r1[i] < r2[i])
                 return true;
-            else if (r1[i] == r2[i] && r1.size() > r2.size())
-                return false;
-        }
     }
     return false;
 }
@@ -101,7 +95,7 @@ static void print_distance(Info &info, vector<t_ull> &route, ostream &stream) {
 }
 
 void print_routes(Info &info, ostream &stream) {
-    string delim(40, '=');
+    const static string delim(40, '=');
 
     for (auto r = info.routes.begin(), end = info.routes.end(); r != end; ++r) {
         stream << delim << endl;
@@ -293,17 +287,17 @@ int main() {
 
     // ======================================== //
 
-    // ofstream ofile("result.txt");
+    ofstream ofile("result.txt");
 
     for (size_t i = 0; i < info.size - 1; ++i) {
         info.distances[i] = 0;
         dijkstra(info);
 
         create_routes(info, i);
-        print_routes(info, cout);
-        // print_routes(info, ofile);
+        // print_routes(info, cout);
+        print_routes(info, ofile);
 
         clean_info(info);
     }
-    // ofile.close();
+    ofile.close();
 }
