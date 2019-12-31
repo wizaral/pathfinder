@@ -5,7 +5,7 @@
 
 #define INF 2147483647
 using t_ull = unsigned long long;
-using std::ofstream, std::ostream, std::string, std::vector, std::pair, std::cout, std::endl;
+using std::ostream, std::vector, std::pair, std::cout, std::endl;
 
 struct Info {
     Info(t_ull size)
@@ -14,7 +14,7 @@ struct Info {
         routes(vector<vector<t_ull>>()),
         distances(vector<t_ull>(size, INF)),
         visited(vector<char>(size, false)),
-        names(vector<string>(size)),
+        names(vector<std::string>(size)),
         size(size) {}
 
     vector<vector<pair<t_ull, t_ull>>> graph;
@@ -22,7 +22,7 @@ struct Info {
     vector<vector<t_ull>> routes;
     vector<t_ull> distances;
     vector<char> visited;
-    vector<string> names;
+    vector<std::string> names;
     t_ull size;
 };
 
@@ -63,14 +63,43 @@ void test2(Info &info) {
     info.graph[4].push_back({2, 15});
     info.graph[4].push_back({3,  4});
 
-    info.names[0] = "A";
-    info.names[1] = "B";
-    info.names[2] = "C";
-    info.names[3] = "D";
-    info.names[4] = "E";
+    for (int i = 0; i < 5; ++i)
+        info.names[i] = std::string(1, i + 65);
 }
 
 void test3(Info &info) {
+    info.graph[0].push_back({1, 1});
+    info.graph[0].push_back({2, 1});
+
+    info.graph[1].push_back({0, 1});
+    info.graph[1].push_back({2, 1});
+
+    info.graph[2].push_back({0, 1});
+    info.graph[2].push_back({1, 1});
+
+    info.names[0] = "Blade";
+    info.names[1] = "Wizard";
+    info.names[2] = "Drive";
+}
+
+void test4(Info &info) {
+    info.graph[0].push_back({1, 1});
+
+    info.graph[1].push_back({0, 1});
+    info.graph[1].push_back({2, 2});
+
+    info.graph[2].push_back({1, 2});
+    info.graph[2].push_back({3, 8});
+
+    info.graph[3].push_back({2, 8});
+
+    info.names[0] = "One";
+    info.names[1] = "Two";
+    info.names[2] = "Zero";
+    info.names[3] = "Eight";
+}
+
+void test5(Info &info) {
     info.graph[0].push_back({1, 471});
     info.graph[0].push_back({3, 766});
     info.graph[0].push_back({4, 2403});
@@ -98,7 +127,7 @@ void test3(Info &info) {
     info.names[7] = "Tokyo";
 }
 
-void test4(Info &info) {
+void test6(Info &info) {
     info.graph[0].push_back({1, 4});
     info.graph[0].push_back({3, 1});
     info.graph[0].push_back({4, 6});
@@ -135,7 +164,7 @@ void test4(Info &info) {
     info.names[6] = "Park";
 }
 
-void test5(Info &info) {
+void test7(Info &info) {
     info.graph[0].push_back({ 1, 1});
     info.graph[0].push_back({ 2, 1});
     info.graph[0].push_back({ 3, 1});
@@ -214,10 +243,10 @@ void test5(Info &info) {
     info.graph[12].push_back({11, 1});
 
     for (int i = 0; i < 13; ++i)
-        info.names[i] = string(1, i + 65);
+        info.names[i] = std::string(1, i + 65);
 }
 
-void test6(Info &info) {
+void test8(Info &info) {
     info.graph[0].push_back({ 1, 2});
     info.graph[0].push_back({ 2, 2});
     info.graph[0].push_back({ 3, 2});
@@ -316,10 +345,10 @@ void test6(Info &info) {
     info.graph[16].push_back({15, 2});
 
     for (int i = 0; i < 17; ++i)
-        info.names[i] = string(1, i + 65);
+        info.names[i] = std::string(1, i + 65);
 }
 
-void test7(Info &info) {
+void test9(Info &info) {
     info.graph[0].push_back({1, 1306});
     info.graph[0].push_back({4, 2161});
     info.graph[0].push_back({5, 2661});

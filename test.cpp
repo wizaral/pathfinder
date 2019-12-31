@@ -94,8 +94,8 @@ static void print_distance(Info &info, vector<t_ull> &route, ostream &stream) {
         << " = " << info.distances[route.back()] << endl;
 }
 
-void print_routes(Info &info, ostream &stream) {
-    const static string delim(40, '=');
+void print_routes(Info &info, std::ostream &stream) {
+    const static std::string delim(40, '=');
 
     for (auto r = info.routes.begin(), end = info.routes.end(); r != end; ++r) {
         stream << delim << endl;
@@ -125,6 +125,7 @@ void clean_info(Info &info) {
 }
 
 int main() {
+    // 4
     // Greenland-Bananal,8
     // Fraser-Greenland,10
     // Bananal-Fraser,3
@@ -135,6 +136,7 @@ int main() {
 
     // ======================================== //
 
+    // 5
     // A-B,11
     // A-C,10
     // B-D,5
@@ -147,6 +149,27 @@ int main() {
 
     // ======================================== //
 
+    // 3
+    // Blade-Wizard,1
+    // Drive-Blade,1
+    // Wizard-Drive,1
+
+    Info info(3);
+    test3(info);
+
+    // ======================================== //
+
+    // 4
+    // One-Two,1
+    // Zero-Eight,8
+    // Two-Zero,2
+
+    // Info info(4);
+    // test4(info);
+
+    // ======================================== //
+
+    // 8
     // Kyiv-Kharkiv,471
     // Nikopol-Kharkiv,340
     // Kyiv-Warsaw,766
@@ -156,10 +179,11 @@ int main() {
     // Kyiv-Tokyo,11079
 
     // Info info(8);
-    // test3(info);
+    // test5(info);
 
     // ======================================== //
 
+    // 7
     // Home-BusStop,4
     // BusStop-Work,7
     // Home-Taxi,1
@@ -171,11 +195,12 @@ int main() {
     // BusStop-Park,18
     // Park-Metro,16
 
-    Info info(7);
-    test4(info);
+    // Info info(7);
+    // test6(info);
 
     // ======================================== //
 
+    // 13
     // A-B,1
     // A-C,1
     // A-D,1
@@ -210,10 +235,11 @@ int main() {
     // M-L,1
 
     // Info info(13);
-    // test5(info);
+    // test7(info);
 
     // ======================================== //
 
+    // 17
     // A-B,2
     // A-C,2
     // A-D,2
@@ -256,10 +282,11 @@ int main() {
     // P-Q,2
 
     // Info info(17);
-    // test6(info);
+    // test8(info);
 
     // ======================================== //
 
+    // 12
     // Seattle-SanFrancisco,1306
     // SanFrancisco-LasVegas,919
     // SanFrancisco-LosAngeles,629
@@ -283,11 +310,11 @@ int main() {
     // WashDC-Boston,725
 
     // Info info(12);
-    // test7(info);
+    // test9(info);
 
     // ======================================== //
 
-    ofstream ofile("result.txt");
+    std::ofstream ofile("result.txt");
 
     for (size_t i = 0; i < info.size - 1; ++i) {
         info.distances[i] = 0;
