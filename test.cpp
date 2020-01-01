@@ -48,7 +48,7 @@ static void add_route(Info &info, vector<t_ull> &route, t_ull start) {
 }
 
 // true if left element smaller than right
-bool static compare(vector<t_ull> &r1, vector<t_ull> &r2) {
+static bool compare(vector<t_ull> &r1, vector<t_ull> &r2) {
     if (r1.back() < r2.back())
         return true;
 

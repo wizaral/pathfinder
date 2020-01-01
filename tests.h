@@ -82,6 +82,21 @@ void test3(Info &info) {
     info.names[2] = "Drive";
 }
 
+// void test3(Info &info) {
+//     info.graph[0].push_back({1, 1});
+//     info.graph[0].push_back({2, 2});
+
+//     info.graph[1].push_back({0, 1});
+//     info.graph[1].push_back({2, 3});
+
+//     info.graph[2].push_back({0, 2});
+//     info.graph[2].push_back({1, 3});
+
+//     info.names[0] = "Blade";
+//     info.names[1] = "Wizard";
+//     info.names[2] = "Drive";
+// }
+
 void test4(Info &info) {
     info.graph[0].push_back({1, 1});
 
