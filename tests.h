@@ -15,6 +15,7 @@ struct Info {
         distances(vector<ull>(size, INF)),
         visited(vector<char>(size, false)),
         names(vector<std::string>(size)),
+        start(0),
         size(size) {}
 
     vector<vector<pair<ull, ull>>> graph;
@@ -23,6 +24,7 @@ struct Info {
     vector<ull> distances;
     vector<char> visited;
     vector<std::string> names;
+    ull start;
     ull size;
 };
 

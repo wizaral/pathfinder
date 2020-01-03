@@ -34,12 +34,12 @@ static inline void dijkstra(Info &info) {
     }
 }
 
-static inline void add_route(Info &info, vector<ull> &route, ull start) {
+static inline void add_route(Info &info, vector<ull> &route) {
     for (size_t i = 0; i < info.parents[route.back()].size(); ++i) {
         route.push_back(info.parents[route.back()][i]);
 
-        if (start != route.back())
-            add_route(info, route, start);
+        if (info.start != route.back())
+            add_route(info, route);
         else
             info.routes.push_back(vector<ull>(route));
 
@@ -64,12 +64,12 @@ static inline bool compare(vector<ull> &r1, vector<ull> &r2) {
     return false;
 }
 
-static inline void create_routes(Info &info, ull start) {
+static inline void create_routes(Info &info) {
     vector<ull> route;
 
-    for (ull i = start; i < info.size; ++i) {
+    for (ull i = info.start; i < info.size; ++i) {
         route.push_back(i);
-        add_route(info, route, start);
+        add_route(info, route);
         route.pop_back();
     }
 
@@ -129,11 +129,11 @@ static inline void clean_info(Info &info) {
 static inline void test(Info &info) {
     for (size_t i = 0; i < info.size - 1; ++i) {
         info.distances[i] = 0;
+        info.start = i;
         dijkstra(info);
 
-        create_routes(info, i);
+        create_routes(info);
         print_routes(info);
-
         clean_info(info);
     }
 }
@@ -206,5 +206,5 @@ int main(int argc, char **argv) {
         }
     }
     else
-        cout << "usage: ./pathfinder [testnumber] [filename]" << endl;
+        cout << "usage: ./pathfinder [testnumber]" << endl;
 }
