@@ -1,20 +1,25 @@
+# system files
 *.DS_Store
 *.ini
 *~
 ~$*
 
+# text editors
 *.dms
 *.sw*
 *.vscode
 
+# preprocessing, assembly, object, debug
 *.i
 *.s
 *.o
 *.dSYM
 
+# lib, out, exe
 *.a
 *.out
 *.exe
 
+# lol why not
 *.txt
 *.pdf
