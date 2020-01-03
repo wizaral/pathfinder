@@ -33,17 +33,17 @@ struct Info {
 // Java-Fraser,5
 
 void test1(Info &info) {
-    info.graph[0].push_back({1,  8});
+    info.graph[0].push_back({1, 8});
     info.graph[0].push_back({2, 10});
 
-    info.graph[1].push_back({0,  8});
-    info.graph[1].push_back({2,  3});
+    info.graph[1].push_back({0, 8});
+    info.graph[1].push_back({2, 3});
 
     info.graph[2].push_back({0, 10});
-    info.graph[2].push_back({1,  3});
-    info.graph[2].push_back({3,  5});
+    info.graph[2].push_back({1, 3});
+    info.graph[2].push_back({3, 5});
 
-    info.graph[3].push_back({2,  5});
+    info.graph[3].push_back({2, 5});
 
     info.names[0] = "Greenland";
     info.names[1] = "Bananal";
@@ -64,18 +64,18 @@ void test2(Info &info) {
     info.graph[0].push_back({2, 10});
 
     info.graph[1].push_back({0, 11});
-    info.graph[1].push_back({3,  5});
+    info.graph[1].push_back({3, 5});
 
     info.graph[2].push_back({0, 10});
-    info.graph[2].push_back({3,  6});
+    info.graph[2].push_back({3, 6});
     info.graph[2].push_back({4, 15});
 
-    info.graph[3].push_back({1,  5});
-    info.graph[3].push_back({2,  6});
-    info.graph[3].push_back({4,  4});
+    info.graph[3].push_back({1, 5});
+    info.graph[3].push_back({2, 6});
+    info.graph[3].push_back({4, 4});
 
     info.graph[4].push_back({2, 15});
-    info.graph[4].push_back({3,  4});
+    info.graph[4].push_back({3, 4});
 
     for (int i = 0; i < 5; ++i)
         info.names[i] = std::string(1, i + 65);
@@ -264,80 +264,80 @@ void test7(Info &info) {
 // M-L,1
 
 void test8(Info &info) {
-    info.graph[0].push_back({ 1, 1});
-    info.graph[0].push_back({ 2, 1});
-    info.graph[0].push_back({ 3, 1});
+    info.graph[0].push_back({1, 1});
+    info.graph[0].push_back({2, 1});
+    info.graph[0].push_back({3, 1});
 
-    info.graph[1].push_back({ 0, 1});
-    info.graph[1].push_back({ 2, 1});
-    info.graph[1].push_back({ 4, 1});
-    info.graph[1].push_back({ 5, 1});
-    info.graph[1].push_back({ 6, 1});
+    info.graph[1].push_back({0, 1});
+    info.graph[1].push_back({2, 1});
+    info.graph[1].push_back({4, 1});
+    info.graph[1].push_back({5, 1});
+    info.graph[1].push_back({6, 1});
 
-    info.graph[2].push_back({ 0, 1});
-    info.graph[2].push_back({ 1, 1});
-    info.graph[2].push_back({ 3, 1});
-    info.graph[2].push_back({ 5, 1});
-    info.graph[2].push_back({ 6, 1});
-    info.graph[2].push_back({ 7, 1});
+    info.graph[2].push_back({0, 1});
+    info.graph[2].push_back({1, 1});
+    info.graph[2].push_back({3, 1});
+    info.graph[2].push_back({5, 1});
+    info.graph[2].push_back({6, 1});
+    info.graph[2].push_back({7, 1});
 
-    info.graph[3].push_back({ 0, 1});
-    info.graph[3].push_back({ 2, 1});
-    info.graph[3].push_back({ 6, 1});
-    info.graph[3].push_back({ 7, 1});
-    info.graph[3].push_back({ 8, 1});
+    info.graph[3].push_back({0, 1});
+    info.graph[3].push_back({2, 1});
+    info.graph[3].push_back({6, 1});
+    info.graph[3].push_back({7, 1});
+    info.graph[3].push_back({8, 1});
 
-    info.graph[4].push_back({ 1, 1});
-    info.graph[4].push_back({ 5, 1});
-    info.graph[4].push_back({ 9, 1});
+    info.graph[4].push_back({1, 1});
+    info.graph[4].push_back({5, 1});
+    info.graph[4].push_back({9, 1});
 
-    info.graph[5].push_back({ 1, 1});
-    info.graph[5].push_back({ 2, 1});
-    info.graph[5].push_back({ 4, 1});
-    info.graph[5].push_back({ 6, 1});
-    info.graph[5].push_back({ 9, 1});
+    info.graph[5].push_back({1, 1});
+    info.graph[5].push_back({2, 1});
+    info.graph[5].push_back({4, 1});
+    info.graph[5].push_back({6, 1});
+    info.graph[5].push_back({9, 1});
     info.graph[5].push_back({10, 1});
 
-    info.graph[6].push_back({ 1, 1});
-    info.graph[6].push_back({ 2, 1});
-    info.graph[6].push_back({ 3, 1});
-    info.graph[6].push_back({ 5, 1});
-    info.graph[6].push_back({ 7, 1});
-    info.graph[6].push_back({ 9, 1});
+    info.graph[6].push_back({1, 1});
+    info.graph[6].push_back({2, 1});
+    info.graph[6].push_back({3, 1});
+    info.graph[6].push_back({5, 1});
+    info.graph[6].push_back({7, 1});
+    info.graph[6].push_back({9, 1});
     info.graph[6].push_back({10, 1});
     info.graph[6].push_back({11, 1});
 
-    info.graph[7].push_back({ 2, 1});
-    info.graph[7].push_back({ 3, 1});
-    info.graph[7].push_back({ 6, 1});
-    info.graph[7].push_back({ 8, 1});
+    info.graph[7].push_back({2, 1});
+    info.graph[7].push_back({3, 1});
+    info.graph[7].push_back({6, 1});
+    info.graph[7].push_back({8, 1});
     info.graph[7].push_back({10, 1});
     info.graph[7].push_back({11, 1});
 
-    info.graph[8].push_back({ 3, 1});
-    info.graph[8].push_back({ 7, 1});
+    info.graph[8].push_back({3, 1});
+    info.graph[8].push_back({7, 1});
     info.graph[8].push_back({11, 1});
 
-    info.graph[9].push_back({ 4, 1});
-    info.graph[9].push_back({ 5, 1});
-    info.graph[9].push_back({ 6, 1});
+    info.graph[9].push_back({4, 1});
+    info.graph[9].push_back({5, 1});
+    info.graph[9].push_back({6, 1});
     info.graph[9].push_back({10, 1});
     info.graph[9].push_back({12, 1});
 
-    info.graph[10].push_back({ 5, 1});
-    info.graph[10].push_back({ 6, 1});
-    info.graph[10].push_back({ 7, 1});
-    info.graph[10].push_back({ 9, 1});
+    info.graph[10].push_back({5, 1});
+    info.graph[10].push_back({6, 1});
+    info.graph[10].push_back({7, 1});
+    info.graph[10].push_back({9, 1});
     info.graph[10].push_back({11, 1});
     info.graph[10].push_back({12, 1});
 
-    info.graph[11].push_back({ 6, 1});
-    info.graph[11].push_back({ 7, 1});
-    info.graph[11].push_back({ 8, 1});
+    info.graph[11].push_back({6, 1});
+    info.graph[11].push_back({7, 1});
+    info.graph[11].push_back({8, 1});
     info.graph[11].push_back({10, 1});
     info.graph[11].push_back({12, 1});
 
-    info.graph[12].push_back({ 9, 1});
+    info.graph[12].push_back({9, 1});
     info.graph[12].push_back({10, 1});
     info.graph[12].push_back({11, 1});
 
@@ -388,94 +388,94 @@ void test8(Info &info) {
 // P-Q,2
 
 void test9(Info &info) {
-    info.graph[0].push_back({ 1, 2});
-    info.graph[0].push_back({ 2, 2});
-    info.graph[0].push_back({ 3, 2});
+    info.graph[0].push_back({1, 2});
+    info.graph[0].push_back({2, 2});
+    info.graph[0].push_back({3, 2});
 
-    info.graph[1].push_back({ 0, 2});
-    info.graph[1].push_back({ 2, 2});
-    info.graph[1].push_back({ 4, 1});
-    info.graph[1].push_back({ 6, 2});
-    info.graph[1].push_back({ 7, 2});
+    info.graph[1].push_back({0, 2});
+    info.graph[1].push_back({2, 2});
+    info.graph[1].push_back({4, 1});
+    info.graph[1].push_back({6, 2});
+    info.graph[1].push_back({7, 2});
 
-    info.graph[2].push_back({ 0, 2});
-    info.graph[2].push_back({ 1, 2});
-    info.graph[2].push_back({ 3, 2});
-    info.graph[2].push_back({ 4, 1});
-    info.graph[2].push_back({ 5, 1});
-    info.graph[2].push_back({ 8, 2});
+    info.graph[2].push_back({0, 2});
+    info.graph[2].push_back({1, 2});
+    info.graph[2].push_back({3, 2});
+    info.graph[2].push_back({4, 1});
+    info.graph[2].push_back({5, 1});
+    info.graph[2].push_back({8, 2});
 
-    info.graph[3].push_back({ 0, 2});
-    info.graph[3].push_back({ 2, 2});
-    info.graph[3].push_back({ 5, 1});
-    info.graph[3].push_back({ 9, 2});
+    info.graph[3].push_back({0, 2});
+    info.graph[3].push_back({2, 2});
+    info.graph[3].push_back({5, 1});
+    info.graph[3].push_back({9, 2});
     info.graph[3].push_back({10, 2});
 
-    info.graph[4].push_back({ 1, 1});
-    info.graph[4].push_back({ 2, 1});
-    info.graph[4].push_back({ 7, 1});
-    info.graph[4].push_back({ 8, 1});
+    info.graph[4].push_back({1, 1});
+    info.graph[4].push_back({2, 1});
+    info.graph[4].push_back({7, 1});
+    info.graph[4].push_back({8, 1});
 
-    info.graph[5].push_back({ 2, 1});
-    info.graph[5].push_back({ 3, 1});
-    info.graph[5].push_back({ 8, 1});
-    info.graph[5].push_back({ 9, 1});
+    info.graph[5].push_back({2, 1});
+    info.graph[5].push_back({3, 1});
+    info.graph[5].push_back({8, 1});
+    info.graph[5].push_back({9, 1});
 
-    info.graph[6].push_back({ 1, 2});
-    info.graph[6].push_back({ 7, 2});
+    info.graph[6].push_back({1, 2});
+    info.graph[6].push_back({7, 2});
     info.graph[6].push_back({13, 2});
 
-    info.graph[7].push_back({ 1, 2});
-    info.graph[7].push_back({ 4, 1});
-    info.graph[7].push_back({ 6, 2});
-    info.graph[7].push_back({ 8, 2});
+    info.graph[7].push_back({1, 2});
+    info.graph[7].push_back({4, 1});
+    info.graph[7].push_back({6, 2});
+    info.graph[7].push_back({8, 2});
     info.graph[7].push_back({11, 1});
     info.graph[7].push_back({13, 2});
 
-    info.graph[8].push_back({ 2, 2});
-    info.graph[8].push_back({ 4, 1});
-    info.graph[8].push_back({ 5, 1});
-    info.graph[8].push_back({ 7, 2});
-    info.graph[8].push_back({ 9, 2});
+    info.graph[8].push_back({2, 2});
+    info.graph[8].push_back({4, 1});
+    info.graph[8].push_back({5, 1});
+    info.graph[8].push_back({7, 2});
+    info.graph[8].push_back({9, 2});
     info.graph[8].push_back({11, 1});
     info.graph[8].push_back({12, 1});
     info.graph[8].push_back({14, 2});
 
-    info.graph[9].push_back({ 3, 2});
-    info.graph[9].push_back({ 5, 1});
-    info.graph[9].push_back({ 8, 2});
+    info.graph[9].push_back({3, 2});
+    info.graph[9].push_back({5, 1});
+    info.graph[9].push_back({8, 2});
     info.graph[9].push_back({10, 2});
     info.graph[9].push_back({12, 1});
     info.graph[9].push_back({15, 2});
 
-    info.graph[10].push_back({ 3, 2});
-    info.graph[10].push_back({ 9, 2});
+    info.graph[10].push_back({3, 2});
+    info.graph[10].push_back({9, 2});
     info.graph[10].push_back({15, 2});
 
-    info.graph[11].push_back({ 7, 1});
-    info.graph[11].push_back({ 8, 1});
+    info.graph[11].push_back({7, 1});
+    info.graph[11].push_back({8, 1});
     info.graph[11].push_back({13, 1});
     info.graph[11].push_back({14, 1});
 
-    info.graph[12].push_back({ 8, 1});
-    info.graph[12].push_back({ 9, 1});
+    info.graph[12].push_back({8, 1});
+    info.graph[12].push_back({9, 1});
     info.graph[12].push_back({14, 1});
     info.graph[12].push_back({15, 1});
 
-    info.graph[13].push_back({ 6, 2});
-    info.graph[13].push_back({ 7, 2});
+    info.graph[13].push_back({6, 2});
+    info.graph[13].push_back({7, 2});
     info.graph[13].push_back({11, 1});
     info.graph[13].push_back({14, 2});
     info.graph[13].push_back({16, 2});
 
-    info.graph[14].push_back({ 8, 2});
+    info.graph[14].push_back({8, 2});
     info.graph[14].push_back({11, 1});
     info.graph[14].push_back({12, 1});
     info.graph[14].push_back({13, 2});
     info.graph[14].push_back({15, 2});
     info.graph[14].push_back({16, 2});
 
-    info.graph[15].push_back({ 9, 2});
+    info.graph[15].push_back({9, 2});
     info.graph[15].push_back({10, 2});
     info.graph[15].push_back({12, 1});
     info.graph[15].push_back({14, 2});
