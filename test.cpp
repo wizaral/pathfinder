@@ -56,10 +56,8 @@ static inline bool compare(vector<ull> &r1, vector<ull> &r2) {
         ull stop = (r1.size() < r2.size() ? r1.size() : r2.size());
 
         for (ull i = 1; i < stop; ++i)
-            if (r1[i] < r2[i])
-                return true;
-            else if (r1[i] > r2[i])
-                return false;
+            if (r1[i] != r2[i])
+                return r1[i] < r2[i];
     }
     return false;
 }
