@@ -9,7 +9,7 @@ typedef struct s_flist_node {
 } t_flist_node;
 
 typedef struct s_flist {
-    t_ll size;          // amount of elements
+    size_t size;        // amount of elements
     t_flist_node *head; // first element
     t_flist_node *tail; // last element
 } t_flist;
@@ -21,7 +21,7 @@ typedef struct s_flist {
 */
 
 void mx_fcheck_cycle(t_flist *list);
-t_ll mx_fcheck_size(t_flist *list);
+size_t mx_fcheck_size(t_flist *list);
 t_flist_node *mx_fcheck_tail(t_flist *list);
 
 /*
@@ -29,8 +29,8 @@ t_flist_node *mx_fcheck_tail(t_flist *list);
 * deletes base struct and all elements
 */
 
-t_flist *mx_fcreate_list();
-void mx_fdelete_list(t_flist **list);
+t_flist *mx_fcreate_list(void);
+void mx_fdelete_list(t_flist *list);
 
 /*
 * creates node struct and assigns next element
@@ -48,7 +48,7 @@ void mx_fclear_list(t_flist *list);
 
 void mx_fpop_back(t_flist *list);
 void mx_fpop_front(t_flist *list);
-void mx_fpop_index(t_flist *list, t_ll pos);
+void mx_fpop_index(t_flist *list, size_t pos);
 
 /*
 * adds first element
@@ -58,7 +58,7 @@ void mx_fpop_index(t_flist *list, t_ll pos);
 
 void mx_fpush_back(t_flist *list, void *data);
 void mx_fpush_front(t_flist *list, void *data);
-void mx_fpush_index(t_flist *list, void *data, t_ll pos);
+void mx_fpush_index(t_flist *list, void *data, size_t pos);
 
 /*
 * sorts elements in list
@@ -66,7 +66,7 @@ void mx_fpush_index(t_flist *list, void *data, t_ll pos);
 * applies function f to every element in the container
 */
 
-t_flist *mx_fsort_flist(t_flist *list, int (*cmp)(const void *, const void *));
+t_flist *mx_fsort_list(t_flist *list, int (*cmp)(const void *, const void *));
 void **mx_flist_to_array(t_flist *list);
 void mx_fforeach_list(t_flist *list, void (*f)(t_flist_node *));
 

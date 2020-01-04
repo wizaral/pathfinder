@@ -1,21 +1,33 @@
 #include "libmx.h"
 
-int mx_sqrt(int x) {
-    unsigned long long left = 0;
-    unsigned long long right = x > 0 ? x : 0;
-    unsigned long long middle = 0;
-    unsigned long long pow;
+static double precision(double x, double middle) {
+    double stop = 16 - mx_get_num_length(middle, 10);
+    double prec = 0.1;
+
+    for (double i = 0; i < stop; ++i, prec /= 10) {
+        while (middle * middle > x)
+            middle -= prec;
+        while (middle * middle < x)
+            middle += prec;
+    }
+    return middle;
+}
+
+double mx_sqrt(double x) {
+    double left = 0;
+    double right = x > 0 ? x : 0;
+    double middle = 0;
+    double power;
 
     while (left <= right) {
         middle = left + (right - left) / 2;
-        pow = middle * middle;
-
-        if (pow == (unsigned long long)x)
-            return middle;
-        else if (pow > (unsigned long long)x)
+        power = middle * middle;
+        if (power < x)
+            left = middle + 1;
+        else if (power > x)
             right = middle - 1;
         else
-            left = middle + 1;
+            break;
     }
-    return 0;
+    return precision(x, middle);
 }

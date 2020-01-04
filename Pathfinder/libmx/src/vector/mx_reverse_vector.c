@@ -1,7 +1,11 @@
 #include "libmx.h"
 
 void mx_reverse_vector(t_vector *v) {
-    if (v && v->size && v->arr)
-        for (t_ull i = 0, j = v->size - 1; i < j; i += v->bytes, j -= v->bytes)
-            mx_swap((t_uc *)v->arr + i, (t_uc *)v->arr + j, v->bytes);
+    if (v && v->size && v->arr) {
+        size_t i = 0;
+        size_t j = (v->size - 1) * v->bytes;
+
+        for (size_t b = v->bytes; i < j; i += b, j -= b)
+            mx_swap((t_byte *)v->arr + i, (t_byte *)v->arr + j, b);
+    }
 }

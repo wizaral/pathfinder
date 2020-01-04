@@ -1,21 +1,13 @@
 #include "pathfinder.h"
 
-static inline void set_inf(void *item) {
-    *(unsigned long long *)item = INF;
-}
-
-static inline void set_zero(void *item) {
-    *(char *)item = 0;
-}
-
-void clean_info(t_info *info) {
-    unsigned long long inf = INF;
+void mx_clean_info(t_info *info) {
+    size_t inf = INF;
     char zero = false;
 
     for (size_t i = 0; i < info->parents.size; ++i)
-        mx_clear(mx_at(&info->parents, i));
+        mx_clear_vector(*(t_vector **)mx_at(&info->parents, i));
 
-    mx_clear(&info->routes);
-    mx_assign(&info->distances, info->distances.size, &inf);
-    mx_assign(&info->visited, info->visited.size, &zero);
+    mx_clear_vector(&info->routes);
+    mx_assign_vector(&info->distances, info->distances.size, &inf);
+    mx_assign_vector(&info->visited, info->visited.size, &zero);
 }

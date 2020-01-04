@@ -3,6 +3,8 @@
 
 #include "types.h"
 
+#define TREE_DEFAULT_SIZE 16
+
 typedef struct s_tree_node {
     void *data;
     struct s_tree_node *next;
@@ -10,7 +12,7 @@ typedef struct s_tree_node {
 } t_tree_node;
 
 typedef struct s_tree {
-    t_ll size;
+    long long size;
     t_tree_node *root;
     int (*cmp)(const void *, const void *);
 } t_tree;

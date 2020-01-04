@@ -3,12 +3,14 @@
 
 #include "types.h"
 
-typedef struct s_queue {
-    t_ull cap;      // capacity
-    t_ull size;     // current size
+#define QUEUE_DEFAULT_SIZE 16
 
-    t_ull head;     // position of first element // front
-    t_ull tail;     // position of last element // rear
+typedef struct s_queue {
+    size_t cap;      // capacity
+    size_t size;     // current size
+
+    size_t head;     // position of first element // front
+    size_t tail;     // position of last element // rear
 
     size_t bytes;   // sie of item
     void *arr;      // array of items
@@ -20,7 +22,7 @@ typedef struct s_queue {
 */
 
 t_queue *mx_create_queue(size_t bytes);
-void mx_delete_queue(t_queue **q);
+void mx_delete_queue(t_queue *q);
 
 /*
 * adds element at the end
@@ -28,7 +30,7 @@ void mx_delete_queue(t_queue **q);
 */
 
 void mx_enqueue(t_queue *q, void *item);
-void *mx_dequeue(t_queue *q);
+void mx_dequeue(t_queue *q);
 
 /*
 * returns first element
@@ -39,9 +41,11 @@ void *mx_front(t_queue *q);
 void *mx_rear(t_queue *q);
 
 /*
+* erases all elements from the container
 * applies function f to every element in the container
 */
 
+void mx_clear_queue(t_queue *q);
 void mx_foreach_queue(t_queue *q, void (*f)(void *));
 
 #endif

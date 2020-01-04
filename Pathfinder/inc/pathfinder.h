@@ -1,7 +1,6 @@
 #ifndef PATHFINDER_H
 #define PATHFINDER_H
 
-#include "libmx.h"
 #include "graph.h"
 #include "error.h"
 
@@ -15,6 +14,6 @@
 void mx_algorithm(t_info *info);
 void mx_create_routes(t_info *info);
 void mx_print_routes(t_info *info);
-void clean_info(t_info *info);
+void mx_clean_info(t_info *info);
 
 #endif

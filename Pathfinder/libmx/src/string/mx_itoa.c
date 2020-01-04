@@ -2,11 +2,10 @@
 
 static char *make_dec(int num, int length) {
     char *dec = mx_strnew(length);
+
     *dec = num < 0 ? '-' : '\0';
-
-    for (int j = length - 1, temp; j >= (num <= 0); --j, num /= 10)
-        dec[j] = ((temp = num % 10) < 0 ? -temp : temp) + 48;
-
+    for (int j = length - 1; j >= (num <= 0); --j, num /= 10)
+        dec[j] = MX_ABS(num % 10) + 48;
     return dec;
 }
 

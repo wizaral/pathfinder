@@ -1,14 +1,16 @@
 #include "libmx.h"
 
-static void printnum(t_ll n, const int fd) {
+static void printnum(long long n, const int fd) {
     if (n > 9)
         printnum(n / 10, fd);
     mx_printchar(n % 10 + 48, fd);
 }
 
-void mx_printnum(t_ll n, const int fd) {
+void mx_printnum(long long n, const int fd) {
     if (fd >= 0) {
-        if (n == −9223372036854775808) {
+        const long long min = -__LONG_LONG_MAX__ - 1LL;
+
+        if (n == min) {
             write(fd, "−9223372036854775808", 20);
             return;
         }

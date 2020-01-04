@@ -6,11 +6,9 @@ void *mx_realloc(void *ptr, size_t size) {
 
     if (ptr == NULL)
         return malloc(size);
-    else if (old_size && size == 0)
-        free(ptr);
-    else if (size && (new_ptr = malloc(mx_max_ull(size, old_size)))) {
+    else if (size && (new_ptr = malloc(MX_MAX(size, old_size, size_t))))
         mx_memcpy(new_ptr, ptr, old_size);
+    if (old_size)
         free(ptr);
-    }
     return new_ptr;
 }

@@ -1,27 +1,19 @@
 #include "libmx.h"
 
-static void reduce_queue(t_queue *q) {
-    void *temp_arr = NULL;
+static inline void reduce_queue(t_queue *q) {
+    void *temp_arr = q && q->arr ? malloc(q->bytes * q->cap / 2) : NULL;
 
-    if (q && q->arr) {
-        temp_arr = malloc(q->bytes * q->cap / 2);
-
-        if (q->tail >= q->head) {
-            mx_memcpy(temp_arr,
-            (t_uc *)q->arr + q->head * q->bytes,
-            q->cap * q->bytes);
+    if (temp_arr) {
+        if (q->tail < q->head) {
+            mx_memcpy(temp_arr, (t_byte *)q->arr + q->head * q->bytes,
+                (q->cap - q->head + 1) * q->bytes);
+            mx_memcpy((t_byte *)temp_arr + (q->cap - q->head + 1) * q->bytes,
+                q->arr, (q->tail + 1) * q->bytes);
         }
-        else {
-            mx_memcpy(temp_arr,
-            (t_uc *)q->arr + q->head * q->bytes,
-            (q->cap - q->head + 1) * q->bytes);
-
-            mx_memcpy((t_uc *)temp_arr + (q->cap - q->head + 1) * q->bytes,
-            q->arr,
-            (q->tail + 1) * q->bytes);
-        }
-
-        free(q->arr);
+        else
+            mx_memcpy(temp_arr, q->arr, q->cap * q->bytes);
+        if (malloc_size(q->arr))
+            free(q->arr);
         q->arr = temp_arr;
         q->cap /= 2;
         q->head = 0;
@@ -29,15 +21,11 @@ static void reduce_queue(t_queue *q) {
     }
 }
 
-void *mx_dequeue(t_queue *q) {
-    void *item = mx_front(q);
-
+void mx_dequeue(t_queue *q) {
     if (q && q->arr) {
         q->head = q->head + 1 == q->cap ? 0 : q->head + 1;
         --q->size;
-
-        if ((float)q->cap / q->size > 4 && q->cap > 32)
+        if ((float)q->cap / q->size > 4 && q->cap > QUEUE_DEFAULT_SIZE)
             reduce_queue(q);
     }
-    return item;
 }
