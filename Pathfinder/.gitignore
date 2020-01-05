@@ -6,9 +6,7 @@
 *.dms
 *.sw*
 
-*.i
-*.s
-*.o
+*.[ios]
 *.dSYM
 
 *.a

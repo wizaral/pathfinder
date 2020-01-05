@@ -65,7 +65,7 @@ static inline bool compare(vector<ull> &r1, vector<ull> &r2) {
 static inline void create_routes(Info &info) {
     vector<ull> route;
 
-    for (ull i = info.start; i < info.size; ++i) {
+    for (ull i = info.start + 1; i < info.size; ++i) {
         route.push_back(i);
         add_route(info, route);
         route.pop_back();
@@ -137,7 +137,7 @@ static inline void test(Info &info) {
 }
 
 int main(int argc, char **argv) {
-    if (argc > 1) {
+    if (argc == 2) {
         int testtype = std::stoi(argv[1]);
 
         switch (testtype) {
@@ -196,11 +196,13 @@ int main(int argc, char **argv) {
             break;
         }
         case 10: {
-            Info info(12);
+            Info info(49);
             test10(info);
             test(info);
             break;
         }
+        default:
+            cout << "Wrong number!" << endl;
         }
     }
     else

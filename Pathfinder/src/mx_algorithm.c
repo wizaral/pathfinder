@@ -1,6 +1,6 @@
 #include "pathfinder.h"
 
-#include <stdio.h>
+// #include <stdio.h>
 
 static inline size_t get_min(t_info *info) {
     size_t visit = INF;

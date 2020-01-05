@@ -20,6 +20,6 @@
 *.out
 *.exe
 
-# lol why not
+# text files
 *.txt
 *.pdf

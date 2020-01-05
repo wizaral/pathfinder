@@ -1,6 +1,6 @@
 #include "pathfinder.h"
 
-#include <stdio.h>
+// #include <stdio.h>
 
 static inline void add_route(t_info *info, t_vector *route) {
     // printf("back: %zu\n", *(size_t *)mx_get_back(route));
