@@ -59,6 +59,7 @@ void mx_algorithm(t_info *info) {
         dijkstra(info);
 
         mx_create_routes(info);
+
         mx_print_routes(info);
         mx_clear_info(info);
     }
