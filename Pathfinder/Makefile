@@ -12,10 +12,10 @@ SRC = $(addprefix $(SRC_DIR), $(addprefix mx_, $(addsuffix .c, $(RAW))))
 OBJ = $(addprefix $(OBJ_DIR), $(addprefix mx_, $(addsuffix .o, $(RAW))))
 LIB_PATH = $(addprefix $(LIB_DIR), $(LIB))
 
-CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
+WFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 LFLAGS = -Iinc -Ilibmx/inc
-OFLAGS = -Ofast -march=native
-DFLAGS = -g -fsanitize=address
+CFLAGS = -Ofast -march=native -pipe -fomit-frame-pointer
+DFLAGS = -O0 -g -fsanitize=address
 
 all: install clean
 
@@ -27,24 +27,24 @@ $(LIB):
 
 # install
 # $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-# 	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
+# 	@$(CC) $(WFLAGS) $(LFLAGS) -o $@ -c $<
 
 # $(NAME): $(OBJ_DIR) $(OBJ)
-# 	@$(CC) $(CFLAGS) $(LFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
+# 	@$(CC) $(WFLAGS) $(LFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
 
 # optimize
 # $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-# 	@$(CC) $(CFLAGS) $(LFLAGS) $(OFLAGS) -o $@ -c $<
+# 	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
 
 # $(NAME): $(OBJ_DIR) $(OBJ)
-# 	@$(CC) $(CFLAGS) $(LFLAGS) $(OFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
+# 	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
 
 # debug
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(CC) $(CFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
+	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
 
 $(NAME): $(OBJ_DIR) $(OBJ)
-	@$(CC) $(CFLAGS) $(LFLAGS) $(DFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
+	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
 
 install: $(LIB) $(NAME)
 

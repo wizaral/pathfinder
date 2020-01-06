@@ -3,7 +3,7 @@
 
 #include "types.h"
 
-#define VECTOR_DEFAULT_SIZE 32
+#define VECTOR_DEFAULT_SIZE 16
 
 typedef struct s_vector {
     size_t cap;     // capacity
@@ -14,6 +14,7 @@ typedef struct s_vector {
 
 /*
 * creates base struct
+* copies base struct and all objects in container
 * deletes base struct
 */
 

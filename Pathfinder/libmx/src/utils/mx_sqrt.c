@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-static double precision(double x, double middle) {
+static inline double precision(double x, double middle) {
     double stop = 16 - mx_get_num_length(middle, 10);
     double prec = 0.1;
 

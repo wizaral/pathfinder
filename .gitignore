@@ -10,9 +10,7 @@
 *.vscode
 
 # preprocessing, assembly, object, debug
-*.i
-*.s
-*.o
+*.[ios]
 *.dSYM
 
 # lib, out, exe
@@ -23,3 +21,4 @@
 # text files
 *.txt
 *.pdf
+!testfiles/*.txt

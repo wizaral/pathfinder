@@ -119,6 +119,9 @@ static inline void clean_info(Info &info) {
     for (auto &p : info.parents)
         p.clear();
 
+    for (auto &r : info.routes)
+        r.clear();
+
     info.routes.clear();
     info.distances.assign(info.size, INF);
     info.visited.assign(info.size, false);

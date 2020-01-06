@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-static char *make_dec(int num, int length) {
+static inline char *make_dec(int num, int length) {
     char *dec = mx_strnew(length);
 
     *dec = num < 0 ? '-' : '\0';

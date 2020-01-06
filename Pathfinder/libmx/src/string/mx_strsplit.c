@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-static int get_length(const char *s, char c) {
+static inline int get_length(const char *s, char c) {
     int len = 0;
 
     for (; s[len] && s[len] != c; ++len);

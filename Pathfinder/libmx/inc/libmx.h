@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <malloc/malloc.h>
+// #include <malloc/malloc.h>
 
 #include "algorithm.h"
 #include "macroses.h"
@@ -46,14 +46,14 @@ void mx_print_unicode(wchar_t c, const int fd);
 void mx_printchar(char c, const int fd);
 void mx_printnum(long long n, const int fd);
 void mx_printstr(const char *s, const int fd);
-void mx_printunum(unsigned long long n, const int fd);
+void mx_printunum(t_i64 n, const int fd);
 
 /*
 * string
 */
 
 long long mx_atoll(const char *str);
-unsigned long long mx_atoull(const char *str);
+t_i64 mx_atoull(const char *str);
 
 int mx_count_substr(const char *str, const char *sub);
 int mx_count_words(const char *str, char c);
@@ -64,9 +64,9 @@ void mx_del_strarr(char ***arr);
 int mx_get_char_index(const char *str, char c);
 int mx_get_substr_index(const char *str, const char *sub);
 
-unsigned long long mx_hex_to_nbr(const char *hex);
+t_i64 mx_hex_to_nbr(const char *hex);
 char *mx_itoa(int number);
-char *mx_nbr_to_hex(unsigned long long nbr);
+char *mx_nbr_to_hex(t_i64 nbr);
 
 char *mx_replace_substr(const char *str, const char *sub, const char *replace);
 void mx_str_reverse(char *s);
@@ -112,18 +112,18 @@ bool mx_isupper(int c);
 * utils
 */
 
-unsigned long long mx_factorial(unsigned long long n);
+t_i64 mx_factorial(t_i64 n);
 void mx_foreach(void *arr, size_t size, size_t bytes, void(*f)(void *));
 
 int mx_get_num_length(long long num, unsigned base);
-bool mx_isprime(unsigned long long num);
+bool mx_isprime(t_i64 num);
 
 double mx_pow(double n, unsigned pow);
-unsigned long long mx_sigma(unsigned long long n);
+t_i64 mx_sigma(t_i64 n);
 
-unsigned long long mx_sqrt_natural(unsigned long long x);
+t_i64 mx_sqrt_natural(t_i64 x);
 double mx_sqrt(double x);
-int mx_sum_digits(unsigned long long num);
+int mx_sum_digits(t_i64 num);
 
 void mx_swap(void *restrict v1, void *restrict v2, size_t size);
 

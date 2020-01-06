@@ -29,9 +29,6 @@ string = atoll atoull count_substr count_words del_extra_spaces del_strarr \
 	str_reverse strcat strchr strcmp strcpy strdel strdup strjoin strlen \
 	strncmp strncpy strndup strnew strsplit strstr strtrim tolower toupper
 
-# tree = clear_tree create_tree delete_tree get_max get_min \
-#	обходы 4 шт, вставка, удаление, поиск
-
 type = isalpha isdigit ishex islower isspace isupper
 
 utils = factorial foreach get_num_length isprime pow sigma sqrt_natural sqrt \
@@ -55,10 +52,10 @@ OBJ_DIR = ./obj/
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(RAW)))
 OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(RAW)))
 
-CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
+WFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 LFLAGS = -Iinc
-OFLAGS = -Ofast -march=native
-DFLAGS = -g -fsanitize=address
+CFLAGS = -Ofast -march=native -pipe -fomit-frame-pointer
+DFLAGS = -O0 -g -fsanitize=address
 
 all: install clean
 
@@ -70,15 +67,15 @@ $(OBJ_DIR):
 
 # install
 # $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-# 	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
+# 	@$(CC) $(WFLAGS) $(LFLAGS) -o $@ -c $<
 
 # optimize
 # $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-# 	@$(CC) $(CFLAGS) $(LFLAGS) $(OFLAGS) -o $@ -c $<
+# 	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
 
 # debug
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(CC) $(CFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
+	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
 
 install: $(OBJ_DIR) $(OBJ)
 	@ar rc $(NAME) $(OBJ)

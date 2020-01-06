@@ -1,7 +1,7 @@
 #include "libmx.h"
 
-unsigned long long mx_atoull(const char *str) {
-    unsigned long long sum = 0;
+t_i64 mx_atoull(const char *str) {
+    t_i64 sum = 0;
 
     for (; mx_isspace(*str); ++str);
     if (*str == '+')

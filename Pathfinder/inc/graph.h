@@ -1,15 +1,16 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-#define INF 2147483647
+#define MX_INT_MAX 2147483647
+#define MX_INF 18446744073709551615
 
 #include "libmx.h"
 
 typedef struct s_info {
-    t_vector graph;     // vector<vector<pair<size_t, size_t>>>
+    t_vector graph;     // vector<vector<pair<size_t, t_i64>>>
     t_vector parents;   // vector<vector<size_t>>
     t_vector routes;    // vector<vector<size_t>>
-    t_vector distances; // vector<size_t>
+    t_vector distances; // vector<t_i64>
     t_vector visited;   // vector<char>
     t_vector names;     // vector<string>
     size_t start;       // entry point to graph
@@ -18,7 +19,7 @@ typedef struct s_info {
 
 typedef struct s_pair {
     size_t island;
-    size_t distance;
+    t_i64 dist;
 } t_pair;
 
 #endif

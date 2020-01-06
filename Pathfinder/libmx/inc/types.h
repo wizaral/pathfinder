@@ -4,6 +4,6 @@
 #include <stddef.h>
 
 typedef unsigned char t_byte;
-typedef unsigned long long t_big;
+typedef unsigned long long t_i64;
 
 #endif

@@ -1,11 +1,11 @@
 #include "libmx.h"
 
-unsigned long long mx_hex_to_nbr(const char *hex) {
-    unsigned long long result = 0;
+t_i64 mx_hex_to_nbr(const char *hex) {
+    t_i64 result = 0;
 
     if (hex) {
-        unsigned long long pow = 1;
-        unsigned long long len = mx_strlen(hex);
+        t_i64 pow = 1;
+        t_i64 len = mx_strlen(hex);
 
         for (long long j = len - 1; j >= 0; --j, pow *= 16) {
             if (hex[j] > 47 && hex[j] < 58)
