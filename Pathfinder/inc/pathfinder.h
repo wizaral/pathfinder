@@ -14,6 +14,7 @@
 void mx_algorithm(t_info *info);
 void mx_create_routes(t_info *info);
 void mx_print_routes(t_info *info);
-void mx_clean_info(t_info *info);
+void mx_clear_info(t_info *info);
+void mx_delete_info(t_info *info);
 
 #endif

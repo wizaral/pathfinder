@@ -60,6 +60,6 @@ void mx_algorithm(t_info *info) {
 
         mx_create_routes(info);
         mx_print_routes(info);
-        mx_clean_info(info);
+        mx_clear_info(info);
     }
 }

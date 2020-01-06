@@ -14,8 +14,9 @@ static inline void add_route(t_info *info, t_vector *route) {
             add_route(info, route);
         }
         else {
-            t_vector *temp = mx_copy_vector(route);
-            mx_push_backward(&info->routes, temp);
+            t_vector *v = mx_copy_vector(route);
+            mx_push_backward(&info->routes, v);
+            free(v);
         }
         mx_pop_backward(route);
     }
@@ -26,8 +27,8 @@ static inline void reverse(void *item) {
 }
 
 static inline int compare(const void *r1, const void *r2) {
-    t_vector *v1 = r1;
-    t_vector *v2 = r2;
+    t_vector *v1 = (t_vector *)r1;
+    t_vector *v2 = (t_vector *)r2;
 
     if (*(size_t *)mx_get_back(v1) < *(size_t *)mx_get_back(v2))
         return -1;

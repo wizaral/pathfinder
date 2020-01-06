@@ -2,7 +2,7 @@
 #define GRAPH_H
 
 #define MX_INT_MAX 2147483647
-#define MX_INF 18446744073709551615
+#define MX_INF 18446744073709551615ULL
 
 #include "libmx.h"
 

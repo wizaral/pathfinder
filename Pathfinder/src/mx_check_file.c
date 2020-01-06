@@ -1,5 +1,5 @@
 #include "pathfinder.h"
 
-void mx_check_file(char *filename) {
+// void mx_check_file(char *filename) {
 
-}
+// }
