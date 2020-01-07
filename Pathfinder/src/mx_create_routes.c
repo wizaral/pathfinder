@@ -26,26 +26,26 @@ static inline void reverse(void *item) {
     mx_reverse_vector(item);
 }
 
-static inline int compare(const void *r1, const void *r2) {
-    t_vector *v1 = (t_vector *)r1;
-    t_vector *v2 = (t_vector *)r2;
+// static inline int compare(const void *r1, const void *r2) {
+//     t_vector *v1 = (t_vector *)r1;
+//     t_vector *v2 = (t_vector *)r2;
 
-    printf("v1: %zu %zu\n", v1->size, *(size_t *)mx_at(v1, 1));
-    printf("v2: %zu %zu\n", v2->size, *(size_t *)mx_at(v2, 1));
+//     // printf("v1: %zu %zu\n", v1->size, *(size_t *)mx_at(v1, 1));
+//     // printf("v2: %zu %zu\n", v2->size, *(size_t *)mx_at(v2, 1));
 
-    if (*(size_t *)mx_get_back(v1) < *(size_t *)mx_get_back(v2))
-        return -1;
-    if (*(size_t *)mx_get_back(v1) == *(size_t *)mx_get_back(v2)) {
-        size_t stop = MX_MIN(v1->size, v2->size, size_t);
+//     if (*(size_t *)mx_get_back(v1) < *(size_t *)mx_get_back(v2))
+//         return -1;
+//     if (*(size_t *)mx_get_back(v1) == *(size_t *)mx_get_back(v2)) {
+//         size_t stop = MX_MIN(v1->size, v2->size, size_t);
 
-        for (size_t i = 1; i < stop; ++i)
-            if (*(size_t *)mx_at(v1, i) != *(size_t *)mx_at(v2, i)) {
-                // printf("return %zu %zu\n", *(size_t *)mx_at(v1, i), *(size_t *)mx_at(v2, i));
-                return *(size_t *)mx_at(v1, i) - *(size_t *)mx_at(v2, i);
-            }
-    }
-    return 1;
-}
+//         for (size_t i = 1; i < stop; ++i)
+//             if (*(size_t *)mx_at(v1, i) != *(size_t *)mx_at(v2, i)) {
+//                 // printf("return %zu %zu\n", *(size_t *)mx_at(v1, i), *(size_t *)mx_at(v2, i));
+//                 return *(size_t *)mx_at(v1, i) - *(size_t *)mx_at(v2, i);
+//             }
+//     }
+//     return 1;
+// }
 
 void mx_create_routes(t_info *info) {
     t_vector route = {VECTOR_DEFAULT_SIZE, 0, sizeof(size_t), malloc(sizeof(size_t) * VECTOR_DEFAULT_SIZE)};
@@ -57,7 +57,7 @@ void mx_create_routes(t_info *info) {
     }
 
     mx_foreach_vector(&info->routes, reverse);
-    printf("BEFORE: %zu %zu %zu\n", info->routes.bytes, info->routes.cap, info->routes.size);
-    mx_sort_rec(info->routes.arr, info->routes.size, info->routes.bytes, compare);
+    // printf("BEFORE: %zu %zu %zu\n", info->routes.bytes, info->routes.cap, info->routes.size);
+    // mx_sort_rec(info->routes.arr, info->routes.size, info->routes.bytes, compare);
     free(route.arr);
 }
