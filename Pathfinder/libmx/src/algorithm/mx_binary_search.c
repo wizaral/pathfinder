@@ -1,6 +1,6 @@
 #include "libmx.h"
 
-size_t mx_binary_search(const void *key, t_vector *v,
+t_byte *mx_binary_search(const void *key, t_vector *v,
     int (*cmp)(const void *, const void *)) {
     t_byte *left = v ? v->arr : NULL;
     t_byte *right = v ? v->arr + (v->size - 1) * v->bytes : NULL;
@@ -19,5 +19,5 @@ size_t mx_binary_search(const void *key, t_vector *v,
                 return middle;
         }
     }
-    return 0;
+    return NULL;
 }

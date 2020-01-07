@@ -20,7 +20,7 @@ static inline void check_distance(t_info *info, size_t visit, size_t j) {
 
     if (info->distances[visit] + distance <= info->distances[island]) {
         if (info->distances[visit] + distance < info->distances[island]) {
-            mx_clear_vector(mx_at(&info->parents, island));
+            mx_clear_vector(&info->parents[island]);
             info->distances[island] = info->distances[visit] + distance;
         }
         mx_push_backward(&info->parents[island], &visit);

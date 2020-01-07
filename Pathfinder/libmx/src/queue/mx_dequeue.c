@@ -1,7 +1,7 @@
 #include "libmx.h"
 
 static inline void reduce_queue(t_queue *q) {
-    void *temp_arr = q && q->arr ? malloc(q->bytes * q->cap / 2) : NULL;
+    t_byte *temp_arr = q && q->arr ? malloc(q->bytes * q->cap / 2) : NULL;
 
     if (temp_arr) {
         if (q->tail < q->head) {

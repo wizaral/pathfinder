@@ -15,7 +15,7 @@ static inline void init(t_info *info) {
     }
 }
 
-void mx_init_info(size_t size, t_info *info) {
+void mx_init_info(t_info *info, size_t size) {
     if (size > 0) {
         info->size = size;
         info->distances = malloc(sizeof(int) * info->size);
@@ -30,7 +30,7 @@ void mx_init_info(size_t size, t_info *info) {
         init(info);
     }
     else
-        mx_throw_error(MX_NUM_VALID);
+        mx_throw_line_error(1);
 }
 
 void mx_clear_info(t_info *info) {

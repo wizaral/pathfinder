@@ -1,8 +1,8 @@
 #include "libmx.h"
 
 static inline void push(t_parametrs *prm, t_byte *left, t_byte *right) {
-    mx_push(&prm->stack, right);
-    mx_push(&prm->stack, left);
+    mx_push(&prm->stack, &right);
+    mx_push(&prm->stack, &left);
 }
 
 static inline void update(t_parametrs *prm, t_pivot *pivot, size_t bytes,
@@ -38,7 +38,7 @@ void mx_quicksort(void *arr, size_t size, size_t bytes,
         (t_byte *)arr + (size - 1) * bytes, {STACK_DEFAULT_SIZE, 0,
         sizeof(t_byte *), malloc(sizeof(t_byte *) * STACK_DEFAULT_SIZE)}};
 
-        push(&prm, &prm.left, &prm.right);
+        push(&prm, prm.left, prm.right);
         while (prm.stack.size) {
             update(&prm, &pivot, bytes, w);
             while (prm.i < prm.j) {

@@ -2,7 +2,7 @@ CC = clang
 LIB = libmx.a
 NAME = pathfinder
 
-RAW = algorithm check_file clear_info create_routes main print_routes
+RAW = algorithm check_file create_routes error info main print_routes
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/
