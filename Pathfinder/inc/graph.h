@@ -16,8 +16,8 @@ typedef struct s_info {
 } t_info;
 
 typedef struct s_pair {
-    size_t island;
-    int distance;
+    size_t island;      // number of connected island
+    int distance;       // distance to island
 } t_pair;
 
 #endif

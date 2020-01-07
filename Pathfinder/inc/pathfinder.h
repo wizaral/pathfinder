@@ -6,15 +6,28 @@
 
 /*
 * dijkstra algorithm for searching shortests pathes
-* creating routes from array of arrays of parents and sorting in FIFO order
-* printing all routes from current island to others
-* cleaning t_info struct for next iteration of algorithm
+* creates routes from array of arrays of parents and sorts in FIFO order
+* prints all routes from the current island to other
 */
 
 void mx_algorithm(t_info *info);
 void mx_create_routes(t_info *info);
 void mx_print_routes(t_info *info);
+
+/*
+* creating t_info struct before first iteration of algorithm
+* cleaning t_info struct for next iteration of algorithm
+* deleting t_info struct after last iteration of algorithm
+*/
+
+void mx_init_info(t_info *info, size_t size);
 void mx_clear_info(t_info *info);
 void mx_delete_info(t_info *info);
+
+/*
+* returns value in first line or 0 in invalid cases
+*/
+
+int mx_check_file(const char *filename);
 
 #endif

@@ -5,59 +5,10 @@
 #define VECTOR_DEFAULT_SIZE 32
 
 void test(t_info *info) {
-    info->size = 17;     // 4
-
-    //=======================================================================//
-
-    info->distances = (int *)malloc(sizeof(int) * info->size);
-    for (size_t i = 0; i < info->size; ++i)
-        info->distances[i] = MX_INF;
-
-    //=======================================================================//
-
-    info->visited = (char *)malloc(sizeof(char) * info->size);
-    for (size_t i = 0; i < info->size; ++i)
-        info->visited[i] = false;
-
-    //=======================================================================//
-
-    info->names = (char **)malloc(sizeof(char *) * info->size);
-
     // info->names[0] = mx_strdup("Greenland");
     // info->names[1] = mx_strdup("Bananal");
     // info->names[2] = mx_strdup("Fraser");
     // info->names[3] = mx_strdup("Java");
-
-    char str[] = "A";
-    for (int i = 0; i < 17; ++i, *str = i + 65)
-        info->names[i] = mx_strdup(str);
-
-    //=======================================================================//
-
-    info->routes.bytes = sizeof(t_vector);
-    info->routes.cap = VECTOR_DEFAULT_SIZE;
-    info->routes.size = 0;
-    info->routes.arr = malloc(sizeof(t_vector) * VECTOR_DEFAULT_SIZE);
-
-    //=======================================================================//
-
-    info->parents = malloc(sizeof(t_vector) * info->size);
-    for (size_t i = 0; i < info->size; ++i) {
-        info->parents[i].cap = VECTOR_DEFAULT_SIZE;
-        info->parents[i].size = 0;
-        info->parents[i].bytes = sizeof(size_t);
-        info->parents[i].arr = malloc(sizeof(size_t) * VECTOR_DEFAULT_SIZE);
-    }
-
-    //=======================================================================//
-
-    info->graph = malloc(sizeof(t_vector) * info->size);
-    for (size_t i = 0; i < info->size; ++i) {
-        info->graph[i].cap = VECTOR_DEFAULT_SIZE;
-        info->graph[i].size = 0;
-        info->graph[i].bytes = sizeof(t_pair);
-        info->graph[i].arr = malloc(sizeof(t_pair) * VECTOR_DEFAULT_SIZE);
-    }
 
     // t_pair pair = {1, 8};
     // mx_push_backward(&info->graph[0], &pair);
@@ -87,6 +38,10 @@ void test(t_info *info) {
     // mx_push_backward(&info->graph[3], &pair);
 
     //=======================================================================//
+
+    char str[] = "A";
+    for (int i = 0; i < 17; ++i, *str = i + 65)
+        info->names[i] = mx_strdup(str);
 
     t_pair pair = {1, 2};
     mx_push_backward(&info->graph[0], &pair);
@@ -287,15 +242,15 @@ void test(t_info *info) {
 
 int main(int ac, char **av) {
     t_info info;
-    test(&info);
 
     if (ac && av) {
-        // mx_check_file(av[1]);
+        mx_init_info(&info, mx_check_file(av[1]));
+        test(&info);
         // mx_parse_file(av[1], &info);
         mx_algorithm(&info);
-        // mx_delete_info(&info);
+        mx_delete_info(&info);
     }
-    // else
-    //     mx_throw_error(USAGE);
+    else
+        mx_throw_usage_error();
     // system("leaks -q pathfinder");
 }

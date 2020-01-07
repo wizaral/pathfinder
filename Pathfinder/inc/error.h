@@ -1,12 +1,10 @@
 #ifndef ERROR_H
 #define ERROR_H
 
-#define USAGE 0
-#define EXIST 1
-#define EMPTY 2
-
-#define NUM_VALID 3
-#define LINE_VALID 4
-#define ISLAND_NUM 5
+void mx_throw_usage_error();
+void mx_throw_file_exist_error(const char *filename);
+void mx_throw_file_empty_error(const char *filename);
+void mx_throw_line_error(int num);
+void mx_throw_amount_error();
 
 #endif

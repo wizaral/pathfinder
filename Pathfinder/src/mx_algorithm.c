@@ -6,7 +6,7 @@ static inline size_t get_min(t_info *info) {
     size_t visit = MX_INF;
 
     for (size_t j = 0; j < info->size; ++j)
-        if (info->visited[j] == false && (visit == false || info->distances[j] < info->distances[visit]))
+        if (info->visited[j] == false && (visit == MX_INF || info->distances[j] < info->distances[visit]))
             visit = j;
     return visit;
 }
@@ -48,7 +48,7 @@ static inline void dijkstra(t_info *info) {
 
 void mx_algorithm(t_info *info) {
     for (size_t i = 0; i < info->size - 1; ++i) {
-        *(int *)mx_at(&info->distances, i) = 0;
+        info->distances[i] = 0;
         info->start = i;
         dijkstra(info);
 
