@@ -6,14 +6,14 @@
 #define QUEUE_DEFAULT_SIZE 16
 
 typedef struct s_queue {
-    size_t cap;      // capacity
-    size_t size;     // current size
+    size_t cap;     // capacity
+    size_t size;    // current size
 
-    size_t head;     // position of first element // front
-    size_t tail;     // position of last element // rear
+    size_t head;    // position of first element // front
+    size_t tail;    // position of last element // rear
 
     size_t bytes;   // sie of item
-    void *arr;      // array of items
+    t_byte *arr;    // array of items
 } t_queue;
 
 /*
@@ -26,11 +26,11 @@ void mx_delete_queue(t_queue *q);
 
 /*
 * adds element at the end
-* deletes first element
+* deletes first element and returns it
 */
 
 void mx_enqueue(t_queue *q, void *item);
-void mx_dequeue(t_queue *q);
+void *mx_dequeue(t_queue *q);
 
 /*
 * returns first element

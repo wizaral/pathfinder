@@ -6,7 +6,7 @@ void mx_push_backward(t_vector *v, const void *item) {
             v->cap *= 2;
             v->arr = mx_realloc(v->arr, v->bytes * v->cap);
         }
-        mx_memcpy((t_byte *)v->arr + (v->size * v->bytes), item, v->bytes);
+        mx_memcpy(v->arr + (v->size * v->bytes), item, v->bytes);
         ++v->size;
     }
 }

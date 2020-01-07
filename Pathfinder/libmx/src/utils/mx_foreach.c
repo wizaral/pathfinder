@@ -2,9 +2,9 @@
 
 void mx_foreach(void *arr, size_t size, size_t bytes, void(*f)(void *)) {
     if (arr && f && size && bytes) {
-        size_t end = size * bytes;
+        t_byte *end = (t_byte *)arr + size * bytes;
 
-        for (size_t i = 0; i < end; i += bytes)
-            f((t_byte *)arr + i);
+        for (t_byte *i = arr; i < end; i += bytes)
+            f(i);
     }
 }

@@ -2,17 +2,19 @@
 
 void mx_insert(t_vector *v, size_t pos, const void *item) {
     if (v && item && pos <= v->size) {
-        size_t b = v->bytes;
+        t_byte *ppos = v->arr + pos * v->bytes;
 
         if (v->size == v->cap) {
             v->cap *= 2;
-            v->arr = mx_realloc(v->arr, b * v->cap);
+            v->arr = mx_realloc(v->arr, v->bytes * v->cap);
         }
         if (pos < v->size) {
-            for (size_t i = v->size * b; i > pos + b; i -= b)
-                mx_memcpy((t_byte *)v->arr + i, (t_byte *)v->arr + i - b, b);
+            t_byte *start = v->arr + v->size * v->bytes;
+
+            for (; start > ppos; start -= v->bytes)
+                mx_memcpy(start, start - v->bytes, v->bytes);
         }
-        mx_memcpy((t_byte *)v->arr + pos * b, item, b);
+        mx_memcpy(ppos, item, v->bytes);
         ++v->size;
     }
 }

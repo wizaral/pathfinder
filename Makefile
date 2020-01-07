@@ -3,6 +3,7 @@ install:
 
 path:
 	@make -sC Pathfinder -f Makefile pathfinder
+	@make -sC Pathfinder -f Makefile clean
 
 go:
 	@./Pathfinder/pathfinder

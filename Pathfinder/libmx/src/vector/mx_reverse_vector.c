@@ -6,6 +6,6 @@ void mx_reverse_vector(t_vector *v) {
         size_t j = (v->size - 1) * v->bytes;
 
         for (size_t b = v->bytes; i < j; i += b, j -= b)
-            mx_swap((t_byte *)v->arr + i, (t_byte *)v->arr + j, b);
+            mx_swap(v->arr + i, v->arr + j, b);
     }
 }

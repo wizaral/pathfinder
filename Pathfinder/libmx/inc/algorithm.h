@@ -5,11 +5,10 @@
 #include "structs.h"
 
 typedef struct s_parametrs {
-    void *arr;
-    size_t i;
-    size_t j;
-    size_t left;
-    size_t right;
+    t_byte *i;
+    t_byte *j;
+    t_byte *left;
+    t_byte *right;
     t_stack stack;
 } t_parametrs;
 

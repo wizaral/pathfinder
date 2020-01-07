@@ -1,19 +1,19 @@
 #include "libmx.h"
 
 void mx_foreach_queue(t_queue *q, void (*f)(void *)) {
-    if (q && q->arr && f) {
-        size_t byte = q->bytes;
-        size_t endt = q->tail * byte;
-        size_t endc = q->cap * byte;
+    if (q && q->arr && q->size && f) {
+        t_byte *starth = q->arr + q->head * q->bytes;
+        t_byte *endt = q->arr + (q->tail + 1) * q->bytes;
+        t_byte *endc = q->arr + q->cap * q->bytes;
 
         if (q->head <= q->tail)
-            for (size_t i = q->head * byte; i <= endt; i += byte)
-                f((t_byte *)q->arr + i);
+            for (; starth < endt; starth += q->bytes)
+                f(starth);
         else {
-            for (size_t i = q->head * byte; i < endc; i += byte)
-                f((t_byte *)q->arr + i);
-            for (size_t i = 0; i <= endt; i += byte)
-                f((t_byte *)q->arr + i);
+            for (; starth < endc; starth += q->bytes)
+                f(starth);
+            for (t_byte *i = q->arr; i < endt; i += q->bytes)
+                f(i);
         }
     }
 }

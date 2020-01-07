@@ -58,6 +58,6 @@ void mx_create_routes(t_info *info) {
 
     mx_foreach_vector(&info->routes, reverse);
     // printf("BEFORE: %zu %zu %zu\n", info->routes.bytes, info->routes.cap, info->routes.size);
-    // // // // // mx_sort_rec(info->routes.arr, info->routes.size, info->routes.bytes, compare);
+    mx_sort_rec(info->routes.arr, info->routes.size, info->routes.bytes, compare);
     free(route.arr);
 }
