@@ -3,30 +3,27 @@
 // #include <stdio.h>
 
 static inline size_t get_min(t_info *info) {
-    size_t visit = MX_INT_MAX;
+    size_t visit = MX_INF;
 
     for (size_t j = 0; j < info->size; ++j)
-        if (*(char *)mx_at(&info->visited, j) == false
-        && (visit == MX_INT_MAX
-        || *(t_i64 *)mx_at(&info->distances, j) < *(t_i64 *)mx_at(&info->distances, visit)))
+        if (info->visited[j] == false && (visit == false || info->distances[j] < info->distances[visit]))
             visit = j;
     return visit;
 }
 
 static inline void check_distance(t_info *info, size_t visit, size_t j) {
-    size_t island = ((t_pair *)mx_at(mx_at(&info->graph, visit), j))->island;
-    t_i64 distance = ((t_pair *)mx_at(mx_at(&info->graph, visit), j))->dist;
+    size_t island = ((t_pair *)mx_at(&info->graph[visit], j))->island;
+    int distance = ((t_pair *)mx_at(&info->graph[visit], j))->distance;
 
     // printf("island: %zu\n", island);
-    // printf("dist: %llu\n", dist);
+    // printf("dist: %i\n", dist);
 
-    if (distance != MX_INF && *(t_i64 *)mx_at(&info->distances, visit) + distance <= *(t_i64 *)mx_at(&info->distances, island)) {
-        if (*(t_i64 *)mx_at(&info->distances, visit) + distance < *(t_i64 *)mx_at(&info->distances, island)) {
+    if (info->distances[visit] + distance <= info->distances[island]) {
+        if (info->distances[visit] + distance < info->distances[island]) {
             mx_clear_vector(mx_at(&info->parents, island));
-
-            *(t_i64 *)mx_at(&info->distances, island) = *(t_i64 *)mx_at(&info->distances, visit) + distance;
+            info->distances[island] = info->distances[visit] + distance;
         }
-        mx_push_backward(mx_at(&info->parents, island), &visit);
+        mx_push_backward(&info->parents[island], &visit);
     }
 }
 
@@ -36,16 +33,13 @@ static inline void dijkstra(t_info *info) {
 
     for (size_t i = 0; i < info->size; ++i) {
         visit = get_min(info);
+        // printf("%zu %i\n", visit, info->distances[visit]);
 
-        // printf("%zu %zu\n", visit, *(size_t *)mx_at(&info->distances, visit));
-
-        if (*(t_i64 *)mx_at(&info->distances, visit) == MX_INF)
+        if (info->distances[visit] == MX_INF)
             break;
 
-        *(char *)mx_at(&info->visited, visit) = true;
-        size = ((t_vector *)mx_at(&info->graph, visit))->size;
-
-        // printf("%zu %zu\n", (*(t_vector **)mx_at(&info->graph, visit))->size, size);
+        info->visited[visit] = true;
+        size = info->graph[visit].size;
 
         for (size_t j = 0; j < size; ++j)
             check_distance(info, visit, j);
@@ -54,12 +48,11 @@ static inline void dijkstra(t_info *info) {
 
 void mx_algorithm(t_info *info) {
     for (size_t i = 0; i < info->size - 1; ++i) {
-        *(t_i64 *)mx_at(&info->distances, i) = 0;
+        *(int *)mx_at(&info->distances, i) = 0;
         info->start = i;
         dijkstra(info);
 
         mx_create_routes(info);
-
         mx_print_routes(info);
         mx_clear_info(info);
     }

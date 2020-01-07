@@ -4,10 +4,10 @@
 
 static inline void add_route(t_info *info, t_vector *route) {
     // printf("back: %zu\n", *(size_t *)mx_get_back(route));
-    size_t size = ((t_vector *)mx_at(&info->parents, *(size_t *)mx_get_back(route)))->size;
+    size_t size = info->parents[*(size_t *)mx_get_back(route)].size;
 
     for (size_t i = 0; i < size; ++i) {
-        mx_push_backward(route, mx_at(mx_at(&info->parents, *(size_t *)mx_get_back(route)), i));
+        mx_push_backward(route, mx_at(&info->parents[*(size_t *)mx_get_back(route)], i));
 
         if (info->start != *(size_t *)mx_get_back(route)) {
             // printf("back: %zu\n", *(size_t *)mx_get_back(route));
@@ -36,7 +36,7 @@ static inline int compare(const void *r1, const void *r2) {
     if (*(size_t *)mx_get_back(v1) < *(size_t *)mx_get_back(v2))
         return -1;
     if (*(size_t *)mx_get_back(v1) == *(size_t *)mx_get_back(v2)) {
-        size_t stop = (v1->size < v2->size ? v1->size : v2->size);
+        size_t stop = MX_MIN(v1->size, v2->size, size_t);
 
         for (size_t i = 1; i < stop; ++i)
             if (*(size_t *)mx_at(v1, i) != *(size_t *)mx_at(v2, i)) {
