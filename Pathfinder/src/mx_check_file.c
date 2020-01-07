@@ -1,7 +1,7 @@
 #include "pathfinder.h"
 
 int mx_check_file(const char *filename) {
-    return 17;  // 4
+    return 4;  // 17
     // char *line;
 
     if (filename) {

@@ -30,8 +30,8 @@ static inline int compare(const void *r1, const void *r2) {
     t_vector *v1 = (t_vector *)r1;
     t_vector *v2 = (t_vector *)r2;
 
-    // printf("1: %zu %zu %zu\n", v1->bytes, v1->cap, v1->size);
-    // printf("2: %zu %zu %zu\n", v2->bytes, v2->cap, v2->size);
+    printf("v1: %zu %zu\n", v1->size, *(size_t *)mx_at(v1, 1));
+    printf("v2: %zu %zu\n", v2->size, *(size_t *)mx_at(v2, 1));
 
     if (*(size_t *)mx_get_back(v1) < *(size_t *)mx_get_back(v2))
         return -1;
@@ -57,7 +57,7 @@ void mx_create_routes(t_info *info) {
     }
 
     mx_foreach_vector(&info->routes, reverse);
-    // printf("BEFORE: %zu %zu %zu\n", info->routes.bytes, info->routes.cap, info->routes.size);
+    printf("BEFORE: %zu %zu %zu\n", info->routes.bytes, info->routes.cap, info->routes.size);
     mx_sort_rec(info->routes.arr, info->routes.size, info->routes.bytes, compare);
     free(route.arr);
 }
