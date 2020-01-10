@@ -13,6 +13,7 @@
 void mx_algorithm(t_info *info);
 void mx_create_routes(t_info *info);
 void mx_print_routes(t_info *info);
+void mx_sort_routes(t_vector *routes);
 
 /*
 * creating t_info struct before first iteration of algorithm

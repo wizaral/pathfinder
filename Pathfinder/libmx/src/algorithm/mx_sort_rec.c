@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 static void sort(t_byte *left, t_byte *right, size_t bytes,
-    int (*cmp)(const void *, const void *)) {
+int (*cmp)(const void *, const void *)) {
     t_byte *i = left;
     t_byte *j = right;
     t_byte pivot[bytes];
@@ -51,10 +51,6 @@ static void sort(t_byte *left, t_byte *right, size_t bytes,
 void mx_sort_rec(void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *)) {
     if (arr && size > 1 && bytes > 0 && cmp) {
         // printf("size: %zu bytes: %zu\n", size, bytes);
-        // printf("size: %zu bytes: %zu\n", size, bytes);
         sort(arr, (t_byte *)arr + ((size - 1) * bytes), bytes, cmp);
     }
 }
-
-// 0x7ffe95c02c10  0x7ffe95c02c30  0x7ffe95c02bf0
-// 140731410820112 140731410820144 140731410820080
