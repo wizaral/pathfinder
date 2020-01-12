@@ -54,7 +54,10 @@ OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(RAW)))
 
 WFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 LFLAGS = -Iinc
-CFLAGS = -Ofast -march=native -pipe -fomit-frame-pointer
+CFLAGS = -Ofast -march=native -pipe -fomit-frame-pointer -flto \
+	-ffunction-sections -fdata-sections
+# check -Wl, --gc-sections flags !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 DFLAGS = -O0 -g -fsanitize=address
 
 all: install clean
@@ -78,7 +81,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
 
 install: $(OBJ_DIR) $(OBJ)
-	@ar rc $(NAME) $(OBJ)
+	@ar rcs $(NAME) $(OBJ)
 
 clean:
 	@rm -rf $(OBJ_DIR)

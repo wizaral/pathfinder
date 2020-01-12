@@ -75,6 +75,11 @@ static inline void create_routes(Info &info) {
         std::reverse(r.begin(), r.end());
 
     std::sort(info.routes.begin(), info.routes.end(), compare);
+
+    // info.routes.erase(std::unique(info.routes.begin(), info.routes.end(),
+    // [](vector<ull> &v1, vector<ull> &v2) {
+    //     return v1.back() == v2.back();
+    // }), info.routes.end());
 }
 
 static inline void print_route(Info &info, vector<ull> &route) {
@@ -101,6 +106,8 @@ static inline void print_routes(Info &info) {
         cout << delim << endl;
         cout << "Path: " << info.names[(*r).front()] << " -> ";
         cout << info.names[(*r).back()] << endl;
+        // cout << info.names[(*r).front()] << "-";
+        // cout << info.names[(*r).back()] << ",";
 
         cout << "Route: ";
         print_route(info, (*r));
@@ -139,75 +146,138 @@ static inline void test(Info &info) {
     }
 }
 
+static inline void read_data(Info &info, std::ifstream &file) {
+    std::string temp;
+    size_t i1 = 0, i2 = 0;
+    vector<std::string>::iterator it;
+
+    while (!file.eof()) {
+        std::getline(file, temp, '-');
+
+        if ((it = std::find(info.names.begin(), info.names.end(), temp)) == info.names.end()) {
+            i1 = info.names.size();
+            info.names.emplace_back(temp);
+        }
+        else
+            i1 = it - info.names.begin();
+
+        std::getline(file, temp, ',');
+
+        if ((it = std::find(info.names.begin(), info.names.end(), temp)) == info.names.end()) {
+            i2 = info.names.size();
+            info.names.emplace_back(temp);
+        }
+        else
+            i2 = it - info.names.begin();
+
+        std::getline(file, temp);
+        if (temp != "") {
+            info.graph[i1].emplace_back(std::make_pair(i2, std::stoi(temp)));
+            info.graph[i2].emplace_back(std::make_pair(i1, std::stoi(temp)));
+        }
+    }
+}
+
+// void log_print(Info &info) {
+//     cout << "Size: " << info.size << endl;
+
+//     for (size_t i = 0; i < info.size; ++i)
+//         cout << "Distance[" << i << "]: " << info.distances[i] << endl;
+//     for (size_t i = 0; i < info.size; ++i)
+//         cout << "Visited[" << i << "]: " << info.visited[i] << endl;
+//     for (size_t i = 0; i < info.size; ++i)
+//         cout << "Name[" << i << "]: " << info.names[i] << endl;
+//     for (size_t i = 0; i < info.size; ++i)
+//         for (const auto &j : info.graph[i])
+//             cout << "From[" << i << "] to[" << j.first << "]: [" << j.second << "]" << endl;
+// }
+
 int main(int argc, char **argv) {
     if (argc == 2) {
-        int testtype = std::stoi(argv[1]);
-
-        switch (testtype) {
-        case 1: {
-            Info info(4);
-            test1(info);
+        std::ifstream file(argv[1]);
+        if (file) {
+            std::string num;
+            std::getline(file, num);
+            Info info(std::stoi(num));
+            read_data(info, file);
+            file.close();
+            // log_print(info);
             test(info);
-            break;
-        }
-        case 2: {
-            Info info(5);
-            test2(info);
-            test(info);
-            break;
-        }
-        case 3: {
-            Info info(3);
-            test3(info);
-            test(info);
-            break;
-        }
-        case 4: {
-            Info info(3);
-            test4(info);
-            test(info);
-            break;
-        }
-        case 5: {
-            Info info(4);
-            test5(info);
-            test(info);
-            break;
-        }
-        case 6: {
-            Info info(8);
-            test6(info);
-            test(info);
-            break;
-        }
-        case 7: {
-            Info info(7);
-            test7(info);
-            test(info);
-            break;
-        }
-        case 8: {
-            Info info(13);
-            test8(info);
-            test(info);
-            break;
-        }
-        case 9: {
-            Info info(17);
-            test9(info);
-            test(info);
-            break;
-        }
-        case 10: {
-            Info info(49);
-            test10(info);
-            test(info);
-            break;
-        }
-        default:
-            cout << "Wrong number!" << endl;
         }
     }
     else
-        cout << "usage: ./pathfinder [testnumber]" << endl;
+        cout << "usage: ./pathfinder [filename]" << endl;
 }
+
+// int main(int argc, char **argv) {
+//     if (argc == 2) {
+//         int testtype = std::stoi(argv[1]);
+
+//         switch (testtype) {
+//         case 0: {
+//             Info info(4);
+//             test0(info);
+//             test(info);
+//             break;
+//         }
+//         case 1: {
+//             Info info(5);
+//             test1(info);
+//             test(info);
+//             break;
+//         }
+//         case 2: {
+//             Info info(3);
+//             test2(info);
+//             test(info);
+//             break;
+//         }
+//         case 3: {
+//             Info info(3);
+//             test3(info);
+//             test(info);
+//             break;
+//         }
+//         case 4: {
+//             Info info(4);
+//             test4(info);
+//             test(info);
+//             break;
+//         }
+//         case 5: {
+//             Info info(8);
+//             test5(info);
+//             test(info);
+//             break;
+//         }
+//         case 6: {
+//             Info info(7);
+//             test6(info);
+//             test(info);
+//             break;
+//         }
+//         case 7: {
+//             Info info(13);
+//             test7(info);
+//             test(info);
+//             break;
+//         }
+//         case 8: {
+//             Info info(17);
+//             test8(info);
+//             test(info);
+//             break;
+//         }
+//         case 9: {
+//             Info info(49);
+//             test9(info);
+//             test(info);
+//             break;
+//         }
+//         default:
+//             cout << "Wrong number!" << endl;
+//         }
+//     }
+//     else
+//         cout << "usage: ./pathfinder [testnumber]" << endl;
+// }

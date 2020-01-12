@@ -14,7 +14,8 @@ struct Info {
         routes(vector<vector<ull>>()),
         distances(vector<ull>(size, INF)),
         visited(vector<char>(size, false)),
-        names(vector<std::string>(size)),
+        // names(vector<std::string>(size)),
+        names(vector<std::string>()),
         start(0),
         size(size) {}
 
@@ -34,7 +35,7 @@ struct Info {
 // Bananal-Fraser,3
 // Java-Fraser,5
 
-void test1(Info &info) {
+void test0(Info &info) {
     info.graph[0].push_back({1, 8});
     info.graph[0].push_back({2, 10});
 
@@ -61,7 +62,7 @@ void test1(Info &info) {
 // C-E,15
 // D-E,4
 
-void test2(Info &info) {
+void test1(Info &info) {
     info.graph[0].push_back({1, 11});
     info.graph[0].push_back({2, 10});
 
@@ -88,7 +89,7 @@ void test2(Info &info) {
 // Drive-Blade,1
 // Wizard-Drive,1
 
-void test3(Info &info) {
+void test2(Info &info) {
     info.graph[0].push_back({1, 1});
     info.graph[0].push_back({2, 1});
 
@@ -108,7 +109,7 @@ void test3(Info &info) {
 // Drive-Blade,2
 // Wizard-Drive,3
 
-void test4(Info &info) {
+void test3(Info &info) {
     info.graph[0].push_back({1, 1});
     info.graph[0].push_back({2, 2});
 
@@ -128,7 +129,7 @@ void test4(Info &info) {
 // Zero-Eight,8
 // Two-Zero,2
 
-void test5(Info &info) {
+void test4(Info &info) {
     info.graph[0].push_back({1, 1});
 
     info.graph[1].push_back({0, 1});
@@ -154,7 +155,7 @@ void test5(Info &info) {
 // Kyiv-Singapore,11864
 // Kyiv-Tokyo,11079
 
-void test6(Info &info) {
+void test5(Info &info) {
     info.graph[0].push_back({1, 471});
     info.graph[0].push_back({3, 766});
     info.graph[0].push_back({4, 2403});
@@ -194,7 +195,7 @@ void test6(Info &info) {
 // BusStop-Park,18
 // Park-Metro,16
 
-void test7(Info &info) {
+void test6(Info &info) {
     info.graph[0].push_back({1, 4});
     info.graph[0].push_back({3, 1});
     info.graph[0].push_back({4, 6});
@@ -265,7 +266,7 @@ void test7(Info &info) {
 // K-L,1
 // M-L,1
 
-void test8(Info &info) {
+void test7(Info &info) {
     info.graph[0].push_back({1, 1});
     info.graph[0].push_back({2, 1});
     info.graph[0].push_back({3, 1});
@@ -389,7 +390,7 @@ void test8(Info &info) {
 // O-Q,2
 // P-Q,2
 
-void test9(Info &info) {
+void test8(Info &info) {
     info.graph[0].push_back({1, 2});
     info.graph[0].push_back({2, 2});
     info.graph[0].push_back({3, 2});
@@ -577,7 +578,7 @@ void test9(Info &info) {
 // UU-WW,1
 // VV-WW,1
 
-void test10(Info &info) {
+void test9(Info &info) {
     info.graph[0].push_back({1, 1});
     info.graph[0].push_back({2, 1});
 

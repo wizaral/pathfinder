@@ -15,7 +15,8 @@ LIB_PATH = $(addprefix $(LIB_DIR), $(LIB))
 
 WFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 LFLAGS = -Iinc -Ilibmx/inc
-CFLAGS = -Ofast -march=native -pipe -fomit-frame-pointer
+CFLAGS = -Ofast -march=native -pipe -fomit-frame-pointer -flto \
+	-ffunction-sections -fdata-sections -Wl, --gc-sections
 DFLAGS = -O0 -g -fsanitize=address
 
 all: install clean

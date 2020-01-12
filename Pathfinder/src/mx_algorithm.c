@@ -1,7 +1,5 @@
 #include "pathfinder.h"
 
-// #include <stdio.h>
-
 static inline size_t get_min(t_info *info) {
     size_t visit = MX_INF;
 
@@ -14,9 +12,6 @@ static inline size_t get_min(t_info *info) {
 static inline void check_distance(t_info *info, size_t visit, size_t j) {
     size_t island = ((t_pair *)mx_at(&info->graph[visit], j))->island;
     int distance = ((t_pair *)mx_at(&info->graph[visit], j))->distance;
-
-    // printf("island: %zu\n", island);
-    // printf("dist: %i\n", dist);
 
     if (info->distances[visit] + distance <= info->distances[island]) {
         if (info->distances[visit] + distance < info->distances[island]) {
@@ -33,7 +28,6 @@ static inline void dijkstra(t_info *info) {
 
     for (size_t i = 0; i < info->size; ++i) {
         visit = get_min(info);
-        // printf("%zu %i\n", visit, info->distances[visit]);
 
         if (info->distances[visit] == MX_INF)
             break;
