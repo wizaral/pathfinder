@@ -108,6 +108,7 @@ static inline void print_routes(Info &info) {
         cout << info.names[(*r).back()] << endl;
         // cout << info.names[(*r).front()] << "-";
         // cout << info.names[(*r).back()] << ",";
+        // cout << info.distances[(*r).back()] << endl;
 
         cout << "Route: ";
         print_route(info, (*r));
@@ -123,15 +124,16 @@ static inline void print_routes(Info &info) {
 }
 
 static inline void clean_info(Info &info) {
-    for (auto &p : info.parents)
-        p.clear();
-
     for (auto &r : info.routes)
         r.clear();
-
     info.routes.clear();
-    info.distances.assign(info.size, INF);
-    info.visited.assign(info.size, false);
+
+    for (auto &p : info.parents)
+        p.clear();
+    for (auto &v : info.visited)
+        v = false;
+    for (auto &d : info.distances)
+        d = INF;
 }
 
 static inline void test(Info &info) {
@@ -148,27 +150,31 @@ static inline void test(Info &info) {
 
 static inline void read_data(Info &info, std::ifstream &file) {
     std::string temp;
-    size_t i1 = 0, i2 = 0;
+    size_t i1 = 0, i2 = 0, current = 0;
     vector<std::string>::iterator it;
 
     while (!file.eof()) {
         std::getline(file, temp, '-');
 
-        if ((it = std::find(info.names.begin(), info.names.end(), temp)) == info.names.end()) {
-            i1 = info.names.size();
-            info.names.emplace_back(temp);
+        if (temp != "") {
+            if ((it = std::find(info.names.begin(), info.names.end(), temp)) == info.names.end()) {
+                i1 = current;
+                info.names[current++] = std::move(temp);
+            }
+            else
+                i1 = it - info.names.begin();
         }
-        else
-            i1 = it - info.names.begin();
 
         std::getline(file, temp, ',');
 
-        if ((it = std::find(info.names.begin(), info.names.end(), temp)) == info.names.end()) {
-            i2 = info.names.size();
-            info.names.emplace_back(temp);
+        if (temp != "") {
+            if ((it = std::find(info.names.begin(), info.names.end(), temp)) == info.names.end()) {
+                i2 = current;
+                info.names[current++] = std::move(temp);
+            }
+            else
+                i2 = it - info.names.begin();
         }
-        else
-            i2 = it - info.names.begin();
 
         std::getline(file, temp);
         if (temp != "") {
@@ -178,19 +184,19 @@ static inline void read_data(Info &info, std::ifstream &file) {
     }
 }
 
-// void log_print(Info &info) {
-//     cout << "Size: " << info.size << endl;
+void log_print(Info &info) {
+    cout << "Size: " << info.size << endl;
 
-//     for (size_t i = 0; i < info.size; ++i)
-//         cout << "Distance[" << i << "]: " << info.distances[i] << endl;
-//     for (size_t i = 0; i < info.size; ++i)
-//         cout << "Visited[" << i << "]: " << info.visited[i] << endl;
-//     for (size_t i = 0; i < info.size; ++i)
-//         cout << "Name[" << i << "]: " << info.names[i] << endl;
-//     for (size_t i = 0; i < info.size; ++i)
-//         for (const auto &j : info.graph[i])
-//             cout << "From[" << i << "] to[" << j.first << "]: [" << j.second << "]" << endl;
-// }
+    for (size_t i = 0; i < info.size; ++i)
+        cout << "Distance[" << i << "]: " << info.distances[i] << endl;
+    for (size_t i = 0; i < info.size; ++i)
+        cout << "Visited[" << i << "]: " << info.visited[i] << endl;
+    for (size_t i = 0; i < info.size; ++i)
+        cout << "Name[" << i << "]: " << info.names[i] << endl;
+    for (size_t i = 0; i < info.size; ++i)
+        for (const auto &j : info.graph[i])
+            cout << "From[" << i << "] to[" << j.first << "]: " << j.second << endl;
+}
 
 int main(int argc, char **argv) {
     if (argc == 2) {

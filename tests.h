@@ -14,8 +14,7 @@ struct Info {
         routes(vector<vector<ull>>()),
         distances(vector<ull>(size, INF)),
         visited(vector<char>(size, false)),
-        // names(vector<std::string>(size)),
-        names(vector<std::string>()),
+        names(vector<std::string>(size)),
         start(0),
         size(size) {}
 
