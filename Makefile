@@ -6,7 +6,7 @@ path:
 	@make -sC Pathfinder -f Makefile clean
 
 go:
-	@./Pathfinder/pathfinder
+	@./Pathfinder/pathfinder test.txt
 
 all: install go
 pll: path go

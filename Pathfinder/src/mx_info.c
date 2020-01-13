@@ -29,8 +29,10 @@ void mx_init_info(t_info *info, size_t size) {
         info->routes.arr = malloc(sizeof(t_vector) * VECTOR_DEFAULT_SIZE);
         init(info);
     }
-    else
+    else {
         mx_throw_line_error(1);
+        exit(0);
+    }
 }
 
 void mx_clear_info(t_info *info) {

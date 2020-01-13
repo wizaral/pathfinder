@@ -6,7 +6,7 @@ t_vector *mx_create_vector(size_t size, size_t bytes) {
     if (v) {
         size_t capacity = VECTOR_DEFAULT_SIZE;
 
-        for (; capacity < SIZE_MAX; capacity *= 2)
+        for (; capacity < 4294967296UL; capacity *= 2)
             if (capacity > size)
                 break;
         v->cap = capacity;

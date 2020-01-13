@@ -12,7 +12,7 @@ typedef struct s_tree_node {
 } t_tree_node;
 
 typedef struct s_tree {
-    long long size;
+    size_t size;
     t_tree_node *root;
     int (*cmp)(const void *, const void *);
 } t_tree;
