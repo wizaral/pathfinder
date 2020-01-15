@@ -1,5 +1,4 @@
-#ifndef LIBMX_H
-#define LIBMX_H
+#pragma once
 
 #include <fcntl.h>
 #include <unistd.h>
@@ -126,5 +125,3 @@ double mx_sqrt(double x);
 int mx_sum_digits(t_u64 num);
 
 void mx_swap(void *restrict v1, void *restrict v2, size_t size);
-
-#endif

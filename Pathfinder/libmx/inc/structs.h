@@ -1,5 +1,4 @@
-#ifndef STRUCTS_H
-#define STRUCTS_H
+#pragma once
 
 #include "list.h"
 #include "flist.h"
@@ -7,5 +6,3 @@
 #include "stack.h"
 #include "tree.h"
 #include "vector.h"
-
-#endif

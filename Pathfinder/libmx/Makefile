@@ -56,7 +56,6 @@ WFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 LFLAGS = -Iinc
 CFLAGS = -Ofast -march=native -pipe -fomit-frame-pointer -flto                \
 	-ffunction-sections -fdata-sections
-# check -Wl, --gc-sections flags !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 DFLAGS = -O0 -g -fsanitize=address
 

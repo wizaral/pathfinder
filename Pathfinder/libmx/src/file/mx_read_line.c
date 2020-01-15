@@ -3,20 +3,20 @@
 long long mx_read_line(char **lineptr, char delim, const int fd) {
     size_t len = 0;
     size_t lim = 16;
-    int writen_bytes = 1;
+    size_t checked = 0;
 
     if (read(fd, NULL, 0) < 0) {
         *lineptr = mx_realloc(*lineptr, 0);
         return -2;
     }
     *lineptr = (char *)mx_realloc(*lineptr, lim);
-    for (; *lineptr && writen_bytes > 0; len += (writen_bytes != 0)) {
+    for (size_t writen = 1; *lineptr && writen; len += writen) {
         len >= lim ? *lineptr = (char *)mx_realloc(*lineptr, lim *= 2) : NULL;
-        writen_bytes = *lineptr ? read(fd, *lineptr + len, 1) : -1;
+        checked += (writen = *lineptr ? read(fd, *lineptr + len, 1) : 0);
         if (*lineptr && (*lineptr)[len] == delim)
             break;
     }
     if (*lineptr && (*lineptr = (char *)mx_realloc(*lineptr, len + 1)))
         (*lineptr)[len] = '\0';
-    return *lineptr ? (writen_bytes > 0 ? mx_strlen(*lineptr) : -1) : -2;
+    return *lineptr ? (checked ? len : -1) : -2;
 }

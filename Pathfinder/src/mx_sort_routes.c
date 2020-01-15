@@ -17,11 +17,11 @@ static inline void sort(t_vector *arr, size_t size) {
     size_t step = size;
 
     for (size_t k = 0; size > 1; k = 0) {
-        (step /= 1.247f) < 1 ? (step = 1) : step;
+        (step /= 1.247f) < 1 ? (step = 1) : 0;
         for (size_t i = 0; i + step < size; ++i)
             if (compare(arr + i, arr + i + step) == false)
                 mx_swap(arr + (k = i), arr + i + step, sizeof(t_vector));
-        (step == 1) ? (size = k + 1) : step;
+        (step == 1) ? (size = k + 1) : 0;
     }
 }
 

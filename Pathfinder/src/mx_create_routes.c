@@ -2,14 +2,15 @@
 
 static inline void add_route(t_info *info, t_vector *route) {
     size_t size = info->parents[*(size_t *)mx_get_back(route)].size;
+    t_vector *v = NULL;
 
     for (size_t i = 0; i < size; ++i) {
-        mx_push_backward(route, mx_at(&info->parents[*(size_t *)mx_get_back(route)], i));
-
+        mx_push_backward(route,
+        mx_at(&info->parents[*(size_t *)mx_get_back(route)], i));
         if (info->start != *(size_t *)mx_get_back(route))
             add_route(info, route);
         else {
-            t_vector *v = mx_copy_vector(route);
+            v = mx_copy_vector(route);
             mx_push_backward(&info->routes, v);
             free(v);
         }

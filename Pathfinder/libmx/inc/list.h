@@ -1,5 +1,4 @@
-#ifndef LIST_H
-#define LIST_H
+#pragma once
 
 #include "types.h"
 
@@ -62,5 +61,3 @@ t_list *mx_sort_list(t_list *list, int (*cmp)(const void *, const void *));
 void **mx_list_to_array(t_list *list);
 void mx_foreach_list(t_list *list, void (*f)(t_list_node *));
 void mx_foreach_list_reverse(t_list *list, void (*f)(t_list_node *));
-
-#endif

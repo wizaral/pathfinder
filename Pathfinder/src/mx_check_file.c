@@ -1,27 +1,33 @@
 #include "pathfinder.h"
 
-#include <stdio.h>
+static inline size_t check_line(char *line) {
+    size_t len = mx_strlen(line);
+    size_t result = 0;
 
-static inline int check_line(const char *line) {
-    printf(":%s:\n", line);
-    free((void *)line);
-    return 0;
+    if (len == 0)
+        mx_throw_line_error(1);
+    for (size_t i = 0; i < len; ++i)
+        if (!mx_isdigit(line[i]))
+            mx_throw_line_error(1);
+    result = mx_atoull(line);
+    free(line);
+    return result > 0 ? result : result + 1;
 }
 
-int mx_check_file(const char *filename) {
+size_t mx_check_file(const char *filename) {
     char *line = NULL;
+    int stream = 0;
 
     if (filename) {
-        int stream = open(filename, 0);
-
-        if (stream >= 0) {
-            if ((mx_read_line(&line, '\n', stream)) > 0)
+        if ((stream = open(filename, 0)) >= 0) {
+            if (mx_read_line(&line, '\n', stream) > -1)
                 return check_line(line);
             else
                 mx_throw_file_empty_error(filename);
         }
         else
             mx_throw_file_exist_error(filename);
+        close(stream);
     }
     return 0;
 }

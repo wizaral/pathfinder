@@ -1,5 +1,4 @@
-#ifndef TREE_H
-#define TREE_H
+#pragma once
 
 #include "types.h"
 
@@ -18,5 +17,3 @@ typedef struct s_tree {
 } t_tree;
 
 
-
-#endif

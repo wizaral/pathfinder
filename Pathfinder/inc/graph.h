@@ -1,5 +1,4 @@
-#ifndef GRAPH_H
-#define GRAPH_H
+#pragma once
 
 #define MX_INF 2147483647
 #include "libmx.h"
@@ -19,5 +18,3 @@ typedef struct s_pair {
     size_t island;      // number of connected island
     int distance;       // distance to island
 } t_pair;
-
-#endif

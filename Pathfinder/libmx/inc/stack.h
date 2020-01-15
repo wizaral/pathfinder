@@ -1,5 +1,4 @@
-#ifndef STACK_H
-#define STACK_H
+#pragma once
 
 #include "types.h"
 
@@ -37,5 +36,3 @@ void *mx_top(t_stack *st);
 
 void mx_clear_stack(t_stack *st);
 void mx_foreach_stack(t_stack *st, void (*f)(void *));
-
-#endif

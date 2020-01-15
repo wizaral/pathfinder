@@ -1,5 +1,4 @@
-#ifndef QUEUE_H
-#define QUEUE_H
+#pragma once
 
 #include "types.h"
 
@@ -47,5 +46,3 @@ void *mx_rear(t_queue *q);
 
 void mx_clear_queue(t_queue *q);
 void mx_foreach_queue(t_queue *q, void (*f)(void *));
-
-#endif

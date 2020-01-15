@@ -1,5 +1,4 @@
-#ifndef ALGORITHM_H
-#define ALGORITHM_H
+#pragma once
 
 #include "types.h"
 #include "structs.h"
@@ -41,5 +40,3 @@ void mx_quicksort_rec(void *arr, size_t size, size_t bytes, long long (*w)(const
 */
 
 bool mx_checksort(const void *arr, size_t size, size_t bytes, int (*cmp)(const void *, const void *));
-
-#endif

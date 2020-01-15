@@ -1,5 +1,4 @@
-#ifndef FLIST_H
-#define FLIST_H
+#pragma once
 
 #include "types.h"
 
@@ -69,5 +68,3 @@ void mx_fpush_index(t_flist *list, void *data, size_t pos);
 t_flist *mx_fsort_list(t_flist *list, int (*cmp)(const void *, const void *));
 void **mx_flist_to_array(t_flist *list);
 void mx_fforeach_list(t_flist *list, void (*f)(t_flist_node *));
-
-#endif

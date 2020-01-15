@@ -1,5 +1,4 @@
-#ifndef VECTOR_H
-#define VECTOR_H
+#pragma once
 
 #include "types.h"
 
@@ -59,5 +58,3 @@ void *mx_get_back(t_vector *v);
 
 void mx_foreach_vector(t_vector *v, void (*f)(void *));
 void mx_reverse_vector(t_vector *v);
-
-#endif

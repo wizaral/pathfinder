@@ -34,7 +34,7 @@ static inline void dijkstra(Info &info) {
     }
 }
 
-static inline void add_route(Info &info, vector<ull> &route) {
+static void add_route(Info &info, vector<ull> &route) {
     for (size_t i = 0; i < info.parents[route.back()].size(); ++i) {
         route.push_back(info.parents[route.back()][i]);
 
@@ -214,76 +214,3 @@ int main(int argc, char **argv) {
     else
         cout << "usage: ./pathfinder [filename]" << endl;
 }
-
-// int main(int argc, char **argv) {
-//     if (argc == 2) {
-//         int testtype = std::stoi(argv[1]);
-
-//         switch (testtype) {
-//         case 0: {
-//             Info info(4);
-//             test0(info);
-//             test(info);
-//             break;
-//         }
-//         case 1: {
-//             Info info(5);
-//             test1(info);
-//             test(info);
-//             break;
-//         }
-//         case 2: {
-//             Info info(3);
-//             test2(info);
-//             test(info);
-//             break;
-//         }
-//         case 3: {
-//             Info info(3);
-//             test3(info);
-//             test(info);
-//             break;
-//         }
-//         case 4: {
-//             Info info(4);
-//             test4(info);
-//             test(info);
-//             break;
-//         }
-//         case 5: {
-//             Info info(8);
-//             test5(info);
-//             test(info);
-//             break;
-//         }
-//         case 6: {
-//             Info info(7);
-//             test6(info);
-//             test(info);
-//             break;
-//         }
-//         case 7: {
-//             Info info(13);
-//             test7(info);
-//             test(info);
-//             break;
-//         }
-//         case 8: {
-//             Info info(17);
-//             test8(info);
-//             test(info);
-//             break;
-//         }
-//         case 9: {
-//             Info info(49);
-//             test9(info);
-//             test(info);
-//             break;
-//         }
-//         default:
-//             cout << "Wrong number!" << endl;
-//         }
-//     }
-//     else
-//         cout << "usage: ./pathfinder [testnumber]" << endl;
-// }
