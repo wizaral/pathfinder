@@ -1,4 +1,4 @@
-// #pragma once
+#pragma once
 
 #include "graph.h"
 #include "error.h"
@@ -25,7 +25,8 @@ void mx_clear_info(t_info *info);
 // void mx_delete_info(t_info *info);
 
 /*
-* returns value in first line or 0 in invalid cases
+* returns value in first line or exit from program in invalid cases
+* convert file to graph struct
 */
 
 size_t mx_check_file(const char *filename);

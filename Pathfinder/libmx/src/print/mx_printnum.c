@@ -8,9 +8,7 @@ static void printnum(long long n, const int fd) {
 
 void mx_printnum(long long n, const int fd) {
     if (fd >= 0) {
-        const long long min = -__LONG_LONG_MAX__ - 1LL;
-
-        if (n == min) {
+        if (n == (-9223372036854775807LL - 1LL)) {
             write(fd, "−9223372036854775808", 20);
             return;
         }

@@ -9,7 +9,8 @@ static inline size_t check_line(char *line) {
     for (size_t i = 0; i < len; ++i)
         if (!mx_isdigit(line[i]))
             mx_throw_line_error(1);
-    result = mx_atoull(line);
+    if ((result = mx_atoull(line)) > 10000000)
+        exit(0);
     free(line);
     return result > 0 ? result : result + 1;
 }
