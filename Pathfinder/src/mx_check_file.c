@@ -4,8 +4,8 @@ static inline size_t check_line(char *line) {
     size_t len = mx_strlen(line);
     size_t result = 0;
 
-    if (len == 0)
-        mx_throw_line_error(1);
+    // // if (len == 0)
+    // //     mx_throw_line_error(1);
     for (size_t i = 0; i < len; ++i)
         if (!mx_isdigit(line[i]))
             mx_throw_line_error(1);
