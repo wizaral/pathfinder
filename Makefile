@@ -10,3 +10,6 @@ go:
 
 all: install go
 pll: path go
+
+cpp:
+	@g++ -std=c++2a -Ofast -march=native -pipe -fomit-frame-pointer -flto *.cpp

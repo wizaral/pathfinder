@@ -2,8 +2,8 @@
 
 int mx_count_substr(const char *str, const char *sub) {
     if (str && sub) {
-        int len1 = mx_strlen(str);
-        int len2 = mx_strlen(sub);
+        size_t len1 = mx_strlen(str);
+        size_t len2 = mx_strlen(sub);
         int result = 0;
 
         if (len1 >= len2) {

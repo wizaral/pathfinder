@@ -6,7 +6,7 @@ static inline void push(t_parametrs *prm, t_byte *left, t_byte *right) {
 }
 
 static inline void update(t_parametrs *prm, t_pivot *pivot, size_t bytes,
-    long long (*w)(const void *)) {
+    t_i64 (*w)(const void *)) {
     prm->i = prm->left = *(t_byte **)mx_pop(&prm->stack);
     prm->j = prm->right = *(t_byte **)mx_pop(&prm->stack);
     pivot->pivot = w(mx_memcpy(pivot->temp,
@@ -30,7 +30,7 @@ static inline void add(t_parametrs *prm, size_t bytes) {
 }
 
 void mx_quicksort(void *arr, size_t size, size_t bytes,
-    long long (*w)(const void *)) {
+    t_i64 (*w)(const void *)) {
     if (arr && size > 1 && bytes > 0 && w) {
         t_byte temp[bytes];
         t_pivot pivot = {temp, 0};

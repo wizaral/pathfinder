@@ -4,6 +4,7 @@ static inline void init(t_info *info, size_t size) {
     for (size_t i = 0; i < size; ++i) {
         info->distances[i] = MX_INF;
         info->visited[i] = false;
+        info->names[i] = NULL;
         info->parents[i].cap = VECTOR_DEFAULT_SIZE;
         info->parents[i].size = 0;
         info->parents[i].bytes = sizeof(size_t);

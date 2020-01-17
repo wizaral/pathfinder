@@ -1,8 +1,8 @@
 #include "libmx.h"
 
-long long mx_atoll(const char *str) {
+t_i64 mx_atoll(const char *str) {
     bool sign = 0;
-    long long sum = 0;
+    t_i64 sum = 0;
 
     for (; mx_isspace(*str); ++str);
     if (*str == '+' || *str == '-')

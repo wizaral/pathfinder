@@ -60,11 +60,11 @@ int main() {
 
     // printf("%i\n", time(NULL));
     // printf("%llu\n", __rdtsc());
-    unsigned long long tStart1 = __rdtsc();
+    unsigned t_i64 tStart1 = __rdtsc();
     sortc(arr1, size);
     // qsort(arr1, size, sizeof(int), compare);
     // printf("S1\n");
-    unsigned long long tEnd1 = __rdtsc();
+    unsigned t_i64 tEnd1 = __rdtsc();
     // printf("%llu\n", __rdtsc());
     // printf("%i\n", time(NULL));
 
@@ -72,11 +72,11 @@ int main() {
 
     // printf("%i\n", time(NULL));
     // printf("%llu\n", __rdtsc());
-    unsigned long long tStart2 = __rdtsc();
+    unsigned t_i64 tStart2 = __rdtsc();
     sortc2(arr2, size, sizeof(int), compare);
     // printf("S2\n");
     // qsort(arr2, size, sizeof(int), compare);
-    unsigned long long tEnd2 = __rdtsc();
+    unsigned t_i64 tEnd2 = __rdtsc();
 
     // printf("%llu\n", __rdtsc());
     // printf("%i\n", time(NULL));

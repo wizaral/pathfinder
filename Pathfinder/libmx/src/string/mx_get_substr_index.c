@@ -2,8 +2,8 @@
 
 int mx_get_substr_index(const char *str, const char *sub) {
     if (str && sub) {
-        int len1 = mx_strlen(str);
-        int len2 = mx_strlen(sub);
+        size_t len1 = mx_strlen(str);
+        size_t len2 = mx_strlen(sub);
 
         if (len1 >= len2)
             for (const char *copy = str; (str = mx_strchr(str, *sub)); ++str)

@@ -30,4 +30,4 @@ void mx_clear_info(t_info *info);
 */
 
 size_t mx_check_file(const char *filename);
-void mx_parse_file(t_info *info, const char *filename);
+void mx_parse_file(t_info *info, char *filename);

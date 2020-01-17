@@ -16,8 +16,8 @@
 */
 
 char *mx_file_to_str(const char *file);
-long long mx_get_file_length(const char *filename);
-long long mx_read_line(char **lineptr, char delim, const int fd);
+t_i64 mx_get_file_length(const char *filename);
+t_i64 mx_read_line(char **lineptr, char delim, const int fd);
 
 /*
 * memory
@@ -43,7 +43,7 @@ void mx_print_strarr(const char **arr, const char *delim, const int fd);
 void mx_print_unicode(wchar_t c, const int fd);
 
 void mx_printchar(char c, const int fd);
-void mx_printnum(long long n, const int fd);
+void mx_printnum(t_i64 n, const int fd);
 void mx_printstr(const char *s, const int fd);
 void mx_printunum(t_u64 n, const int fd);
 
@@ -51,7 +51,7 @@ void mx_printunum(t_u64 n, const int fd);
 * string
 */
 
-long long mx_atoll(const char *str);
+t_i64 mx_atoll(const char *str);
 t_u64 mx_atoull(const char *str);
 
 int mx_count_substr(const char *str, const char *sub);
@@ -114,7 +114,7 @@ bool mx_isupper(int c);
 t_u64 mx_factorial(t_u64 n);
 void mx_foreach(void *arr, size_t size, size_t bytes, void(*f)(void *));
 
-int mx_get_num_length(long long num, unsigned base);
+int mx_get_num_length(t_i64 num, unsigned base);
 bool mx_isprime(t_u64 num);
 
 double mx_pow(double n, unsigned pow);
