@@ -8,7 +8,7 @@ typedef struct s_stack {
     size_t cap;     // capacity
     size_t size;    // current size
     size_t bytes;   // size of item
-    t_byte *arr;    // array of items
+    uint8_t *arr;    // array of items
 } t_stack;
 
 /*

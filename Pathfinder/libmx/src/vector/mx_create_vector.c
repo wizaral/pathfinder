@@ -4,15 +4,13 @@ t_vector *mx_create_vector(size_t size, size_t bytes) {
     t_vector *v = bytes > 0 ? (t_vector *)malloc(sizeof(t_vector)) : NULL;
 
     if (v) {
-        size_t capacity = VECTOR_DEFAULT_SIZE;
+        size_t cap = VECTOR_DEFAULT_SIZE;
 
-        for (; capacity < 4294967296UL; capacity *= 2)
-            if (capacity > size)
-                break;
-        v->cap = capacity;
+        for (size_t max = SIZE_MAX / 16; cap < max && cap > size; cap *= 2);
+        v->cap = cap;
         v->size = size;
         v->bytes = bytes;
-        v->arr = malloc(bytes * capacity);
+        v->arr = malloc(bytes * cap);
     }
     return v;
 }

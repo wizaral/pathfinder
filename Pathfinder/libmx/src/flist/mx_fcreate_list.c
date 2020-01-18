@@ -1,7 +1,7 @@
 #include "libmx.h"
 
 t_flist *mx_fcreate_list() {
-    t_flist *list = (t_flist *)malloc(sizeof(t_flist));
+    t_flist *list = malloc(sizeof(t_flist));
 
     if (list) {
         list->head = list->tail = NULL;

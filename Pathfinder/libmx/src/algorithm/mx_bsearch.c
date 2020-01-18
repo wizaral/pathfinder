@@ -1,13 +1,13 @@
 #include "libmx.h"
 
-t_byte *mx_binary_search(const void *key, t_vector *v,
-    int (*cmp)(const void *, const void *)) {
-    t_byte *left = v ? v->arr : NULL;
-    t_byte *right = v ? v->arr + (v->size - 1) * v->bytes : NULL;
-    t_byte *middle = NULL;
-    int result;
+uint8_t *mx_bsearch(const void *key, t_vector *v,
+int (*cmp)(const void *, const void *)) {
+    if (v && v->size && v->bytes && v->arr && key && cmp) {
+        uint8_t *left = v->arr;
+        uint8_t *right = v->arr + (v->size - 1) * v->bytes;
+        uint8_t *middle = NULL;
+        int result;
 
-    if (v && v->size && v->arr && key && cmp) {
         while (left <= right) {
             middle = left + (right - left) / 2;
             result = cmp(key, middle);

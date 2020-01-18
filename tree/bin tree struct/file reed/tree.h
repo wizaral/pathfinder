@@ -50,6 +50,6 @@ void levelorder_print_file(tree *a_tree, FILE *a_file);
 
 void add_elements(tree *a_tree);
 void my_task(tree *a_tree);
-t_i64 int levelorder(node *a_node);
+int64_t int levelorder(node *a_node);
 
 #endif

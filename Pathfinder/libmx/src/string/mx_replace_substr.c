@@ -9,14 +9,14 @@ char *mx_replace_substr(const char *str, const char *sub, const char *replace) {
         if (count > 0) {
             char *result = mx_strnew(mx_strlen(str) + (len2 - len1) * count);
 
-            for (int i = 0; *str; ) {
+            for (int i = 0; *str; )
                 if (*str == *sub && mx_strncmp(str, sub, len1) == 0) {
                     mx_strncpy(result + i, replace, len2);
-                    str += len1, i += len2;
+                    str += len1;
+                    i += len2;
                 }
                 else
                     result[i++] = *str++;
-            }
             return result;
         }
     }

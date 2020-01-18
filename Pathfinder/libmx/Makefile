@@ -1,8 +1,7 @@
 NAME = libmx.a
 CC = clang
 
-algorithm = binary_search checksort linear_search quicksort_rec quicksort     \
-	sort_rec sort
+algorithm = bsearch checksort lsearch quicksort sort
 
 file = get_file_length file_to_str read_line
 
@@ -70,12 +69,12 @@ $(OBJ_DIR):
 # 	@$(CC) $(WFLAGS) $(LFLAGS) -o $@ -c $<
 
 # optimize
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
+# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
+# 	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
 
 # debug
-# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-# 	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
 
 install: $(OBJ_DIR) $(OBJ)
 	@ar rcs $(NAME) $(OBJ)

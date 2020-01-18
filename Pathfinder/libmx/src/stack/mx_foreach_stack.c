@@ -2,9 +2,9 @@
 
 void mx_foreach_stack(t_stack *st, void (*f)(void *)) {
     if (st && st->arr && f) {
-        t_byte *end = st->arr + st->size * st->bytes;
+        uint8_t *end = st->arr + st->size * st->bytes;
 
-        for (t_byte *i = st->arr; i < end; i += st->bytes)
+        for (uint8_t *i = st->arr; i < end; i += st->bytes)
             f(i);
     }
 }

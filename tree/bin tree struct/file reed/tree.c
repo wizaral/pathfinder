@@ -417,7 +417,7 @@ void add_elements(tree *a_tree) {
     }
 }
 
-t_i64 int levelorder(node *a_node) {
+int64_t int levelorder(node *a_node) {
     if (a_node) {
         if (a_node->level == 3)
             return a_node->value;
@@ -429,7 +429,7 @@ t_i64 int levelorder(node *a_node) {
 
 void my_task(tree *a_tree) {
     if (a_tree) {
-        t_i64 int result = levelorder(a_tree->root);
+        int64_t int result = levelorder(a_tree->root);
         printf("\n������������ ���� ��������� �������� ������ ������: %lli\n", result);
     }
 }

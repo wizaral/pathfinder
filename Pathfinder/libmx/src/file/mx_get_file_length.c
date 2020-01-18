@@ -1,11 +1,11 @@
 #include "libmx.h"
 
-t_i64 mx_get_file_length(const char *filename) {
+int64_t mx_get_file_length(const char *filename) {
     int stream = open(filename, 0);
-    t_i64 length = 0;
 
     if (stream > -1) {
-        t_i64 delta = 1;
+        int64_t length = 0;
+        int64_t delta = 1;
         char buffer[1024];
 
         while (delta) {

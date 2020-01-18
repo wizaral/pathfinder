@@ -5,5 +5,5 @@ size_t mx_fcheck_size(t_flist *list) {
 
     for (t_flist_node *node = list ? list->head : NULL; node; ++size)
         node = node->next;
-    return list ? list->size = size : -1;
+    return list ? (list->size = size) : -1;
 }

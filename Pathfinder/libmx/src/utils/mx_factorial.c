@@ -1,11 +1,11 @@
 #include "libmx.h"
 
-t_u64 mx_factorial(t_u64 n) {
-    t_u64 result = 1;
+uint64_t mx_factorial(uint64_t n) {
+    uint64_t result = 1;
 
     if (n > 20)
         return 0;
-    for (t_u64 i = 1; i <= n; ++i)
+    for (uint64_t i = 1; i <= n; ++i)
         result *= i;
     return result;
 }

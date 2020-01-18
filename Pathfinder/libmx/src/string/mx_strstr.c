@@ -7,7 +7,7 @@ char *mx_strstr(const char *haystack, const char *needle) {
     if (len2 == 0)
         return (char *)haystack;
     if (len1 >= len2)
-        for (; (haystack = mx_strchr(haystack, *needle)) != NULL; ++haystack)
+        for (; (haystack = mx_strchr(haystack, *needle)); ++haystack)
             if (mx_strncmp(haystack, needle, len2) == 0)
                 return (char *)haystack;
     return NULL;

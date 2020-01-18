@@ -17,12 +17,10 @@ void mx_sort_routes(t_vector *routes);
 /*
 * creating t_info struct before first iteration of algorithm
 * cleaning t_info struct for next iteration of algorithm
-* deleting t_info struct after last iteration of algorithm
 */
 
 void mx_init_info(t_info *info, size_t size);
 void mx_clear_info(t_info *info);
-// void mx_delete_info(t_info *info);
 
 /*
 * returns value in first line or exit from program in invalid cases

@@ -2,8 +2,8 @@
 
 void *mx_memccpy(void *restrict dst, const void *restrict src, int c, size_t n) {
     if (dst && src && n) {
-        t_byte *udst = dst;
-        const t_byte *usrc = src;
+        uint8_t *udst = dst;
+        const uint8_t *usrc = src;
 
         for (size_t i = 0; i < n; ++i) {
             udst[i] = usrc[i];

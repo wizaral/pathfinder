@@ -1,23 +1,24 @@
 #pragma once
 
 #include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdbool.h>
 #include <malloc/malloc.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 #include "algorithm.h"
 #include "macroses.h"
 #include "structs.h"
-#include "types.h"
 
 /*
 * file
 */
 
 char *mx_file_to_str(const char *file);
-t_i64 mx_get_file_length(const char *filename);
-t_i64 mx_read_line(char **lineptr, char delim, const int fd);
+int64_t mx_get_file_length(const char *filename);
+int64_t mx_read_line(char **lineptr, char delim, const int fd);
 
 /*
 * memory
@@ -43,16 +44,16 @@ void mx_print_strarr(const char **arr, const char *delim, const int fd);
 void mx_print_unicode(wchar_t c, const int fd);
 
 void mx_printchar(char c, const int fd);
-void mx_printnum(t_i64 n, const int fd);
+void mx_printnum(int64_t n, const int fd);
 void mx_printstr(const char *s, const int fd);
-void mx_printunum(t_u64 n, const int fd);
+void mx_printunum(uint64_t n, const int fd);
 
 /*
 * string
 */
 
-t_i64 mx_atoll(const char *str);
-t_u64 mx_atoull(const char *str);
+int64_t mx_atoll(const char *str);
+uint64_t mx_atoull(const char *str);
 
 int mx_count_substr(const char *str, const char *sub);
 int mx_count_words(const char *str, char c);
@@ -63,9 +64,9 @@ void mx_del_strarr(char ***arr);
 int mx_get_char_index(const char *str, char c);
 int mx_get_substr_index(const char *str, const char *sub);
 
-t_u64 mx_hex_to_nbr(const char *hex);
+uint64_t mx_hex_to_nbr(const char *hex);
 char *mx_itoa(int number);
-char *mx_nbr_to_hex(t_u64 nbr);
+char *mx_nbr_to_hex(uint64_t nbr);
 
 char *mx_replace_substr(const char *str, const char *sub, const char *replace);
 void mx_str_reverse(char *s);
@@ -111,17 +112,17 @@ bool mx_isupper(int c);
 * utils
 */
 
-t_u64 mx_factorial(t_u64 n);
+uint64_t mx_factorial(uint64_t n);
 void mx_foreach(void *arr, size_t size, size_t bytes, void(*f)(void *));
 
-int mx_get_num_length(t_i64 num, unsigned base);
-bool mx_isprime(t_u64 num);
+int mx_get_num_length(int64_t num, uint32_t base);
+bool mx_isprime(uint64_t num);
 
-double mx_pow(double n, unsigned pow);
-t_u64 mx_sigma(t_u64 n);
+double mx_pow(double n, uint32_t pow);
+uint64_t mx_sigma(uint64_t n);
 
-t_u64 mx_sqrt_natural(t_u64 x);
+uint64_t mx_sqrt_natural(uint64_t x);
 double mx_sqrt(double x);
-int mx_sum_digits(t_u64 num);
+int mx_sum_digits(uint64_t num);
 
 void mx_swap(void *restrict v1, void *restrict v2, size_t size);

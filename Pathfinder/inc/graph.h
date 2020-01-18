@@ -1,7 +1,7 @@
 #pragma once
 
-#define MX_INF 2147483647
 #include "libmx.h"
+#define MX_INF 2147483647
 
 typedef struct s_info {
     t_vector *graph;    // array<vector<pair<size_t, int>>>

@@ -1,7 +1,7 @@
 #include "libmx.h"
 
 static inline void increase_queue(t_queue *q) {
-    t_byte *temp_arr = q && q->arr ? malloc(q->bytes * q->cap * 2) : NULL;
+    uint8_t *temp_arr = q && q->arr ? malloc(q->bytes * q->cap * 2) : NULL;
 
     if (temp_arr) {
         if (q->tail < q->head) {

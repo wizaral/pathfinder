@@ -2,9 +2,9 @@
 
 void mx_foreach_vector(t_vector *v, void (*f)(void *)) {
     if (v && v->arr && f) {
-        t_byte *end = v->arr + v->size * v->bytes;
+        uint8_t *end = v->arr + v->size * v->bytes;
 
-        for (t_byte *i = v->arr; i < end; i += v->bytes)
+        for (uint8_t *i = v->arr; i < end; i += v->bytes)
             f(i);
     }
 }

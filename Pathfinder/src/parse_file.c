@@ -52,8 +52,7 @@ static inline void add_new_path(t_info *info, t_pair *first, t_pair *second) {
     }
     else {
         result->distance = first->distance;
-        result = (t_pair *)mx_linear_search(second,
-        &info->graph[first->island], compare);
+        result = (t_pair *)mx_linear_search(second, &info->graph[first->island], compare);
         result->distance = first->distance;
     }
 }

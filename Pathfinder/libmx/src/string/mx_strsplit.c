@@ -12,7 +12,10 @@ char **mx_strsplit(const char *s, char c) {
     char **result = s ? (char **)malloc(sizeof(char *) * (words + 1)) : NULL;
 
     if (s && result) {
-        for (int i = 0, j = 0, len; s[j]; ++j) {
+        int j = 0;
+        int len;
+
+        for (int i = 0; s[j]; ++j) {
             if (s[j] != c) {
                 len = get_length(s + j, c);
                 result[i++] = mx_strndup(s + j, len);
