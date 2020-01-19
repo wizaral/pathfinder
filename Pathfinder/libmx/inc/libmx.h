@@ -3,7 +3,7 @@
 #if defined (__APPLE__)
     #include <malloc/malloc.h>
     #define MX_MALLOC_SIZE(x)  malloc_size(x)
-#elif defined (_WIN64) || (_WIN32)
+#elif defined (_WIN64) || defined (_WIN32)
     #include <malloc.h>
     #define MX_MALLOC_SIZE(x) _msize(x)
 #elif defined (__linux__)

@@ -12,7 +12,7 @@ static inline size_t check_line(char *line) {
     if ((result = mx_atoull(line)) > 10000000)
         exit(0);
     free(line);
-    return result > 0 ? result : 1;
+    return result;
 }
 
 size_t mx_check_file(const char *filename) {

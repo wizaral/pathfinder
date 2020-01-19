@@ -21,10 +21,13 @@
 
 int main(int ac, char **av) {
     t_info info;
+    char *names[2] = {0};
+    t_file file = {NULL, 2, names, {0, 0}, {0, 0}, 0};
 
     if (ac == 2) {
         mx_init_info(&info, mx_check_file(av[1]));
-        mx_parse_file(&info, mx_file_to_str(av[1]));
+        file.file = mx_file_to_str(av[1]);
+        mx_parse_file(&info, &file);
         mx_algorithm(&info);
         // mx_delete_info(&info);
     }

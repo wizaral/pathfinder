@@ -2,6 +2,7 @@
 
 #include "graph.h"
 #include "error.h"
+#include "file.h"
 
 /*
 * dijkstra algorithm for searching shortests pathes
@@ -21,11 +22,3 @@ void mx_sort_routes(t_vector *routes);
 
 void mx_init_info(t_info *info, size_t size);
 void mx_clear_info(t_info *info);
-
-/*
-* returns value in first line or exit from program in invalid cases
-* convert file to graph struct
-*/
-
-size_t mx_check_file(const char *filename);
-void mx_parse_file(t_info *info, char *filename);
