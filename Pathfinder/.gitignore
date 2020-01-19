@@ -1,16 +1,25 @@
+# system files
 *.DS_Store
 *.ini
 *~
 ~$*
 
+# text editors
 *.dms
 *.sw*
+*.vscode
 
+# preprocessing, object, assembly, debug
 *.[ios]
 *.dSYM
 
+# lib, out, exe
 *.a
 *.out
 *.exe
+
+# text files
+*.txt
+*.pdf
 
 pathfinder

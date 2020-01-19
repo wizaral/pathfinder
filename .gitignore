@@ -9,7 +9,7 @@
 *.sw*
 *.vscode
 
-# preprocessing, assembly, object, debug
+# preprocessing, object, assembly, debug
 *.[ios]
 *.dSYM
 
