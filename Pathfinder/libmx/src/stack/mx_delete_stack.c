@@ -2,9 +2,9 @@
 
 void mx_delete_stack(t_stack *st) {
     if (st) {
-        if (malloc_size(st->arr))
+        if (MX_MALLOC_SIZE(st->arr))
             free(st->arr);
-        if (malloc_size(st))
+        if (MX_MALLOC_SIZE(st))
             free(st);
     }
 }

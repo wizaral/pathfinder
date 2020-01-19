@@ -2,7 +2,7 @@
 
 void *mx_realloc(void *ptr, size_t size) {
     void *new_ptr = NULL;
-    size_t old_size = malloc_size(ptr);
+    size_t old_size = MX_MALLOC_SIZE(ptr);
 
     if (ptr == NULL)
         return malloc(size);

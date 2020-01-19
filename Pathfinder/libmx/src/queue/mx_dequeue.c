@@ -1,7 +1,7 @@
 #include "libmx.h"
 
 static inline void reduce_queue(t_queue *q) {
-    uint8_t *temp_arr = q && q->arr ? malloc(q->bytes * q->cap / 2) : NULL;
+    uint8_t *temp_arr = q && q->arr ? malloc(q->cap / 2 * q->bytes) : NULL;
 
     if (temp_arr) {
         if (q->tail < q->head) {
@@ -12,7 +12,7 @@ static inline void reduce_queue(t_queue *q) {
         }
         else
             mx_memcpy(temp_arr, q->arr, q->cap * q->bytes);
-        if (malloc_size(q->arr))
+        if (MX_MALLOC_SIZE(q->arr))
             free(q->arr);
         q->arr = temp_arr;
         q->cap /= 2;

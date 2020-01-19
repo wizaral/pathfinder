@@ -1,7 +1,17 @@
 #pragma once
 
+#if defined (__APPLE__)
+    #include <malloc/malloc.h>
+    #define MX_MALLOC_SIZE(x)  malloc_size(x)
+#elif defined (_WIN64) || (_WIN32)
+    #include <malloc.h>
+    #define MX_MALLOC_SIZE(x) _msize(x)
+#elif defined (__linux__)
+    #include <malloc.h>
+    #define MX_MALLOC_SIZE(x)  malloc_usable_size(x)
+#endif
+
 #include <fcntl.h>
-#include <malloc/malloc.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
