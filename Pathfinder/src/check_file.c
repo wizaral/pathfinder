@@ -17,18 +17,20 @@ static inline size_t check_line(char *line) {
 
 size_t mx_check_file(const char *filename) {
     char *line = NULL;
-    int stream = 0;
 
     if (filename) {
-        if ((stream = open(filename, 0)) >= 0) {
-            if (mx_read_line(&line, '\n', stream) > -1)
+        int stream = open(filename, 0);
+        int64_t result = mx_read_line(&line, '\n', stream);
+
+        if (result > -2) {
+            close(stream);
+            if (result > -1)
                 return check_line(line);
-            else
+            else if (result == -1)
                 mx_throw_file_empty_error(filename);
         }
         else
             mx_throw_file_exist_error(filename);
-        close(stream);
     }
     return 0;
 }
