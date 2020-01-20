@@ -54,9 +54,9 @@ OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(RAW)))
 WFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 LFLAGS = -Iinc
 CFLAGS = -Ofast -march=native -pipe -fomit-frame-pointer -flto
-DFLAGS = -O0 -g -fsanitize=address
+DFLAGS = -O0 -g3 -glldb -fsanitize=address
 
-all: install clean
+all: install
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR) $(OBJ_DIR)/algorithm $(OBJ_DIR)/file                 \
@@ -69,12 +69,12 @@ $(OBJ_DIR):
 # 	@$(CC) $(WFLAGS) $(LFLAGS) -o $@ -c $<
 
 # optimize
-# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-# 	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
 
 # debug
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
+# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
+# 	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
 
 install: $(OBJ_DIR) $(OBJ)
 	@ar rcs $(NAME) $(OBJ)
@@ -86,4 +86,4 @@ uninstall:
 	@rm -rf $(NAME)
 	@rm -rf $(OBJ_DIR)
 
-reinstall: uninstall all
+reinstall: uninstall install
