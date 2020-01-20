@@ -1,14 +1,14 @@
 #pragma once
 
-#if defined (__APPLE__)
+#if defined(__APPLE__)
     #include <malloc/malloc.h>
-    #define MX_MALLOC_SIZE(x)  malloc_size(x)
-#elif defined (_WIN64) || defined (_WIN32)
+    #define MX_MALLOC_SIZE(x) malloc_size(x)
+#elif defined(_WIN64) || defined(_WIN32)
     #include <malloc.h>
     #define MX_MALLOC_SIZE(x) _msize(x)
-#elif defined (__linux__)
+#elif defined(__linux__)
     #include <malloc.h>
-    #define MX_MALLOC_SIZE(x)  malloc_usable_size(x)
+    #define MX_MALLOC_SIZE(x) malloc_usable_size(x)
 #endif
 
 #include <fcntl.h>
@@ -18,9 +18,15 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include "algorithm.h"
 #include "macroses.h"
-#include "structs.h"
+
+#include "flist.h"
+#include "list.h"
+#include "queue.h"
+#include "stack.h"
+#include "tree.h"
+#include "vector.h"
+#include "algorithm.h"
 
 /*
 * file
@@ -123,7 +129,7 @@ bool mx_isupper(int c);
 */
 
 uint64_t mx_factorial(uint64_t n);
-void mx_foreach(void *arr, size_t size, size_t bytes, void(*f)(void *));
+void mx_foreach(void *arr, size_t size, size_t bytes, void (*f)(void *));
 
 int mx_get_num_length(int64_t num, uint32_t base);
 bool mx_isprime(uint64_t num);

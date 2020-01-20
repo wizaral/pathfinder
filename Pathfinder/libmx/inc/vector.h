@@ -1,7 +1,5 @@
 #pragma once
 
-#include "types.h"
-
 #define VECTOR_DEFAULT_SIZE 16
 
 typedef struct s_vector {

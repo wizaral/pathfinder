@@ -1,8 +1,5 @@
 #pragma once
 
-#include "types.h"
-#include "structs.h"
-
 /*
 * bsearch and lsearch return 0 if have not found item, so you need to
 * check first item in container
