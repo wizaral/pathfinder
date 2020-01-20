@@ -30,12 +30,12 @@ static inline void dijkstra(t_info *info) {
 
     for (size_t i = 0; i < info->size; ++i) {
         visit = get_min(info);
-        if (info->distances[visit] == MX_INF)
-            break;
-        info->visited[visit] = true;
-        size = info->graph[visit].size;
-        for (size_t j = 0; j < size; ++j)
-            check_distance(info, visit, j);
+        if (info->distances[visit] != MX_INF) {
+            info->visited[visit] = true;
+            size = info->graph[visit].size;
+            for (size_t j = 0; j < size; ++j)
+                check_distance(info, visit, j);
+        }
     }
 }
 

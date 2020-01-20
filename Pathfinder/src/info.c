@@ -34,7 +34,8 @@ void mx_clear_info(t_info *info) {
     for (size_t i = 0; i < info->size; ++i)
         mx_clear_vector(&info->parents[i]);
     for (size_t i = 0; i < info->routes.size; ++i)
-        free(((t_vector *)mx_at(&info->routes, i))->arr);
+        mx_clear_vector(mx_at(&info->routes, i));
+        // free(((t_vector *)mx_at(&info->routes, i))->arr);
     mx_clear_vector(&info->routes);
     for (size_t i = 0; i < info->size; ++i) {
         info->distances[i] = MX_INF;

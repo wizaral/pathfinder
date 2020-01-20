@@ -5,28 +5,28 @@ static inline int compare(const void *a, const void *b) {
 }
 
 static inline void add_new_path(t_info *info, t_file *file) {
-    t_pair *result = (t_pair *)mx_linear_search(&file->first,
-    &info->graph[file->second.island], compare);
+    t_pair *result = (t_pair *)mx_linear_search(&file->src,
+    &info->graph[file->dst.island], compare);
 
     if (!result) {
-        mx_push_backward(&info->graph[file->first.island], &file->second);
-        mx_push_backward(&info->graph[file->second.island], &file->first);
+        mx_push_backward(&info->graph[file->src.island], &file->dst);
+        mx_push_backward(&info->graph[file->dst.island], &file->src);
     }
     else {
-        result->distance = file->first.distance;
-        result = (t_pair *)mx_linear_search(&file->second, &info->graph[file->first.island], compare);
-        result->distance = file->first.distance;
+        result->distance = file->src.distance;
+        result = (t_pair *)mx_linear_search(&file->dst, &info->graph[file->src.island], compare);
+        result->distance = file->src.distance;
     }
 }
 
-#include <stdio.h>
-
 void mx_parse_file(t_info *info, t_file *file) {
-    if ((file->file = mx_strchr(file->file, '\n')) && ++file->file) {
+    if ((file->file = mx_strchr(file->file, '\n'))) {
+        ++file->file;
+
         for (; file->counter <= info->size && *file->file; ++file->line) {
-            file->second.island = mx_check_island(info, file, '-');
-            file->first.island = mx_check_island(info, file, ',');
-            file->first.distance = file->second.distance = mx_parse_distance(file);
+            file->dst.island = mx_check_island(info, file, '-');
+            file->src.island = mx_check_island(info, file, ',');
+            file->src.distance = file->dst.distance = mx_parse_distance(file);
             add_new_path(info, file);
         }
     }

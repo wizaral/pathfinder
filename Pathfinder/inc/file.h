@@ -4,10 +4,11 @@
 
 typedef struct s_file {
     char *file;     // pointer with stored file input
+    char *copy;     // same file pointer that should not change
     size_t line;    // current line of file
     char **names;   // temporary array of stored islands from line
-    t_pair first;   // struct for connect with first island
-    t_pair second;  // struct for connect with second island
+    t_pair src;     // struct for connect with first island
+    t_pair dst;     // struct for connect with second island
     size_t counter; // current amount of islands
 } t_file;
 
