@@ -1,36 +1,33 @@
 #include "tests.h"
 
 static inline ull get_min(Info &info) {
-    ull v = INF;
+    ull visited = INF;
 
     for (ull j = 0; j < info.size; ++j)
-        if (info.visited[j] == false && (v == INF || info.distances[j] < info.distances[v]))
-            v = j;
-    return v;
+        if (info.visited[j] == false && (visited == INF || info.distances[j] < info.distances[visited]))
+            visited = j;
+    return visited;
 }
 
-static inline void check_distance(Info &info, ull v, ull j) {
-    ull to = info.graph[v][j].first;
-    ull len = info.graph[v][j].second;
+static inline void check_distance(Info &info, ull visited, ull j) {
+    auto [to, len] = info.graph[visited][j];
 
-    if (info.distances[v] + len <= info.distances[to]) {
-        if (info.distances[v] + len < info.distances[to]) {
+    if (info.distances[visited] + len <= info.distances[to]) {
+        if (info.distances[visited] + len < info.distances[to]) {
+            info.distances[to] = info.distances[visited] + len;
             info.parents[to].clear();
-            info.distances[to] = info.distances[v] + len;
         }
-        info.parents[to].push_back(v);
+        info.parents[to].emplace_back(visited);
     }
 }
 
 static inline void dijkstra(Info &info) {
-    for (ull i = 0, v; i < info.size; ++i) {
-        v = get_min(info);
-        if (info.distances[v] == INF)
-            break;
-
-        info.visited[v] = true;
-        for (ull j = 0, size = info.graph[v].size(); j < size; ++j)
-            check_distance(info, v, j);
+    for (ull i = 0, visited; i < info.size; ++i) {
+        if (visited = get_min(info); info.distances[visited] != INF) {
+            info.visited[visited] = true;
+            for (ull j = 0, size = info.graph[visited].size(); j < size; ++j)
+                check_distance(info, visited, j);
+        }
     }
 }
 
@@ -41,13 +38,12 @@ static void add_route(Info &info, vector<ull> &route) {
         if (info.start != route.back())
             add_route(info, route);
         else
-            info.routes.push_back(vector<ull>(route));
+            info.routes.emplace_back(vector<ull>(route));
 
         route.pop_back();
     }
 }
 
-// true if left element smaller than right
 static inline bool compare(vector<ull> &r1, vector<ull> &r2) {
     if (r1.back() < r2.back())
         return true;
@@ -100,12 +96,11 @@ static inline void print_distance(Info &info, vector<ull> &route) {
 }
 
 static inline void print_routes(Info &info) {
-    const static std::string delim(40, '=');
-
     for (auto r = info.routes.begin(), end = info.routes.end(); r != end; ++r) {
-        cout << delim << endl;
+        cout << "========================================" << endl;
         cout << "Path: " << info.names[(*r).front()] << " -> ";
         cout << info.names[(*r).back()] << endl;
+
         // cout << info.names[(*r).front()] << "-";
         // cout << info.names[(*r).back()] << ",";
         // cout << info.distances[(*r).back()] << endl;
@@ -119,7 +114,7 @@ static inline void print_routes(Info &info) {
         else
             cout << info.distances[(*r).back()] << endl;
 
-        cout << delim << endl;
+        cout << "========================================" << endl;
     }
 }
 
@@ -128,12 +123,11 @@ static inline void clean_info(Info &info) {
         r.clear();
     info.routes.clear();
 
-    for (auto &p : info.parents)
-        p.clear();
-    for (auto &v : info.visited)
-        v = false;
-    for (auto &d : info.distances)
-        d = INF;
+    for (size_t i = 0; i < info.size; ++i) {
+        info.distances[i] = INF;
+        info.visited[i] = false;
+        info.parents[i].clear();
+    }
 }
 
 static inline void test(Info &info) {
