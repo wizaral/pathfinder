@@ -6,11 +6,12 @@ int (*cmp)(const void *, const void *)) {
         uint8_t *left = v->arr;
         uint8_t *right = v->arr + (v->size - 1) * v->bytes;
         uint8_t *middle = NULL;
+        size_t temp;
         int result;
 
         while (left <= right) {
-            middle = left + (right - left) / 2;
-            result = cmp(key, middle);
+            temp = (right - left) / v->bytes;
+            result = cmp(key, (middle = left + (temp / 2) * v->bytes));
             if (result > 0)
                 left = middle + v->bytes;
             else if (result < 0)
