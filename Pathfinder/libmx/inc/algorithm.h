@@ -5,9 +5,9 @@
 * check first item in container
 */
 
-uint8_t *mx_binary_search(const void *key, t_vector *v,
+uint8_t *mx_bsearch(const void *key, t_vector *v,
 int (*cmp)(const void *, const void *));
-uint8_t *mx_linear_search(const void *key, t_vector *v,
+uint8_t *mx_lsearch(const void *key, t_vector *v,
 int (*cmp)(const void *, const void *));
 
 /*

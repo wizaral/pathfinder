@@ -2,8 +2,8 @@ CC = clang
 LIB = libmx.a
 NAME = pathfinder
 
-RAW = algorithm check_file create_routes error info main parse_distance \
-	parse_file parse_islands print_routes sort_routes
+RAW = algorithm check_file create_routes error info main parse_line \
+	parse_file print_routes sort_routes
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/
@@ -16,7 +16,7 @@ LIB_PATH = $(addprefix $(LIB_DIR), $(LIB))
 WFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 LFLAGS = -Iinc -Ilibmx/inc
 CFLAGS = -Ofast -march=native -pipe -fomit-frame-pointer -flto
-DFLAGS = -O0 -g3 -glldb -fsanitize=address
+DFLAGS = -O0 -g3 -fsanitize=address
 
 all: install
 
@@ -34,18 +34,18 @@ $(LIB):
 # 	@$(CC) $(WFLAGS) $(LFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
 
 # optimize
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
-
-$(NAME): $(OBJ_DIR) $(OBJ)
-	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
-
-# debug
 # $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-# 	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
+# 	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
 
 # $(NAME): $(OBJ_DIR) $(OBJ)
-# 	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
+# 	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
+
+# debug
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
+
+$(NAME): $(OBJ_DIR) $(OBJ)
+	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
 
 install: $(LIB) $(NAME)
 

@@ -4,6 +4,9 @@ pll: path go
 install:
 	@make -sC Pathfinder -f Makefile all
 
+uninstall:
+	@make -sC Pathfinder -f Makefile uninstall
+
 path:
 	@make -sC Pathfinder -f Makefile pathfinder
 

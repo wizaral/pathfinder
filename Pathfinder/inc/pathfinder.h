@@ -22,3 +22,4 @@ void mx_sort_routes(t_vector *routes);
 
 void mx_init_info(t_info *info, size_t size);
 void mx_clear_info(t_info *info);
+void mx_delete_info(t_info *info);
