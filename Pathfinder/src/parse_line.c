@@ -36,16 +36,11 @@ size_t check_array(t_info *info, t_file *file, char *end) {
     size_t result = SIZE_MAX;
 
     for (size_t i = 0; i < info->size && i < file->cntr && info->names[i]; ++i)
-        if (mx_strncmp(info->names[i], file->file, end - file->file) == 0) {
-            result = i;
-            break;
-        }
-    if (result == SIZE_MAX && file->names[0]
-        && mx_strncmp(file->names[0], file->file, end - file->file) == 0)
-        result = 0;
-    if (result == SIZE_MAX && file->names[1]
-        && mx_strncmp(file->names[1], file->file, end - file->file) == 0)
-        result = 1;
+        if (mx_strncmp(info->names[i], file->file, end - file->file) == 0)
+            return i;
+    if (file->names[0]
+        && !mx_strncmp(file->names[0], file->file, end - file->file))
+        result -= 1;
     return result;
 }
 

@@ -4,14 +4,27 @@ static inline int compare(const void *a, const void *b) {
     return (int)((t_pair *)a)->island - (int)((t_pair *)b)->island;
 }
 
+static inline update_names(t_info *info, t_file *file) {
+    if (file->names[0] && file->names[1]) {
+        info->names[file->cntr - 2] = file->names[0];
+        info->names[file->cntr - 1] = file->names[1];
+        if (file->dst.island == SIZE_MAX - 1)
+            file->dst.island = file->cntr - 2;
+    }
+    else if (file->names[0]) {
+        info->names[file->cntr - 1] = file->names[0];
+        if (file->dst.island == SIZE_MAX - 1)
+            file->dst.island = file->cntr - 1;
+    }
+    file->names[0] = file->names[1] = NULL;
+}
+
 static inline void add_new_path(t_info *info, t_file *file) {
     t_pair *result = (t_pair *)mx_lsearch(&file->src,
     &info->graph[file->dst.island], compare);
 
     if (!result) {
-        file->names[0] ? (info->names[file->cntr - 2] = file->names[0]) : NULL;
-        file->names[1] ? (info->names[file->cntr - 1] = file->names[1]) : NULL;
-        file->names[0] = file->names[1] = NULL;
+        update_names(info, file);
         mx_push_backward(&info->graph[file->src.island], &file->dst);
         mx_push_backward(&info->graph[file->dst.island], &file->src);
     }
