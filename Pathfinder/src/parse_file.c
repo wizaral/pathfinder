@@ -49,9 +49,7 @@ void mx_parse_file(t_info *info, t_file *file) {
         for (; file->cntr <= info->size && *file->file; ++file->line) {
             file->dst.island = mx_check_island(info, file, '-');
             file->src.island = mx_check_island(info, file, ',');
-
             file->src.distance = file->dst.distance = mx_parse_distance(file);
-
             if (file->cntr <= info->size)
                 add_new_path(info, file);
             else

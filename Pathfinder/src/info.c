@@ -50,10 +50,12 @@ void mx_delete_info(t_info *info) {
         free(info->parents[i].arr);
         free(info->names[i]);
     }
-    free(info->graph);
-    free(info->parents);
-    free(info->names);
-    free(info->visited);
-    free(info->distances);
-    free(info->routes.arr);
+    if (info->size) {
+        free(info->graph);
+        free(info->parents);
+        free(info->names);
+        free(info->visited);
+        free(info->distances);
+        free(info->routes.arr);
+    }
 }
