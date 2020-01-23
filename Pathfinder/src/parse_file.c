@@ -4,17 +4,22 @@ static inline int compare(const void *a, const void *b) {
     return (int)((t_pair *)a)->island - (int)((t_pair *)b)->island;
 }
 
-static inline update_names(t_info *info, t_file *file) {
+static inline void update_names(t_info *info, t_file *file) {
     if (file->names[0] && file->names[1]) {
         info->names[file->cntr - 2] = file->names[0];
         info->names[file->cntr - 1] = file->names[1];
-        if (file->dst.island == SIZE_MAX - 1)
-            file->dst.island = file->cntr - 2;
+        if (file->src.island == SIZE_MAX - 1)
+            file->src.island = file->cntr - 2;
     }
     else if (file->names[0]) {
         info->names[file->cntr - 1] = file->names[0];
-        if (file->dst.island == SIZE_MAX - 1)
-            file->dst.island = file->cntr - 1;
+        if (file->src.island == SIZE_MAX - 1)
+            file->src.island = file->cntr - 1;
+    }
+    else if (file->names[1]) {
+        info->names[file->cntr - 1] = file->names[1];
+        if (file->src.island == SIZE_MAX - 1)
+            file->src.island = file->cntr - 1;
     }
     file->names[0] = file->names[1] = NULL;
 }
@@ -25,8 +30,10 @@ static inline void add_new_path(t_info *info, t_file *file) {
 
     if (!result) {
         update_names(info, file);
-        mx_push_backward(&info->graph[file->src.island], &file->dst);
-        mx_push_backward(&info->graph[file->dst.island], &file->src);
+        if (file->dst.island != file->src.island) {
+            mx_push_backward(&info->graph[file->src.island], &file->dst);
+            mx_push_backward(&info->graph[file->dst.island], &file->src);
+        }
     }
     else {
         result->distance = file->src.distance;

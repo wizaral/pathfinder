@@ -29,11 +29,12 @@ int main(int ac, char **av) {
         file.file = file.copy = mx_file_to_str(av[1]);
         mx_parse_file(&info, &file);
         free(file.copy);
+        // print(&info);
         if (info.size)
             mx_algorithm(&info);
         mx_delete_info(&info);
     }
     else
         mx_throw_usage_error();
-    system("leaks -q pathfinder");
+    // system("leaks -q pathfinder");
 }
