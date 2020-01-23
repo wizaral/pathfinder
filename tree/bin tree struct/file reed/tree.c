@@ -83,7 +83,7 @@ void destroy_tree(tree *a_tree) {
     }
 }
 
-//=========================================================
+
 
 node *min_value(node *a_node) {
     if (a_node->left) {
@@ -103,12 +103,12 @@ node *max_value(node *a_node) {
     return NULL;
 }
 
-//=========================================================
+
 
 void insert_element(tree *a_tree, int a_value) {
     if (a_tree) {
         if (!a_tree->root) {
-            node *a_node = create_node(a_tree->root, a_value); //(NULL, a_value);
+            node *a_node = create_node(a_tree->root, a_value); 
             if (a_node) {
                 a_tree->root = a_node;
                 a_tree->count++;
@@ -128,7 +128,7 @@ void insert_element(tree *a_tree, int a_value) {
                     break;
                 } else if (a_value < a_fast->value) {
                     a_fast = a_fast->left;
-                    if (!a_fast) //����
+                    if (!a_fast) 
                     {
                         node *a_node = create_node(a_low, a_value);
                         a_low->left = a_node;
@@ -137,7 +137,7 @@ void insert_element(tree *a_tree, int a_value) {
                     }
                 } else {
                     a_fast = a_fast->right;
-                    if (!a_fast) //����
+                    if (!a_fast) 
                     {
                         node *a_node = create_node(a_low, a_value);
                         a_low->right = a_node;
@@ -197,7 +197,7 @@ void delete_element(tree *a_tree, node *a_node) {
     }
 }
 
-//=========================================================
+
 
 node *search_node(node *a_node, int a_value) {
     if (a_node) {
@@ -225,7 +225,7 @@ void delete_element_by_value(tree *a_tree, int a_value) {
     printf("������!\n");
 }
 
-//=========================================================
+
 
 void preorder_print(node *a_node) {
     if (a_node) {
@@ -403,7 +403,7 @@ void print_tree(tree *a_tree) {
     }
 }
 
-//=========================================================
+
 
 void add_elements(tree *a_tree) {
     FILE *file = fopen("data.txt", "r");

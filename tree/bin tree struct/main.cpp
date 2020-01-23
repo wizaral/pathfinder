@@ -16,8 +16,6 @@ struct Tree {
     Node *root;
 };
 
-//=========================================================
-
 Tree *createTree() {
     Tree *aTree = new Tree;
     if (!aTree) {
@@ -59,8 +57,6 @@ void destroyTree(Tree *aTree) {
     }
 }
 
-//=========================================================
-
 Node *minValue(Node *aNode) {
     if (aNode->left) {
         while (aNode->left)
@@ -78,8 +74,6 @@ Node *maxValue(Node *aNode) {
     }
     return NULL;
 }
-
-//=========================================================
 
 void insertElement(Tree *aTree, int aValue) {
     if (aTree) {
@@ -104,8 +98,7 @@ void insertElement(Tree *aTree, int aValue) {
                     break;
                 } else if (aValue < aFast->value) {
                     aFast = aFast->left;
-                    if (!aFast) //����
-                    {
+                    if (!aFast) {
                         Node *aNode = createNode(aLow, aValue);
                         aLow->left = aNode;
                         aTree->count++;
@@ -113,8 +106,7 @@ void insertElement(Tree *aTree, int aValue) {
                     }
                 } else {
                     aFast = aFast->right;
-                    if (!aFast) //����
-                    {
+                    if (!aFast) {
                         Node *aNode = createNode(aLow, aValue);
                         aLow->right = aNode;
                         aTree->count++;
@@ -173,8 +165,6 @@ void deleteElement(Tree *aTree, Node *aNode) {
     }
 }
 
-//=========================================================
-
 Node *search(Node *aNode, int aValue) {
     if (aNode) {
         if (aValue < aNode->value)
@@ -215,8 +205,6 @@ void deleteElement(Tree *aTree, int aValue) {
     }
     cout << "������!" << endl;
 }
-
-//=========================================================
 
 void preorderPrint(Node *aNode) {
     if (aNode) {
@@ -274,8 +262,6 @@ void print(Tree *aTree, int printType) {
         }
     }
 }
-
-//=========================================================
 
 int main() {
     setlocale(LC_ALL, "");
