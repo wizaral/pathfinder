@@ -130,11 +130,18 @@ static inline void clean_info(Info &info) {
     }
 }
 
+static void print(Info &info) {
+    for (size_t i = 0; i < info.size; ++i)
+        for (const auto &j : info.parents[i])
+            cout << "[" << i << "]: " << j << endl;
+}
+
 static inline void test(Info &info) {
     for (size_t i = 0; i < info.size - 1; ++i) {
         info.distances[i] = 0;
         info.start = i;
         dijkstra(info);
+        print(info);
 
         create_routes(info);
         print_routes(info);
@@ -171,7 +178,7 @@ static inline void read_data(Info &info, std::ifstream &file) {
         }
 
         std::getline(file, temp);
-        if (temp != "") {
+        if (temp != "" && i1 != i2) {
             info.graph[i1].emplace_back(std::make_pair(i2, std::stoi(temp)));
             info.graph[i2].emplace_back(std::make_pair(i1, std::stoi(temp)));
         }
@@ -201,7 +208,7 @@ int main(int argc, char **argv) {
             Info info(std::stoi(num));
             read_data(info, file);
             file.close();
-            // log_print(info);
+            log_print(info);
             test(info);
         }
     }
