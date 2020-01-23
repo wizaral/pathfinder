@@ -69,12 +69,12 @@ $(OBJ_DIR):
 # 	@$(CC) $(WFLAGS) $(LFLAGS) -o $@ -c $<
 
 # optimize
-# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-# 	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
 
 # debug
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
+# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
+# 	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
 
 install: $(OBJ_DIR) $(OBJ)
 	@ar rcs $(NAME) $(OBJ)

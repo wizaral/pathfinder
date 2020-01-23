@@ -34,18 +34,18 @@ $(LIB):
 # 	@$(CC) $(WFLAGS) $(LFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
 
 # optimize
-# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-# 	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
-
-# $(NAME): $(OBJ_DIR) $(OBJ)
-# 	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
-
-# debug
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
+	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) -o $@ -c $<
 
 $(NAME): $(OBJ_DIR) $(OBJ)
-	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
+	@$(CC) $(WFLAGS) $(LFLAGS) $(CFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
+
+# debug
+# $(OBJ_DIR)%.o: $(SRC_DIR)%.c
+# 	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) -o $@ -c $<
+
+# $(NAME): $(OBJ_DIR) $(OBJ)
+# 	@$(CC) $(WFLAGS) $(LFLAGS) $(DFLAGS) $(OBJ) -o $(NAME) $(LIB_PATH)
 
 install: $(LIB) $(NAME)
 

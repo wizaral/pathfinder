@@ -16,11 +16,8 @@ static inline void update_names(t_info *info, t_file *file) {
         if (file->src.island == SIZE_MAX - 1)
             file->src.island = file->cntr - 1;
     }
-    else if (file->names[1]) {
+    else if (file->names[1])
         info->names[file->cntr - 1] = file->names[1];
-        if (file->src.island == SIZE_MAX - 1)
-            file->src.island = file->cntr - 1;
-    }
     file->names[0] = file->names[1] = NULL;
 }
 
@@ -31,16 +28,20 @@ static inline void add_new_path(t_info *info, t_file *file) {
     if (!result) {
         update_names(info, file);
         if (file->dst.island != file->src.island) {
+            file->full_len += file->src.distance;
             mx_push_backward(&info->graph[file->src.island], &file->dst);
             mx_push_backward(&info->graph[file->dst.island], &file->src);
         }
     }
     else {
-        result->distance = file->src.distance;
+        file->full_len -= result->distance;
+        file->full_len += (result->distance = file->src.distance);
         result = (t_pair *)mx_lsearch(&file->dst,
         &info->graph[file->src.island], compare);
         result->distance = file->src.distance;
     }
+    if (file->full_len > MX_INF)
+        exit(0);
 }
 
 void mx_parse_file(t_info *info, t_file *file) {

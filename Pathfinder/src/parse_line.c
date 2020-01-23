@@ -25,10 +25,10 @@ int mx_parse_distance(t_file *file) {
         if (!mx_isdigit(*i))
             mx_throw_line_error(file->line);
     result = check_argument(file, file->file, end);
-    if (result + file->full_len > MX_INF)
-        exit(0);
+    // if (result + file->full_len > MX_INF)
+    //     exit(0);
     file->file = end + 1;
-    file->full_len += result;
+    // file->full_len += result;
     return result;
 }
 

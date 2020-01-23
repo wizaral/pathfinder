@@ -17,7 +17,8 @@ static inline void check_distance(Info &info, ull visited, ull j) {
             info.distances[to] = info.distances[visited] + len;
             info.parents[to].clear();
         }
-        info.parents[to].emplace_back(visited);
+        if (len || info.visited[to] == false)
+            info.parents[to].push_back(visited);
     }
 }
 
@@ -131,9 +132,12 @@ static inline void clean_info(Info &info) {
 }
 
 static void print(Info &info) {
-    for (size_t i = 0; i < info.size; ++i)
+    for (size_t i = 0; i < info.size; ++i) {
+        cout << i << ": ";
         for (const auto &j : info.parents[i])
-            cout << "[" << i << "]: " << j << endl;
+            cout << j << ", ";
+        cout << endl;
+    }
 }
 
 static inline void test(Info &info) {
@@ -141,7 +145,7 @@ static inline void test(Info &info) {
         info.distances[i] = 0;
         info.start = i;
         dijkstra(info);
-        print(info);
+        // print(info);
 
         create_routes(info);
         print_routes(info);
@@ -208,7 +212,7 @@ int main(int argc, char **argv) {
             Info info(std::stoi(num));
             read_data(info, file);
             file.close();
-            log_print(info);
+            // log_print(info);
             test(info);
         }
     }
