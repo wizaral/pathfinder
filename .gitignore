@@ -23,4 +23,3 @@
 *.pdf
 !testfiles/*.txt
 testfiles/out99.txt
-MakefileW
