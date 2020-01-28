@@ -2,16 +2,17 @@ all: install go
 pll: path go
 
 install:
-	@make -sC Pathfinder -f Makefile all
+	@make -sC C_part -f Makefile all
 
 uninstall:
-	@make -sC Pathfinder -f Makefile uninstall
+	@make -sC C_part -f Makefile uninstall
 
 path:
-	@make -sC Pathfinder -f Makefile pathfinder
+	@make -sC C_part -f Makefile pathfinder
 
 go:
-	@./Pathfinder/pathfinder text.txt
+	@./C_part/pathfinder text.txt
 
 cpp:
-	@g++ -std=c++2a -Ofast -march=native -pipe -fomit-frame-pointer -flto *.cpp
+	@g++ -std=c++2a -Ofast -march=native -pipe -fomit-frame-pointer -flto \
+	CPP_part/*.cpp -o CPP_part/pathfinder

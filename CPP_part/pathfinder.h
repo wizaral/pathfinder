@@ -26,4 +26,20 @@ struct Info {
     vector<std::string> names;
     ull start;
     ull size;
+
+    void clean_info() {
+        for (auto &r : routes)
+            r.clear();
+        routes.clear();
+
+        for (size_t i = 0; i < size; ++i) {
+            distances[i] = INF;
+            visited[i] = false;
+            parents[i].clear();
+        }
+    }
 };
+
+void algorithm(Info &info);
+void create_routes(Info &info);
+void print_routes(Info &info);
